@@ -6,11 +6,11 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 16:14:05 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/05/22 16:46:24 by lutsiara         ###   ########.fr       */
+/*   Updated: 2019/05/24 20:03:14 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem-in.h"
+#include "lem_in.h"
 
 int			ft_set_room(t_graph **room, char *name, long x, long y)
 {

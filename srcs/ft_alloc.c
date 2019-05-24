@@ -6,11 +6,11 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 15:53:35 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/05/24 17:00:04 by lutsiara         ###   ########.fr       */
+/*   Updated: 2019/05/24 20:03:19 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem-in.h"
+#include "lem_in.h"
 
 t_graph			*ft_alloc_room(void)
 {

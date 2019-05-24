@@ -6,11 +6,11 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 17:14:01 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/05/22 18:43:06 by lutsiara         ###   ########.fr       */
+/*   Updated: 2019/05/24 20:03:17 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem-in.h"
+#include "lem_in.h"
 
 int			ft_del_path(t_path **path, unsigned int room)
 {

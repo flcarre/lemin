@@ -6,11 +6,11 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 16:49:00 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/05/22 18:41:25 by lutsiara         ###   ########.fr       */
+/*   Updated: 2019/05/24 20:03:15 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem-in.h"
+#include "lem_in.h"
 
 int			ft_enqueue_room(t_path **path, t_path *elem)
 {

@@ -6,7 +6,7 @@
 #    By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/11 17:54:03 by lutsiara          #+#    #+#              #
-#    Updated: 2019/05/24 18:46:39 by lutsiara         ###   ########.fr        #
+#    Updated: 2019/05/24 20:03:10 by lutsiara         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ $(NAME): $(OBJS) ../$(LIBFT)
 
 all: $(NAME)
 
-%.o: %.c $(INCDIR)/lem-in.h
+%.o: %.c $(INCDIR)/lem_in.h
 	@$(CC) -o $@ -c $< -I $(INCDIR) -I $(INCLIB) $(FLAGS)
 
 clean:
