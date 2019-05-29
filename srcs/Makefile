@@ -6,7 +6,7 @@
 #    By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/11 17:54:03 by lutsiara          #+#    #+#              #
-#    Updated: 2019/05/24 20:03:10 by lutsiara         ###   ########.fr        #
+#    Updated: 2019/05/29 15:37:25 by lutsiara         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,9 @@ SRCS = $(SRCDIR)main.c \
 	   $(SRCDIR)ft_alloc.c \
 	   $(SRCDIR)ft_set.c \
 	   $(SRCDIR)ft_enqueue.c \
-	   $(SRCDIR)ft_del.c
+	   $(SRCDIR)ft_del.c \
+	   $(SRCDIR)ft_rank_line.c \
+	   $(SRCDIR)ft_error.c
 
 OBJS = $(SRCS:.c=.o)
 

@@ -6,7 +6,7 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 17:14:01 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/05/24 20:03:17 by lutsiara         ###   ########.fr       */
+/*   Updated: 2019/05/29 18:15:47 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ int			ft_del_graph(t_graph **graph, t_graph *prev_room)
 
 int			ft_del_room(t_graph **room)
 {
+	if (!(*room))
+		return (0);
 	ft_memdel((void **)&((*room)->name));
 	ft_del_links(&((*room)->links));
 	ft_memdel((void **)&(*room));

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lem-in.h                                           :+:      :+:    :+:   */
+/*   lem_in.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 16:25:50 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/05/24 18:02:41 by lutsiara         ###   ########.fr       */
+/*   Updated: 2019/05/29 17:34:36 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,16 @@
 # include "libft.h"
 # include "get_next_line.h"
 # include "ft_printf.h"
+
+typedef enum		e_rank
+{
+	NOTHING,
+	ROOM,
+	LINK,
+	NBANTS,
+	COMMENT,
+	COMMAND
+}					t_rank;
 
 typedef struct		s_links
 {
@@ -74,10 +84,10 @@ int					ft_del_room(t_graph **room);
 int					ft_del_links(t_links **links);
 
 t_graph				*ft_get_graph(void);
-int					ft_error(void);
-int					ft_rank_line(char *line);
-int					ft_control_line(char *line, int rank);
+int					ft_error(unsigned int func, ...);
+t_rank				ft_rank_line(char *line);
 int					ft_control_tube_name(char *line, t_path *rooms);
+t_graph				*ft_find_room(t_path *rooms);
 int					ft_link_rooms(t_path *rooms, char *room1, char *room2);
 int					ft_set_start(t_graph *room);
 int					ft_set_end(t_graph *room);
