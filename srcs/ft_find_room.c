@@ -1,29 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_error.c                                         :+:      :+:    :+:   */
+/*   ft_find_room.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/29 15:06:55 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/05/31 17:30:16 by lutsiara         ###   ########.fr       */
+/*   Created: 2019/05/31 15:38:50 by lutsiara          #+#    #+#             */
+/*   Updated: 2019/05/31 15:50:22 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
-#include <stdarg.h>
 
-int		ft_error(unsigned int func, ...)
+t_graph		*ft_find_room(char *name, t_path *rooms)
 {
-	va_list		vars;
-
-	if (func == 1)
-	{
-		va_start(vars, func);
-		ft_del_path((t_path **)va_arg(vars, t_path **), \
-		(unsigned int)va_arg(vars, unsigned int));
-		va_end(vars);
-	}
-	ft_putendl("ERROR");
-	return (1);
+	if (!rooms)
+		return ((void *)0);
+	if (ft_strncmp(name, rooms->room->name, ft_strlen(rooms->room->name)))
+		return (ft_find_room(name, rooms->next));
+	return (rooms->room);
 }

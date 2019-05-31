@@ -6,7 +6,7 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 13:30:21 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/05/29 16:21:41 by lutsiara         ###   ########.fr       */
+/*   Updated: 2019/05/31 17:09:11 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static t_rank	ft_ants(char *line)
 {
-	if (ft_strchr((const char *)line, (int)'-'))
+	if (*line != 'L' && ft_strchr((const char *)line, (int)'-'))
 		return (LINK);
 	while (*line && ft_isdigit((int)*line))
 		line++;
@@ -34,7 +34,7 @@ t_rank			ft_rank_line(char *line)
 			return (COMMAND);
 		return (COMMENT);
 	}
-	if ((tmp = ft_strchr((const char *)line, (int)' ')))
+	if (*line != 'L' && (tmp = ft_strchr((const char *)line, (int)' ')))
 	{
 		if (*(++tmp) == '-')
 			tmp++;
