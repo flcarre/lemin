@@ -6,7 +6,7 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/31 17:18:51 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/05/31 17:34:07 by lutsiara         ###   ########.fr       */
+/*   Updated: 2019/06/02 20:03:37 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,37 @@
 
 static int		ft_create_room(char *line, t_path **list, unsigned char state)
 {
-	//creating a room
+	t_graph			*room;
+	char			*tmp;
+	t_path			*elem;
+
+	if (!(room = ft_alloc_room()))
+		return (1);
+	if (!(tmp = ft_strchr((const char *)line, (int)' ')) \
+	|| ft_set_room(&room, line, ft_atol(tmp), \
+	ft_atol(ft_strchr((const char *)(tmp + 1), (int)' '))))
+		return (1);
+	room->state |= state;
+	if (!(elem = ft_alloc_path_elem()))
+		return (1);
+	ft_set_path_elem(&elem, room);
+	ft_enqueue_room(list, elem);
+	return (0);
+}
+
+static int		ft_select_cmd(char **line, t_path **list)
+{
+	if (!ft_strcmp((*line) + 2, "end"))
+	{
+		ft_memdel((void **)&(*line));
+		return (ft_create_rooms(list, 128));
+	}
+	if (!ft_strcmp((*line) + 2, "start"))
+	{
+		ft_memdel((void **)&(*line));
+		return (ft_create_rooms(list, 64));
+	}
+	ft_memdel((void **)&(*line));
 	return (0);
 }
 
@@ -42,6 +72,5 @@ int				ft_create_rooms(t_path **list, unsigned char state)
 		return (1);
 	}
 	ret = ft_create_room(line, list, state);
-	ft_memdel((void **)&line);
 	return (ret);
 }

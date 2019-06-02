@@ -6,56 +6,59 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 11:17:54 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/05/29 18:53:44 by lutsiara         ###   ########.fr       */
+/*   Updated: 2019/06/02 22:57:06 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-int		main(void)
+int		ft_travel(t_graph *graph)
 {
-	char	*line;
-	int		ret;
-	t_path	*queue;
-	t_path	*elem;
+	t_links			*link;
 
-	line = (void *)0;
-	queue = (void *)0;
-	while ((ret = gnl(STDIN_FILENO, &line)) == 1)
+	link = graph->links;
+	if (graph->state & 1)
+		return (0);
+	graph->state |= 1;
+	while (link)
 	{
-		ft_printf("%{RED}%d%{} : %{GREEN}%s%{}\n", ft_rank_line(line), line);
-		if (ft_rank_line(line) == ROOM)
-		{
-			if (!(elem = ft_alloc_path_elem()))
-				return (ft_printf("%{HRED} %{}ft_alloc_path_elem failed\n"));
-			if (!(elem->room = ft_alloc_room()))
-			{
-				ft_printf("%{HRED} %{}ft_alloc_room failed\n");
-				if (queue)
-					ft_del_path(&queue, 1);
-				ft_del_path(&elem, 0);
-				return (1);
-			}
-			ft_set_room(&(elem->room), line, 0, 0);
-			ft_enqueue_room(&queue, elem);
-		}
-		else
-			ft_memdel((void **)&line);
+		ft_travel(link->room);
+		link = link->next;
 	}
-	ft_putendl("");
-	elem = queue;
-	while (elem)
-	{
-		ft_printf("%{HGREEN} %{} %s\n", elem->room->name);
-		elem = elem->next;
-	}
-	ft_del_path(&queue, 1);
-	return ((ret < 0) ? -ret : ret);
+	ft_printf("%{HBLUE}%hhu%{} %{HCYAN}%u%{} %s %{YELLOW}%ld %ld%{}\n", \
+	graph->state, graph->nb_ants, graph->name, graph->x, graph->y);
+	return (0);
 }
 
-/*
+int		ft_set(t_graph *graph)
+{
+	t_links			*link;
+
+	link = graph->links;
+	if ((graph->state ^ 1) & 1)
+		return (0);
+	graph->state ^= 1;
+	while (link)
+	{
+		ft_set(link->room);
+		link = link->next;
+	}
+	return (0);
+}
+
+int		main(void)
+{
+	t_graph		*start;
+
+	if (!(start = ft_get_graph()))
+		return (ft_printf("%{HRED} %{} There is no graph !\n"));
+	ft_travel(start);
+	ft_set(start);
+	ft_del_graph(start, (void *)0);
+	return (0);
+}
+
 __attribute__((destructor)) int end()
 {
 	while (1);
 }
-*/

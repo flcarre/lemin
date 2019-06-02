@@ -28,6 +28,7 @@ INCFILES = $(INCDIR)libft.h \
 
 SRCS = $(SRCDIR)ft_atoi.c \
 	   $(SRCDIR)ft_atoui.c \
+	   $(SRCDIR)ft_atol.c \
 	   $(SRCDIR)ft_bzero.c \
 	   $(SRCDIR)ft_countword.c \
 	   $(SRCDIR)ft_delcontent.c \

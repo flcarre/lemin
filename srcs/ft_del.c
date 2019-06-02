@@ -6,7 +6,7 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 17:14:01 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/05/29 18:15:47 by lutsiara         ###   ########.fr       */
+/*   Updated: 2019/06/02 22:56:49 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,12 @@ int			ft_del_container(t_ctnl **paths, unsigned int path)
 	return (0);
 }
 
-int			ft_del_graph(t_graph **graph, t_graph *prev_room)
+int			ft_del_graph(t_graph *graph, t_graph *prev_room)
 {
 	t_links			*link;
 
-	link = (*graph)->links;
-	if ((*graph)->state & 1)
+	link = graph->links;
+	if (graph->state & 1)
 	{
 		while (link && link->room != prev_room)
 			link = link->next;
@@ -48,14 +48,14 @@ int			ft_del_graph(t_graph **graph, t_graph *prev_room)
 			link->room = (void *)0;
 		return (0);
 	}
-	(*graph)->state |= 1;
+	graph->state |= 1;
 	while (link)
 	{
 		if (link->room)
-			ft_del_graph(&(link->room), *graph);
+			ft_del_graph(link->room, graph);
 		link = link->next;
 	}
-	ft_del_room(graph);
+	ft_del_room(&graph);
 	return (0);
 }
 

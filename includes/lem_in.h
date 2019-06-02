@@ -6,7 +6,7 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 16:25:50 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/05/31 15:50:30 by lutsiara         ###   ########.fr       */
+/*   Updated: 2019/06/02 22:58:01 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,20 +79,22 @@ int					ft_enqueue_path(t_ctnl **paths, t_ctnl *elem);
 
 int					ft_del_path(t_path **path, unsigned int room);
 int					ft_del_container(t_ctnl **paths, unsigned int path);
-int					ft_del_graph(t_graph **graph, t_graph *prev_room);
+int					ft_del_graph(t_graph *graph, t_graph *prev_room);
 int					ft_del_room(t_graph **room);
 int					ft_del_links(t_links **links);
 
 t_graph				*ft_get_graph(void);
 int					ft_error(unsigned int func, ...);
 t_rank				ft_rank_line(char *line);
-int					ft_control_tube_name(char *line, t_path *rooms);
+int					ft_control_tube_name(char *line, t_path *rooms, \
+					char **room1, char **room2);
+int					ft_create_rooms(t_path **list, unsigned char state);
 t_graph				*ft_find_room(char *name, t_path *rooms);
 int					ft_link_rooms(t_path *rooms, char *room1, char *room2);
-int					ft_set_start(t_graph *room);
-int					ft_set_end(t_graph *room);
-int					ft_are_end_start_exist(t_path *rooms);
-int					ft_are_rooms_linked(t_graph *start);
+int					ft_make_link(char **line, t_path **list);
+int					ft_make_links(t_path **list);
+void				ft_rm_room_nolinked(t_path *rooms);
 int					ft_is_there_path(t_graph *start, t_graph *end);
+t_graph				*ft_return_head(t_path *rooms);
 
 #endif

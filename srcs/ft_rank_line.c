@@ -40,7 +40,7 @@ t_rank			ft_rank_line(char *line)
 			tmp++;
 		while (*tmp && ft_isdigit((int)*tmp))
 			tmp++;
-		if (*(tmp++) != ' ')
+		if (!(*tmp) || *(tmp++) != ' ')
 			return (NOTHING);
 		if (*tmp == '-')
 			tmp++;
