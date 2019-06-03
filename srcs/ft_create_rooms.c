@@ -6,13 +6,13 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/31 17:18:51 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/06/02 20:03:37 by lutsiara         ###   ########.fr       */
+/*   Updated: 2019/06/04 00:42:01 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-static int		ft_create_room(char *line, t_path **list, unsigned char state)
+static int		ft_create_room(char *line, t_path **list, unsigned char *state)
 {
 	t_graph			*room;
 	char			*tmp;
@@ -24,7 +24,8 @@ static int		ft_create_room(char *line, t_path **list, unsigned char state)
 	|| ft_set_room(&room, line, ft_atol(tmp), \
 	ft_atol(ft_strchr((const char *)(tmp + 1), (int)' '))))
 		return (1);
-	room->state |= state;
+	room->state |= *state;
+	*state = 0;
 	if (!(elem = ft_alloc_path_elem()))
 		return (1);
 	ft_set_path_elem(&elem, room);
@@ -32,23 +33,25 @@ static int		ft_create_room(char *line, t_path **list, unsigned char state)
 	return (0);
 }
 
-static int		ft_select_cmd(char **line, t_path **list)
+static int		ft_select_cmd(char **line, t_path **list, unsigned char *state)
 {
 	if (!ft_strcmp((*line) + 2, "end"))
 	{
+		*state = 128;
 		ft_memdel((void **)&(*line));
-		return (ft_create_rooms(list, 128));
+		return (ft_create_rooms(list, state));
 	}
 	if (!ft_strcmp((*line) + 2, "start"))
 	{
+		*state = 64;
 		ft_memdel((void **)&(*line));
-		return (ft_create_rooms(list, 64));
+		return (ft_create_rooms(list, state));
 	}
 	ft_memdel((void **)&(*line));
 	return (0);
 }
 
-int				ft_create_rooms(t_path **list, unsigned char state)
+int				ft_create_rooms(t_path **list, unsigned char *state)
 {
 	char			*line;
 	t_rank			rank;
@@ -64,7 +67,7 @@ int				ft_create_rooms(t_path **list, unsigned char state)
 			if (rank == COMMAND)
 				return (ft_select_cmd(&line, list));
 			ft_memdel((void **)&line);
-			return (ft_create_rooms(list, state));
+			return (0);
 		}
 		if (rank == LINK)
 			return ((!ft_make_link(&line, list)) ? 2 : 1);

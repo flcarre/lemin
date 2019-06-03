@@ -6,7 +6,7 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/02 16:58:00 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/06/03 18:40:26 by lutsiara         ###   ########.fr       */
+/*   Updated: 2019/06/04 00:35:09 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int			ft_make_links(t_path **list)
 			if (rank == COMMAND && ft_isvalid_cmd(&line))
 				return (1);
 			ft_memdel((void **)&line);
-			return (ft_make_links(list));
+			return (0);
 		}
 		ft_memdel((void **)&line);
 		return (1);

@@ -6,7 +6,7 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/31 15:56:20 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/06/03 19:00:29 by lutsiara         ###   ########.fr       */
+/*   Updated: 2019/06/04 00:45:29 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,13 @@ t_graph			*ft_get_graph(void)
 	t_path			*tmp;
 	unsigned int	nb_ants;
 	int				ret;
+	unsigned char	state;
 
+	state = 0;
 	tmp = (void *)0;
 	if (ft_get_nb_ants(&nb_ants))
 		return ((void *)0);
-	while (!(ret = ft_create_rooms(&tmp, 0)))
+	while (!(ret = ft_create_rooms(&tmp, &state)))
 		;
 	if (ret != 2 && !ft_del_path(&tmp, 1))
 		return ((void *)0);
