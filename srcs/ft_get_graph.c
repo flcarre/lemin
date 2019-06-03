@@ -6,7 +6,7 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/31 15:56:20 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/06/03 16:52:24 by lutsiara         ###   ########.fr       */
+/*   Updated: 2019/06/03 19:00:29 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,19 @@ static int		ft_get_nb_ants(unsigned int *nb_ants)
 
 static void		ft_rm_room_nolinked(t_path *rooms)
 {
+	t_path			*tmp;
+
 	if (!rooms)
 		return ;
-	if (!(rooms->room->links))
-		ft_del_room(&(rooms->room));
-	ft_rm_room_nolinked(rooms->next);
+	ft_set(ft_return_head(rooms, 64), 1);
+	tmp = rooms;
+	while (tmp)
+	{
+		if (!(tmp->room->state & 1))
+			ft_del_room(&(tmp->room));
+		tmp = tmp->next;
+	}
+	ft_reset(ft_return_head(rooms, 64), 1);
 }
 
 t_graph			*ft_get_graph(void)

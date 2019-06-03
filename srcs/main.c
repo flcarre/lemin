@@ -6,7 +6,7 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 11:17:54 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/06/03 16:38:53 by lutsiara         ###   ########.fr       */
+/*   Updated: 2019/06/03 19:01:30 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,23 @@ int		main(void)
 	ft_travel(start);
 	ft_reset(start, 1);
 	ft_del_graph(start, (void *)0);
+	/*
+	char	*line;
+	int		ret;
+
+	line = (void *)0;
+	while((ret = gnl(STDIN_FILENO, &line)) == 1)
+	{
+		ft_printf("%{GREEN}%d%{} %s\n", ft_rank_line(line), line);
+		ft_memdel((void **)&line);
+	}
+	*/
 	return (0);
 }
 
+/*
 __attribute__((destructor)) int end()
 {
 	while (1);
 }
+*/

@@ -6,7 +6,7 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 16:25:50 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/06/03 17:00:17 by lutsiara         ###   ########.fr       */
+/*   Updated: 2019/06/03 18:45:13 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,5 +96,6 @@ int					ft_make_links(t_path **list);
 t_graph				*ft_return_head(t_path *rooms, unsigned char state);
 int					ft_checkup(t_path *rooms);
 int					ft_reset(t_graph *graph, unsigned char state);
+int					ft_set(t_graph *graph, unsigned char state);
 
 #endif

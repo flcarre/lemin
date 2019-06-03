@@ -6,7 +6,7 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/03 16:11:24 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/06/03 16:12:30 by lutsiara         ###   ########.fr       */
+/*   Updated: 2019/06/03 18:52:25 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,22 @@ int		ft_reset(t_graph *graph, unsigned char state)
 	while (link)
 	{
 		ft_reset(link->room, state);
+		link = link->next;
+	}
+	return (0);
+}
+
+int		ft_set(t_graph *graph, unsigned char state)
+{
+	t_links			*link;
+
+	link = graph->links;
+	if (graph->state & state)
+		return (0);
+	graph->state |= state;
+	while (link)
+	{
+		ft_set(link->room, state);
 		link = link->next;
 	}
 	return (0);
