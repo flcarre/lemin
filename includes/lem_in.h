@@ -6,7 +6,7 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 16:25:50 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/06/02 22:58:01 by lutsiara         ###   ########.fr       */
+/*   Updated: 2019/06/03 17:00:17 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,8 @@ t_graph				*ft_find_room(char *name, t_path *rooms);
 int					ft_link_rooms(t_path *rooms, char *room1, char *room2);
 int					ft_make_link(char **line, t_path **list);
 int					ft_make_links(t_path **list);
-void				ft_rm_room_nolinked(t_path *rooms);
-int					ft_is_there_path(t_graph *start, t_graph *end);
-t_graph				*ft_return_head(t_path *rooms);
+t_graph				*ft_return_head(t_path *rooms, unsigned char state);
+int					ft_checkup(t_path *rooms);
+int					ft_reset(t_graph *graph, unsigned char state);
 
 #endif

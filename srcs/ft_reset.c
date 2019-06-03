@@ -1,22 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_return_head.c                                   :+:      :+:    :+:   */
+/*   ft_reset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/02 19:56:01 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/06/03 16:48:01 by lutsiara         ###   ########.fr       */
+/*   Created: 2019/06/03 16:11:24 by lutsiara          #+#    #+#             */
+/*   Updated: 2019/06/03 16:12:30 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-t_graph		*ft_return_head(t_path *rooms, unsigned char state)
+int		ft_reset(t_graph *graph, unsigned char state)
 {
-	if (!rooms)
-		return ((void *)0);
-	if (!rooms->room || !(rooms->room->state & state))
-		return (ft_return_head(rooms->next, state));
-	return (rooms->room);
+	t_links			*link;
+
+	link = graph->links;
+	if ((graph->state ^ state) & state)
+		return (0);
+	graph->state ^= state;
+	while (link)
+	{
+		ft_reset(link->room, state);
+		link = link->next;
+	}
+	return (0);
 }

@@ -6,7 +6,7 @@
 #    By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/11 17:54:03 by lutsiara          #+#    #+#              #
-#    Updated: 2019/06/02 20:29:49 by lutsiara         ###   ########.fr        #
+#    Updated: 2019/06/03 16:52:32 by lutsiara         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,8 @@ SRCS = $(SRCDIR)main.c \
 	   $(SRCDIR)ft_find_room.c \
 	   $(SRCDIR)ft_link_rooms.c \
 	   $(SRCDIR)ft_return_head.c \
+	   $(SRCDIR)ft_checkup.c \
+	   $(SRCDIR)ft_reset.c \
 	   $(SRCDIR)ft_get_graph.c
 
 OBJS = $(SRCS:.c=.o)

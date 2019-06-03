@@ -1,48 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_checkup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/06 11:17:54 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/06/03 16:38:53 by lutsiara         ###   ########.fr       */
+/*   Created: 2019/06/03 15:27:03 by lutsiara          #+#    #+#             */
+/*   Updated: 2019/06/03 16:34:16 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-int		ft_travel(t_graph *graph)
+static int	ft_is_there_path(t_graph *start, t_graph *end)
 {
-	t_links			*link;
+	t_links		*link;
+	int			ret;
 
-	link = graph->links;
-	if (graph->state & 1)
+	ret = 0;
+	if (start == end)
+		return (1);
+	link = start->links;
+	if (start->state & 1)
 		return (0);
-	graph->state |= 1;
-	while (link)
+	start->state |= 1;
+	while (link && !ret)
 	{
-		ft_travel(link->room);
+		ret = ft_is_there_path(link->room, end);
 		link = link->next;
 	}
-	ft_printf("%{HBLUE}%hhu%{} %{HCYAN}%u%{} %s %{YELLOW}%ld %ld%{}\n", \
-	graph->state, graph->nb_ants, graph->name, graph->x, graph->y);
-	return (0);
+	return (ret);
 }
 
-int		main(void)
+int			ft_checkup(t_path *rooms)
 {
 	t_graph		*start;
+	t_graph		*end;
 
-	if (!(start = ft_get_graph()))
-		return (ft_printf("%{HRED} %{} There is no graph !\n"));
-	ft_travel(start);
+	if (!(start = ft_return_head(rooms, 64)) \
+	|| !(end = ft_return_head(rooms, 128)))
+		return (1);
+	if (!ft_is_there_path(start, end))
+		return (1);
 	ft_reset(start, 1);
-	ft_del_graph(start, (void *)0);
 	return (0);
-}
-
-__attribute__((destructor)) int end()
-{
-	while (1);
 }
