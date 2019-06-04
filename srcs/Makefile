@@ -6,7 +6,7 @@
 #    By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/11 17:54:03 by lutsiara          #+#    #+#              #
-#    Updated: 2019/06/03 16:52:32 by lutsiara         ###   ########.fr        #
+#    Updated: 2019/06/04 13:23:44 by lutsiara         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ LIB = ../libft/
 INCLIB = ../libft/includes/
 
 SRCS = $(SRCDIR)main.c \
+	   $(SRCDIR)ft_gnl.c \
 	   $(SRCDIR)ft_alloc.c \
 	   $(SRCDIR)ft_set.c \
 	   $(SRCDIR)ft_enqueue.c \

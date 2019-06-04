@@ -6,7 +6,7 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 16:49:00 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/05/29 18:17:12 by lutsiara         ###   ########.fr       */
+/*   Updated: 2019/06/04 18:27:43 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,27 @@ int			ft_enqueue_room(t_path **path, t_path *elem)
 	return (ft_enqueue_room(&((*path)->next), elem));
 }
 
-int			ft_enqueue_link(t_links **links, t_links *elem)
+int			ft_push_room(t_path **path, t_path *elem)
 {
+	t_path		*next;
+
+	if (!elem)
+		return (1);
+	if (!(*path))
+	{
+		*path = elem;
+		return (0);
+	}
+	next = *path;
+	elem->next = next;
+	*path = elem;
+	return (0);
+}
+
+int			ft_push_link(t_links **links, t_links *elem)
+{
+	t_links		*next;
+
 	if (!elem)
 		return (1);
 	if (!(*links))
@@ -33,11 +52,16 @@ int			ft_enqueue_link(t_links **links, t_links *elem)
 		*links = elem;
 		return (0);
 	}
-	return (ft_enqueue_link(&((*links)->next), elem));
+	next = *links;
+	elem->next = next;
+	*links = elem;
+	return (0);
 }
 
-int			ft_enqueue_path(t_ctnl **paths, t_ctnl *elem)
+int			ft_push_path(t_ctnl **paths, t_ctnl *elem)
 {
+	t_ctnl		*next;
+
 	if (!elem)
 		return (1);
 	if (!(*paths))
@@ -45,5 +69,8 @@ int			ft_enqueue_path(t_ctnl **paths, t_ctnl *elem)
 		*paths = elem;
 		return (0);
 	}
-	return (ft_enqueue_path(&((*paths)->next), elem));
+	next = *paths;
+	elem->next = next;
+	*paths = elem;
+	return (0);
 }

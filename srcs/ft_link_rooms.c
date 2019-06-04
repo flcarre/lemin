@@ -6,7 +6,7 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/02 17:24:59 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/06/02 19:37:13 by lutsiara         ###   ########.fr       */
+/*   Updated: 2019/06/04 19:10:40 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ int		ft_link_rooms(t_path *rooms, char *room1, char *room2)
 	if (!(link = ft_alloc_link()))
 		return (1);
 	ft_set_link(&link, roomB);
-	ft_enqueue_link(&(roomA->links), link);
+	ft_push_link(&(roomA->links), link);
 	if (!(link = ft_alloc_link()))
 		return (1);
 	ft_set_link(&link, roomA);
-	ft_enqueue_link(&(roomB->links), link);
+	ft_push_link(&(roomB->links), link);
 	return (0);
 }

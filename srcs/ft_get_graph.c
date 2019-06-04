@@ -6,7 +6,7 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/31 15:56:20 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/06/04 00:45:29 by lutsiara         ###   ########.fr       */
+/*   Updated: 2019/06/04 19:17:47 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,18 @@ static int		ft_get_nb_ants(unsigned int *nb_ants)
 	t_rank			rank;
 
 	line = (void *)0;
-	if (gnl(STDIN_FILENO, &line) != 1)
+	//if (gnl(STDIN_FILENO, &line) != 1)
+	if (!(line = ft_gnl(2)) || !(*line))
 		return (1);
 	if ((rank = ft_rank_line(line)) != NBANTS)
 	{
-		ft_memdel((void **)&line);
+	//	ft_memdel((void **)&line);
 		if (rank == COMMENT)
 			return (ft_get_nb_ants(nb_ants));
 		return (1);
 	}
 	*nb_ants = ft_atoui((const char *)line);
-	ft_memdel((void **)&line);
+	//ft_memdel((void **)&line);
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 16:25:50 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/06/04 00:37:36 by lutsiara         ###   ########.fr       */
+/*   Updated: 2019/06/04 19:15:56 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ typedef struct		s_ctnl
 	struct s_ctnl	*next;
 }					t_ctnl;
 
+char				*ft_gnl(unsigned char mode);
+
 t_graph				*ft_alloc_room(void);
 t_links				*ft_alloc_link(void);
 t_path				*ft_alloc_path_elem(void);
@@ -74,8 +76,9 @@ int					ft_set_container(t_container **box, t_path *path);
 int					ft_set_ctnl(t_ctnl **elem, t_container *box);
 
 int					ft_enqueue_room(t_path **path, t_path *elem);
-int					ft_enqueue_link(t_links **links, t_links *elem);
-int					ft_enqueue_path(t_ctnl **paths, t_ctnl *elem);
+int					ft_push_room(t_path **path, t_path *elem);
+int					ft_push_link(t_links **links, t_links *elem);
+int					ft_push_path(t_ctnl **paths, t_ctnl *elem);
 
 int					ft_del_path(t_path **path, unsigned int room);
 int					ft_del_container(t_ctnl **paths, unsigned int path);
@@ -91,7 +94,7 @@ int					ft_control_tube_name(char *line, t_path *rooms, \
 int					ft_create_rooms(t_path **list, unsigned char *state);
 t_graph				*ft_find_room(char *name, t_path *rooms);
 int					ft_link_rooms(t_path *rooms, char *room1, char *room2);
-int					ft_make_link(char **line, t_path **list);
+int					ft_make_link(char *line, t_path **list);
 int					ft_make_links(t_path **list);
 t_graph				*ft_return_head(t_path *rooms, unsigned char state);
 int					ft_checkup(t_path *rooms);
