@@ -87,6 +87,7 @@ SRCS = $(SRCDIR)ft_atoi.c \
 	   $(SRCDIR)ft_strmapi.c \
 	   $(SRCDIR)ft_strncat.c \
 	   $(SRCDIR)ft_strncmp.c \
+	   $(SRCDIR)ft_strrevncmp.c \
 	   $(SRCDIR)ft_strncpy.c \
 	   $(SRCDIR)ft_strnequ.c \
 	   $(SRCDIR)ft_strnew.c \

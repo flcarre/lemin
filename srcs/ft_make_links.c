@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_make_links.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
+/*   By: flcarre <flcarre@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/02 16:58:00 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/06/04 19:21:02 by lutsiara         ###   ########.fr       */
+/*   Updated: 2019/06/05 13:49:02 by flcarre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int			ft_make_link(char *line, t_path **list)
 {
-	char		*room1;
-	char		*room2;
+	t_graph		*room1;
+	t_graph		*room2;
 	int			ret;
 
 	//if (ft_control_tube_name(*line, *list, &room1, &room2))
@@ -25,9 +25,9 @@ int			ft_make_link(char *line, t_path **list)
 	//	ft_memdel((void **)&(*line));
 		return (1);
 	}
-	ret = ft_link_rooms(*list, room1, room2);
+	ret = ft_link_rooms(room1, room2);
 	//ft_memdel((void **)&(*line));
-	ft_gnl(1);
+	//ft_gnl(1);
 	return (ret);
 }
 

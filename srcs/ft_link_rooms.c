@@ -3,23 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   ft_link_rooms.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
+/*   By: flcarre <flcarre@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/02 17:24:59 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/06/04 19:10:40 by lutsiara         ###   ########.fr       */
+/*   Updated: 2019/06/05 11:43:12 by flcarre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-int		ft_link_rooms(t_path *rooms, char *room1, char *room2)
+int		ft_link_rooms(t_graph *roomA, t_graph *roomB)
 {
-	t_graph		*roomA;
-	t_graph		*roomB;
 	t_links		*link;
 
-	roomA = ft_find_room(room1, rooms);
-	roomB = ft_find_room(room2, rooms);
 	if (!(link = ft_alloc_link()))
 		return (1);
 	ft_set_link(&link, roomB);

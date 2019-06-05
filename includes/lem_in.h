@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lem_in.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
+/*   By: flcarre <flcarre@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 16:25:50 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/06/04 19:15:56 by lutsiara         ###   ########.fr       */
+/*   Updated: 2019/06/05 11:43:15 by flcarre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,10 +90,10 @@ t_graph				*ft_get_graph(void);
 int					ft_error(unsigned int func, ...);
 t_rank				ft_rank_line(char *line);
 int					ft_control_tube_name(char *line, t_path *rooms, \
-					char **room1, char **room2);
+					t_graph **roomA, t_graph **roomB);
 int					ft_create_rooms(t_path **list, unsigned char *state);
 t_graph				*ft_find_room(char *name, t_path *rooms);
-int					ft_link_rooms(t_path *rooms, char *room1, char *room2);
+int					ft_link_rooms(t_graph *roomA, t_graph *roomB);
 int					ft_make_link(char *line, t_path **list);
 int					ft_make_links(t_path **list);
 t_graph				*ft_return_head(t_path *rooms, unsigned char state);

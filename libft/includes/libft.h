@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
+/*   By: flcarre <flcarre@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/07 12:44:47 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/05/24 19:02:35 by lutsiara         ###   ########.fr       */
+/*   Updated: 2019/06/05 13:11:50 by flcarre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ char				*ft_strnstr(const char *haystack, const char *needle, \
 					unsigned long len);
 int					ft_strcmp(const char *s1, const char *s2);
 int					ft_strncmp(const char *s1, const char *s2, unsigned long n);
+int					ft_strrevncmp(const char *s1, const char *s2, \
+					unsigned long n);
 int					ft_atoi(const char *str);
 long				ft_atol(const char *str);
 unsigned int		ft_atoui(const char *str);
