@@ -6,7 +6,7 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 11:17:54 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/06/04 19:20:45 by lutsiara         ###   ########.fr       */
+/*   Updated: 2019/06/05 20:50:28 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ int		main(void)
 		return (ft_error(0));
 	if (!(start = ft_get_graph()))
 		return (ft_printf("%{HRED} %{} There is no graph !\n"));
-	ft_travel(start);
-	ft_reset(start, 1);
+	//ft_travel(start);
+	//ft_reset(start, 1);
 	/*
 	i = start->links;
 	while (i)

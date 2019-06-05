@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lem_in.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flcarre <flcarre@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 16:25:50 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/06/05 11:43:15 by flcarre          ###   ########.fr       */
+/*   Updated: 2019/06/05 20:40:22 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,11 +93,12 @@ int					ft_control_tube_name(char *line, t_path *rooms, \
 					t_graph **roomA, t_graph **roomB);
 int					ft_create_rooms(t_path **list, unsigned char *state);
 t_graph				*ft_find_room(char *name, t_path *rooms);
-int					ft_link_rooms(t_graph *roomA, t_graph *roomB);
-int					ft_make_link(char *line, t_path **list);
-int					ft_make_links(t_path **list);
+int					ft_link_rooms(t_graph *roomA, t_graph *roomB, \
+					t_graph **start);
+int					ft_make_link(char *line, t_path **list, t_graph **start);
+int					ft_make_links(t_path **list, t_graph **start);
 t_graph				*ft_return_head(t_path *rooms, unsigned char state);
-int					ft_checkup(t_path *rooms);
+int					ft_checkup(t_path *rooms, t_graph *start);
 int					ft_reset(t_graph *graph, unsigned char state);
 int					ft_set(t_graph *graph, unsigned char state);
 
