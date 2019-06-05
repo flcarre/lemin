@@ -6,7 +6,7 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/31 17:18:51 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/06/05 20:19:38 by lutsiara         ###   ########.fr       */
+/*   Updated: 2019/06/05 22:09:29 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,25 @@ static int		ft_create_room(char *line, t_path **list, unsigned char *state)
 
 static int		ft_select_cmd(char *line, t_path **list, unsigned char *state)
 {
+	int				ret;
+	static int		start = 0;
+	static int		end = 0;
+
 	if (!ft_strcmp(line + 2, "end"))
 	{
 		*state = 128;
-		return (ft_create_rooms(list, state));
+		ret = ft_create_rooms(list, state);
+		if (ret)
+			end++;
+		return ((end > 1) ? 2 : ret);
 	}
 	if (!ft_strcmp(line + 2, "start"))
 	{
 		*state = 64;
-		return (ft_create_rooms(list, state));
+		ret = ft_create_rooms(list, state);
+		if (ret)
+			start++;
+		return ((start > 1) ? 2 : ret);
 	}
 	return (0);
 }
@@ -56,7 +66,7 @@ int				ft_create_rooms(t_path **list, unsigned char *state)
 
 	line = (void *)0;
 	if (!(line = ft_gnl(1)) || !(*line))
-		return (1);
+		return (2);
 	if ((rank = ft_rank_line(line)) != ROOM)
 	{
 		if (rank == COMMAND || rank == COMMENT)
@@ -66,8 +76,8 @@ int				ft_create_rooms(t_path **list, unsigned char *state)
 			return (0);
 		}
 		if (rank == LINK)
-			return ((!ft_make_link(line, list, (void *)0)) ? 2 : 1);
-		return (1);
+			return ((!ft_make_link(line, list, (void *)0)) ? 3 : 2);
+		return (2);
 	}
-	return (ft_create_room(line, list, state));
+	return ((!ft_create_room(line, list, state)) ? 1 : 2);
 }
