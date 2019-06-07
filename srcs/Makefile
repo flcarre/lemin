@@ -6,7 +6,7 @@
 #    By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/11 17:54:03 by lutsiara          #+#    #+#              #
-#    Updated: 2019/06/07 20:49:08 by lutsiara         ###   ########.fr        #
+#    Updated: 2019/06/08 00:31:08 by lutsiara         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,17 @@ SRCS = $(SRCDIR)main.c \
 	   $(SRCDIR)ft_gnl.c \
 	   $(SRCDIR)ft_alloc.c \
 	   $(SRCDIR)ft_enqueue.c \
-	   $(SRCDIR)ft_rank_line.c
+	   $(SRCDIR)ft_rank_line.c \
+	   $(SRCDIR)ft_isvalidcmd.c \
+	   $(SRCDIR)ft_get_ants.c \
+	   $(SRCDIR)ft_get_graph.c \
+	   $(SRCDIR)ft_set_room.c \
+	   $(SRCDIR)ft_create_rooms.c \
+	   $(SRCDIR)ft_control_names.c \
+	   $(SRCDIR)ft_make_links.c \
+	   $(SRCDIR)ft_checkup.c \
+	   $(SRCDIR)ft_rs.c \
+	   $(SRCDIR)ft_del.c
 
 OBJS = $(SRCS:.c=.o)
 

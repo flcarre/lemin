@@ -1,55 +1,49 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_reset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/06 11:17:54 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/06/08 00:52:00 by lutsiara         ###   ########.fr       */
+/*   Created: 2019/06/08 00:15:18 by lutsiara          #+#    #+#             */
+/*   Updated: 2019/06/08 00:16:57 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-int		ft_travel(t_graph *graph)
+int		ft_reset(t_graph *start, unsigned char state)
 {
-	t_links	*link;
+	t_links		*link;
 
-	link = graph->links;
-	if (graph->state & 1)
+	if (!start)
+		return (1);
+	link = start->links;
+	if ((start->state ^ state) & state)
 		return (0);
-	graph->state |= 1;
+	start->state ^= state;
 	while (link)
 	{
-		ft_travel(link->room);
+		ft_reset(link->room, state);
 		link = link->next;
 	}
-	ft_printf("%{HBLUE}%hhu%{} %{HCYAN}%u%{} %s %{YELLOW}%ld %ld%{}\n", \
-	graph->state, graph->nb_ants, graph->name, graph->x, graph->y);
 	return (0);
 }
 
-int		main(void)
+int		ft_set(t_graph *start, unsigned char state)
 {
-	t_var	var;
+	t_links		*link;
 
-	ft_bzero((void *)&var, sizeof(t_var));
-	if (!ft_gnl(3) || ft_get_graph(&var))
-	{
-		ft_putendl("ERROR");
-		ft_del(&var);
+	if (!start)
 		return (1);
+	link = start->links;
+	if (start->state & state)
+		return (0);
+	start->state |= state;
+	while (link)
+	{
+		ft_set(link->room, state);
+		link = link->next;
 	}
-	ft_travel(var.start);
-	ft_gnl(0);
-	ft_del(&var);
 	return (0);
 }
-
-/*
-__attribute__((destructor)) int end()
-{
-	while (1);
-}
-*/

@@ -6,7 +6,7 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 16:49:00 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/06/07 20:44:17 by lutsiara         ###   ########.fr       */
+/*   Updated: 2019/06/08 00:47:56 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int			ft_push_link(t_links **links, t_links *elem)
 
 int			ft_push_path(t_ctn **paths, t_ctn *elem)
 {
-	t_ctnl		*next;
+	t_ctn		*next;
 
 	if (!elem)
 		return (1);
