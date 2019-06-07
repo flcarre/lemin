@@ -6,7 +6,7 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 16:25:50 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/06/05 20:40:22 by lutsiara         ###   ########.fr       */
+/*   Updated: 2019/06/07 20:45:40 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,57 +49,36 @@ typedef struct		s_path
 	struct s_path	*next;
 }					t_path;
 
-typedef struct		s_container
+typedef struct		s_ctn
 {
 	t_path			*path;
 	unsigned int	len;
-}					t_container;
+	struct s_ctn	*next;
+}					t_ctn;
 
-typedef struct		s_ctnl
+typedef struct		s_var
 {
-	t_container		*path_box;
-	struct s_ctnl	*next;
-}					t_ctnl;
+	unsigned int	nb_ants;
+	t_graph			*start;
+	t_graph			*end;
+	t_path			*queue;
+	t_container		*paths;
+
+}					t_var;
 
 char				*ft_gnl(unsigned char mode);
 
 t_graph				*ft_alloc_room(void);
 t_links				*ft_alloc_link(void);
 t_path				*ft_alloc_path_elem(void);
-t_container			*ft_alloc_container_elem(void);
-t_ctnl				*ft_alloc_ctnl_elem(void);
-
-int					ft_set_room(t_graph **room, char *name, long x, long y);
-int					ft_set_link(t_links **elem, t_graph *room);
-int					ft_set_path_elem(t_path **elem, t_graph *room);
-int					ft_set_container(t_container **box, t_path *path);
-int					ft_set_ctnl(t_ctnl **elem, t_container *box);
+t_ctn				*ft_alloc_ctn_elem(void);
 
 int					ft_enqueue_room(t_path **path, t_path *elem);
 int					ft_push_room(t_path **path, t_path *elem);
 int					ft_push_link(t_links **links, t_links *elem);
-int					ft_push_path(t_ctnl **paths, t_ctnl *elem);
+int					ft_push_path(t_ctn **paths, t_ctn *elem);
 
-int					ft_del_path(t_path **path, unsigned int room);
-int					ft_del_container(t_ctnl **paths, unsigned int path);
-int					ft_del_graph(t_graph *graph, t_graph *prev_room);
-int					ft_del_room(t_graph **room);
-int					ft_del_links(t_links **links);
-
-t_graph				*ft_get_graph(void);
-int					ft_error(unsigned int func, ...);
 t_rank				ft_rank_line(char *line);
-int					ft_control_tube_name(char *line, t_path *rooms, \
-					t_graph **roomA, t_graph **roomB);
-int					ft_create_rooms(t_path **list, unsigned char *state);
-t_graph				*ft_find_room(char *name, t_path *rooms);
-int					ft_link_rooms(t_graph *roomA, t_graph *roomB, \
-					t_graph **start);
-int					ft_make_link(char *line, t_path **list, t_graph **start);
-int					ft_make_links(t_path **list, t_graph **start);
-t_graph				*ft_return_head(t_path *rooms, unsigned char state);
-int					ft_checkup(t_path *rooms, t_graph *start);
-int					ft_reset(t_graph *graph, unsigned char state);
-int					ft_set(t_graph *graph, unsigned char state);
+
 
 #endif

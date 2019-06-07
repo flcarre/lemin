@@ -6,15 +6,45 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 13:30:21 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/05/31 17:09:11 by lutsiara         ###   ########.fr       */
+/*   Updated: 2019/06/07 19:41:38 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-static t_rank	ft_ants(char *line)
+static int		ft_isaname(char *line)
 {
-	if (*line != 'L' && ft_strchr((const char *)line, (int)'-'))
+	if (!line || *line == 'L' || *line == '#')
+		return (0);
+	while (*line && *line != '-' && *line != ' ')
+		line++;
+	if (!(*line) || *line == '-')
+		return (0);
+	return (1);
+}
+
+static int		ft_isalink(char *line)
+{
+	if (!line || *line == 'L' || *line == '#')
+		return (0);
+	while (*line && *line != '-' && *line != ' ')
+		line++;
+	if (!(*line) || *line == ' ')
+		return (0);
+	if (*line == '-')
+		line++;
+	if (*line == 'L' || *line == '#')
+		return (0);
+	while (*line && *line != '-' && *line != ' ')
+		line++;
+	if (*line == '-' || *line == ' ')
+		return (0);
+	return (1);
+}
+
+static t_rank	ft_next(char *line)
+{
+	if (ft_isalink(line))
 		return (LINK);
 	while (*line && ft_isdigit((int)*line))
 		line++;
@@ -29,12 +59,11 @@ t_rank			ft_rank_line(char *line)
 
 	if (*line == '#')
 	{
-		line++;
-		if (*line == '#')
+		if (*(++line) == '#')
 			return (COMMAND);
 		return (COMMENT);
 	}
-	if (*line != 'L' && (tmp = ft_strchr((const char *)line, (int)' ')))
+	if (ft_isaname(line) && (tmp = ft_strchr(line, ' ')))
 	{
 		if (*(++tmp) == '-')
 			tmp++;
@@ -49,5 +78,5 @@ t_rank			ft_rank_line(char *line)
 		if (!(*tmp))
 			return (ROOM);
 	}
-	return (ft_ants(line));
+	return (ft_next(line));
 }

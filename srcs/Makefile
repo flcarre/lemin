@@ -6,7 +6,7 @@
 #    By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/11 17:54:03 by lutsiara          #+#    #+#              #
-#    Updated: 2019/06/04 13:23:44 by lutsiara         ###   ########.fr        #
+#    Updated: 2019/06/07 20:49:08 by lutsiara         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,20 +25,8 @@ INCLIB = ../libft/includes/
 SRCS = $(SRCDIR)main.c \
 	   $(SRCDIR)ft_gnl.c \
 	   $(SRCDIR)ft_alloc.c \
-	   $(SRCDIR)ft_set.c \
 	   $(SRCDIR)ft_enqueue.c \
-	   $(SRCDIR)ft_del.c \
-	   $(SRCDIR)ft_rank_line.c \
-	   $(SRCDIR)ft_error.c \
-	   $(SRCDIR)ft_control_tube_name.c \
-	   $(SRCDIR)ft_create_rooms.c \
-	   $(SRCDIR)ft_make_links.c \
-	   $(SRCDIR)ft_find_room.c \
-	   $(SRCDIR)ft_link_rooms.c \
-	   $(SRCDIR)ft_return_head.c \
-	   $(SRCDIR)ft_checkup.c \
-	   $(SRCDIR)ft_reset.c \
-	   $(SRCDIR)ft_get_graph.c
+	   $(SRCDIR)ft_rank_line.c
 
 OBJS = $(SRCS:.c=.o)
 
