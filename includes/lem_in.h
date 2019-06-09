@@ -6,7 +6,7 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 16:25:50 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/06/08 00:46:31 by lutsiara         ###   ########.fr       */
+/*   Updated: 2019/06/09 14:01:51 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ typedef struct		s_var
 	t_path			*queue;
 	t_path			*ptr;
 	t_ctn			*paths;
-	char			*names;
 
 }					t_var;
 

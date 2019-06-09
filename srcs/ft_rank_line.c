@@ -6,7 +6,7 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 13:30:21 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/06/07 19:41:38 by lutsiara         ###   ########.fr       */
+/*   Updated: 2019/06/08 17:22:31 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ t_rank			ft_rank_line(char *line)
 			tmp++;
 		while (*tmp && ft_isdigit((int)*tmp))
 			tmp++;
-		if (!(*tmp))
+		if (!(*tmp) && ft_isdigit((int)*(tmp - 1)))
 			return (ROOM);
 	}
 	return (ft_next(line));

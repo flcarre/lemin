@@ -6,7 +6,7 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 23:20:45 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/06/07 23:42:06 by lutsiara         ###   ########.fr       */
+/*   Updated: 2019/06/08 19:13:16 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int		stop(char *line, t_graph *room1, t_graph *room2)
 		s1++;
 		line++;
 	}
-	if (!(*line) && *line != '-')
+	if (!(*line) || *line != '-')
 		return (0);
 	line++;
 	while (*s2 && *line && *s2 == *line)
@@ -66,15 +66,15 @@ int				ft_control_names(char *line, t_var *var)
 	tmp = ft_strlen(var->ptr->room->name);
 	if (!ft_strncmp(line, var->ptr->room->name, tmp))
 	{
-			len[0] = (tmp >= len[0]) ? tmp : len[0];
-			if (tmp >= len[0])
-				var->room1 = var->ptr->room;
+		len[0] = (tmp >= len[0]) ? tmp : len[0];
+		if (tmp >= len[0])
+			var->room1 = var->ptr->room;
 	}
 	if (!ft_strrevncmp(line, var->ptr->room->name, tmp))
 	{
 		len[1] = (tmp >= len[1]) ? tmp : len[1];
 		if (tmp >= len[1])
-			var->room1 = var->ptr->room;
+			var->room2 = var->ptr->room;
 	}
 	var->ptr = var->ptr->next;
 	return (ft_control_names(line, var));

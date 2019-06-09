@@ -6,7 +6,7 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/08 00:31:30 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/06/08 00:51:43 by lutsiara         ###   ########.fr       */
+/*   Updated: 2019/06/09 14:02:10 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ int			ft_del_links(t_links **links)
 
 int			ft_del(t_var *var)
 {
-	ft_memdel((void **)&var->names);
 	ft_del_ctn(&var->paths);
 	ft_del_path(&var->queue, 1);
 	return (0);

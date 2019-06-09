@@ -6,7 +6,7 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 21:33:57 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/06/08 00:51:20 by lutsiara         ###   ########.fr       */
+/*   Updated: 2019/06/08 19:41:38 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,11 @@ static int		ft_create_room(char *line, t_var *var)
 	if (ft_set_room(&room, line, var))
 		return (1);
 	room->state |= var->state;
-	var->state = 0;
 	if (!(elem = ft_alloc_path_elem()))
+	{
+		ft_memdel((void **)&room);
 		return (1);
+	}
 	elem->room = room;
 	ft_push_room(&var->queue, elem);
 	ft_gnl(1);
@@ -32,6 +34,7 @@ static int		ft_create_room(char *line, t_var *var)
 		var->start = room;
 	if (var->state == 128)
 		var->end = room;
+	var->state = 0;
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 #    By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/06 17:06:41 by lutsiara          #+#    #+#              #
-#    Updated: 2019/05/24 18:42:17 by lutsiara         ###   ########.fr        #
+#    Updated: 2019/06/08 17:42:58 by lutsiara         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -95,6 +95,7 @@ SRCS = $(SRCDIR)ft_atoi.c \
 	   $(SRCDIR)ft_strrchr.c \
 	   $(SRCDIR)ft_strsplit.c \
 	   $(SRCDIR)ft_strstr.c \
+	   $(SRCDIR)ft_chunkcmp.c \
 	   $(SRCDIR)ft_strsub.c \
 	   $(SRCDIR)ft_strtabdel.c \
 	   $(SRCDIR)ft_strtabnew.c \
