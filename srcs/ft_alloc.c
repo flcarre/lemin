@@ -6,7 +6,7 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 15:53:35 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/05/24 19:58:30 by lutsiara         ###   ########.fr       */
+/*   Updated: 2019/06/07 20:45:03 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,24 +49,14 @@ t_path			*ft_alloc_path_elem(void)
 	return (elem);
 }
 
-t_container		*ft_alloc_container_elem(void)
+t_ctn		*ft_alloc_ctn_elem(void)
 {
-	t_container	*elem;
+	t_ctn		*elem;
 
-	if (!(elem = (t_container *)ft_memalloc(sizeof(t_container))))
+	if (!(elem = (t_ctn *)ft_memalloc(sizeof(t_ctn))))
 		return ((void *)0);
 	elem->path = (void *)0;
 	elem->len = 0;
-	return (elem);
-}
-
-t_ctnl			*ft_alloc_ctnl_elem(void)
-{
-	t_ctnl		*elem;
-
-	if (!(elem = (t_ctnl *)ft_memalloc(sizeof(t_ctnl))))
-		return ((void *)0);
-	elem->path_box = (void *)0;
 	elem->next = (void *)0;
 	return (elem);
 }

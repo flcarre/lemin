@@ -5,42 +5,43 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/02 16:58:00 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/06/05 20:43:24 by lutsiara         ###   ########.fr       */
+/*   Created: 2019/06/07 23:13:04 by lutsiara          #+#    #+#             */
+/*   Updated: 2019/06/10 19:15:20 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-int			ft_make_link(char *line, t_path **list, t_graph **start)
+static int	ft_link_rooms(t_var *var)
 {
-	t_graph		*room1;
-	t_graph		*room2;
-	int			ret;
+	t_links		*link;
 
-	room1 = (void *)0;
-	room2 = (void *)0;
-	if (ft_control_tube_name(line, *list, &room1, &room2))
-	{
-		//ft_putendl("ft_control_tube_name");
+	if (!(link = ft_alloc_link()))
 		return (1);
-	}
-	ret = ft_link_rooms(room1, room2, start);
-	//ft_gnl(1);
-	return (ret);
+	link->room = var->room2;
+	ft_push_link(&var->room1->links, link);
+	if (!(link = ft_alloc_link()))
+		return (1);
+	link->room = var->room1;
+	ft_push_link(&var->room2->links, link);
+	return (0);
 }
 
-static int	ft_isvalid_cmd(char *line)
+int			ft_make_link(char *line, t_var *var)
 {
 	int			ret;
 
-	ret = 0;
-	if (!ft_strcmp(line, "##start") || !ft_strcmp(line, "##end"))
-		ret = 1;
+	var->ptr = var->queue;
+	if (ft_control_names(line, var))
+		return (1);
+	ret = ft_link_rooms(var);
+	var->room1 = (void *)0;
+	var->room2 = (void *)0;
+	ft_gnl(1);
 	return (ret);
 }
 
-int			ft_make_links(t_path **list, t_graph **start)
+int			ft_make_links(t_var *var)
 {
 	char		*line;
 	t_rank		rank;
@@ -52,11 +53,11 @@ int			ft_make_links(t_path **list, t_graph **start)
 	{
 		if (rank == COMMAND || rank == COMMENT)
 		{
-			if (rank == COMMAND && ft_isvalid_cmd(line))
+			if (rank == COMMAND && ft_isvalidcmd(line))
 				return (1);
 			return (0);
 		}
 		return (1);
 	}
-	return (ft_make_link(line, list, start));
+	return (ft_make_link(line, var));
 }

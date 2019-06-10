@@ -6,7 +6,7 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 11:17:54 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/06/05 20:50:28 by lutsiara         ###   ########.fr       */
+/*   Updated: 2019/06/10 19:04:48 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int		ft_travel(t_graph *graph)
 {
-	t_links			*link;
+	t_links	*link;
 
 	link = graph->links;
 	if (graph->state & 1)
@@ -32,25 +32,22 @@ int		ft_travel(t_graph *graph)
 
 int		main(void)
 {
-	t_graph		*start;
-	//t_links		*i;
+	t_var	var;
 
-	if (!ft_gnl(3))
-		return (ft_error(0));
-	if (!(start = ft_get_graph()))
-		return (ft_printf("%{HRED} %{} There is no graph !\n"));
-	//ft_travel(start);
-	//ft_reset(start, 1);
-	/*
-	i = start->links;
-	while (i)
+	ft_bzero((void *)&var, sizeof(t_var));
+	if (!(var.hash_table = \
+		(t_graph **)ft_memalloc(sizeof(t_graph *) * SIZE_HASH_TABLE)))
+		return (1);
+	if (!ft_gnl(3) || ft_get_graph(&var))
 	{
-		ft_printf("%{HPURPLE} %{} %s - %s\n", start->name, i->room->name);
-		i = i->next;
+		ft_putendl("ERROR");
+		ft_gnl(0);
+		ft_del(&var);
+		return (1);
 	}
-	*/
-	ft_del_graph(start, (void *)0);
+	ft_travel(var.start);
 	ft_gnl(0);
+	ft_del(&var);
 	return (0);
 }
 

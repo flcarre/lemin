@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/22 17:14:01 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/06/05 17:53:59 by lutsiara         ###   ########.fr       */
+/*   Created: 2019/06/08 00:31:30 by lutsiara          #+#    #+#             */
+/*   Updated: 2019/06/10 19:02:04 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,39 +23,13 @@ int			ft_del_path(t_path **path, unsigned int room)
 	return (0);
 }
 
-int			ft_del_container(t_ctnl **paths, unsigned int path)
+int			ft_del_ctn(t_ctn **paths)
 {
 	if (!(*paths))
 		return (0);
-	ft_del_container(&((*paths)->next), path);
-	if (path)
-		ft_del_path(&((*paths)->path_box->path), 0);
-	ft_memdel((void **)&((*paths)->path_box));
+	ft_del_ctn(&((*paths)->next));
+	ft_del_path(&((*paths)->path), 0);
 	ft_memdel((void **)&(*paths));
-	return (0);
-}
-
-int			ft_del_graph(t_graph *graph, t_graph *prev_room)
-{
-	t_links			*link;
-
-	link = graph->links;
-	if (graph->state & 1)
-	{
-		while (link && link->room != prev_room)
-			link = link->next;
-		if (link)
-			link->room = (void *)0;
-		return (0);
-	}
-	graph->state |= 1;
-	while (link)
-	{
-		if (link->room)
-			ft_del_graph(link->room, graph);
-		link = link->next;
-	}
-	ft_del_room(&graph);
 	return (0);
 }
 
@@ -74,5 +48,13 @@ int			ft_del_links(t_links **links)
 		return (0);
 	ft_del_links(&((*links)->next));
 	ft_memdel((void **)&(*links));
+	return (0);
+}
+
+int			ft_del(t_var *var)
+{
+	ft_memdel((void **)&var->hash_table);
+	ft_del_ctn(&var->paths);
+	ft_del_path(&var->queue, 1);
 	return (0);
 }
