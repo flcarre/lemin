@@ -6,7 +6,7 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 21:33:57 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/06/08 19:41:38 by lutsiara         ###   ########.fr       */
+/*   Updated: 2019/06/10 19:13:26 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ static int		ft_create_room(char *line, t_var *var)
 	if (var->state == 128)
 		var->end = room;
 	var->state = 0;
+	var->hash_table[ft_djb2a(room->name) % SIZE_HASH_TABLE] = room;
 	return (0);
 }
 

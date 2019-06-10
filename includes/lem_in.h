@@ -6,7 +6,7 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 16:25:50 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/06/09 14:01:51 by lutsiara         ###   ########.fr       */
+/*   Updated: 2019/06/09 18:39:43 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include "libft.h"
 # include "get_next_line.h"
 # include "ft_printf.h"
+
+# define SIZE_HASH_TABLE 500000
 
 typedef enum		e_rank
 {
@@ -69,6 +71,7 @@ typedef struct		s_var
 	t_path			*queue;
 	t_path			*ptr;
 	t_ctn			*paths;
+	t_graph			**hash_table;
 
 }					t_var;
 

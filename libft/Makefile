@@ -6,7 +6,7 @@
 #    By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/06 17:06:41 by lutsiara          #+#    #+#              #
-#    Updated: 2019/06/08 17:42:58 by lutsiara         ###   ########.fr        #
+#    Updated: 2019/06/10 18:58:00 by lutsiara         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ SRCS = $(SRCDIR)ft_atoi.c \
 	   $(SRCDIR)ft_atoui.c \
 	   $(SRCDIR)ft_atol.c \
 	   $(SRCDIR)ft_bzero.c \
+	   $(SRCDIR)ft_djb2a.c \
 	   $(SRCDIR)ft_countword.c \
 	   $(SRCDIR)ft_delcontent.c \
 	   $(SRCDIR)ft_digitlen.c \

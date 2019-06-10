@@ -6,7 +6,7 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 13:30:21 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/06/08 17:22:31 by lutsiara         ###   ########.fr       */
+/*   Updated: 2019/06/10 19:23:39 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int		ft_isaname(char *line)
 
 static int		ft_isalink(char *line)
 {
-	if (!line || *line == 'L' || *line == '#')
+	if (!(*line) || *line == 'L' || *line == '#')
 		return (0);
 	while (*line && *line != '-' && *line != ' ')
 		line++;
@@ -33,7 +33,7 @@ static int		ft_isalink(char *line)
 		return (0);
 	if (*line == '-')
 		line++;
-	if (*line == 'L' || *line == '#')
+	if (!(*line) || *line == 'L' || *line == '#')
 		return (0);
 	while (*line && *line != '-' && *line != ' ')
 		line++;
@@ -42,7 +42,7 @@ static int		ft_isalink(char *line)
 	return (1);
 }
 
-static t_rank	ft_next(char *line)
+static t_rank	next(char *line)
 {
 	if (ft_isalink(line))
 		return (LINK);
@@ -78,5 +78,5 @@ t_rank			ft_rank_line(char *line)
 		if (!(*tmp) && ft_isdigit((int)*(tmp - 1)))
 			return (ROOM);
 	}
-	return (ft_next(line));
+	return (next(line));
 }

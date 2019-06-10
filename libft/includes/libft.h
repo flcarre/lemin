@@ -6,7 +6,7 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/07 12:44:47 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/06/08 17:42:18 by lutsiara         ###   ########.fr       */
+/*   Updated: 2019/06/10 18:57:04 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,5 +138,7 @@ long double			ft_ldabs(long double x);
 unsigned long		ft_wstrlen(const int *ws);
 char				*ft_chunkcmp(const char *cmp, const char *need, \
 					const char sep);
+unsigned long		ft_djb2a(char *str);
+
 
 #endif
