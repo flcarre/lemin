@@ -6,7 +6,7 @@
 #    By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/11 17:54:03 by lutsiara          #+#    #+#              #
-#    Updated: 2019/06/08 00:31:08 by lutsiara         ###   ########.fr        #
+#    Updated: 2019/06/11 16:18:54 by lutsiara         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,7 @@ SRCS = $(SRCDIR)main.c \
 	   $(SRCDIR)ft_make_links.c \
 	   $(SRCDIR)ft_checkup.c \
 	   $(SRCDIR)ft_rs.c \
+	   $(SRCDIR)ft_hash.c \
 	   $(SRCDIR)ft_del.c
 
 OBJS = $(SRCS:.c=.o)

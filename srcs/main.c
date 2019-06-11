@@ -6,7 +6,7 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 11:17:54 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/06/10 19:04:48 by lutsiara         ###   ########.fr       */
+/*   Updated: 2019/06/11 17:38:56 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int		main(void)
 
 	ft_bzero((void *)&var, sizeof(t_var));
 	if (!(var.hash_table = \
-		(t_graph **)ft_memalloc(sizeof(t_graph *) * SIZE_HASH_TABLE)))
+		(t_links **)ft_memalloc(sizeof(t_links *) * SIZE_HASH_TABLE)))
 		return (1);
 	if (!ft_gnl(3) || ft_get_graph(&var))
 	{
@@ -45,7 +45,7 @@ int		main(void)
 		ft_del(&var);
 		return (1);
 	}
-	ft_travel(var.start);
+	//ft_travel(var.start);
 	ft_gnl(0);
 	ft_del(&var);
 	return (0);

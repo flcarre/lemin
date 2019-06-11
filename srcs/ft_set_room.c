@@ -6,7 +6,7 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 21:59:58 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/06/10 19:13:22 by lutsiara         ###   ########.fr       */
+/*   Updated: 2019/06/11 16:23:23 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,12 @@
 static int	ft_isunique(char *name, t_var *var)
 {
 	unsigned long	id;
+	unsigned long	hash;
 
-	id = ft_djb2a(name) % SIZE_HASH_TABLE;
-	if (var->hash_table[id])
-		return (0);
+	hash = ft_djb2a(name);
+	id = hash % SIZE_HASH_TABLE;
+	if (var->hash_table[id] && ft_return_room(var, name))
+			return (0);
 	return (1);
 }
 

@@ -6,7 +6,7 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 16:25:50 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/06/09 18:39:43 by lutsiara         ###   ########.fr       */
+/*   Updated: 2019/06/11 16:31:18 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ typedef struct		s_var
 	t_path			*queue;
 	t_path			*ptr;
 	t_ctn			*paths;
-	t_graph			**hash_table;
+	t_links			**hash_table;
 
 }					t_var;
 
@@ -92,6 +92,9 @@ int					ft_enqueue_room(t_path **path, t_path *elem);
 int					ft_push_room(t_path **path, t_path *elem);
 int					ft_push_link(t_links **links, t_links *elem);
 int					ft_push_path(t_ctn **paths, t_ctn *elem);
+
+int					ft_push_hash(t_var *var, t_graph *room);
+t_graph				*ft_return_room(t_var *var, char *name);
 
 t_rank				ft_rank_line(char *line);
 t_rank				ft_isvalidcmd(char *line);
