@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strrevncmp.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flcarre <flcarre@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/09 14:37:35 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/06/05 13:14:02 by flcarre          ###   ########.fr       */
+/*   Updated: 2019/06/13 00:49:33 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int		ft_strrevncmp(const char *s1, const char *s2, unsigned long n)
 {
 	unsigned long	l1;
 	unsigned long	l2;
-	
+
 	l1 = ft_strlen(s1);
 	l2 = ft_strlen(s2);
 	s1 += l1 - 1;
