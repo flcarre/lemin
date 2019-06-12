@@ -6,13 +6,13 @@
 #    By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/11 17:54:03 by lutsiara          #+#    #+#              #
-#    Updated: 2019/06/11 16:18:54 by lutsiara         ###   ########.fr        #
+#    Updated: 2019/06/12 23:32:35 by lutsiara         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc
 
-FLAGS = -Wall -Werror -Wextra
+FLAGS = -Wall -Werror -Wextra -g3 -fsanitize=address
 
 SRCDIR = ./
 
@@ -37,6 +37,8 @@ SRCS = $(SRCDIR)main.c \
 	   $(SRCDIR)ft_checkup.c \
 	   $(SRCDIR)ft_rs.c \
 	   $(SRCDIR)ft_hash.c \
+	   $(SRCDIR)ft_hash_utils.c \
+	   $(SRCDIR)ft_dijkstra.c \
 	   $(SRCDIR)ft_del.c
 
 OBJS = $(SRCS:.c=.o)

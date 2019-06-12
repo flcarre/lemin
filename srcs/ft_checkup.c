@@ -6,7 +6,7 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/08 00:11:40 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/06/11 18:27:50 by lutsiara         ###   ########.fr       */
+/*   Updated: 2019/06/12 23:57:32 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,6 @@ int			ft_checkup(t_var *var)
 	if (!ft_is_there_path(var->start, var->end))
 		return (1);
 	ft_reset(var->start, 1);
+	ft_set(var->start, 4);
 	return (0);
 }
