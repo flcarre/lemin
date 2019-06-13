@@ -6,7 +6,7 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 11:17:54 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/06/12 23:17:29 by lutsiara         ###   ########.fr       */
+/*   Updated: 2019/06/13 09:02:01 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ int		ft_travel(t_ctn *paths)
 {
 	t_path	*i;
 
+	if (!paths)
+		return (0);
 	i = paths->path;
 	ft_printf("Path length: %{CYAN}%d%{}\n", paths->len);
 	while (i)
@@ -24,7 +26,8 @@ int		ft_travel(t_ctn *paths)
 		i->room->x, i->room->y);
 		i = i->next;
 	}
-	return (0);
+	ft_printf("\n");
+	return (ft_travel(paths->next));
 }
 
 static int	var_init(t_var *var)
@@ -41,40 +44,36 @@ static int	var_init(t_var *var)
 static int		init(t_var *var)
 {
 	t_path	*i;
-	int		len;
 
-	len = 0;
 	i = var->queue;
 	while (i)
 	{
-		if ((i->room->state & 4))
-		{
+		if (i->room->state & 4)
 			if (ft_push_hash2(var, i->room))
 				return (-1);
-			len++;
-		}
 		i = i->next;
 	}
-	return (len);
+	return (0);
 }
 
 int			main(void)
 {
 	t_var	var;
-	int		i;
+	t_ctn	*path;
 
 	ft_bzero((void *)&var, sizeof(t_var));
 	if (var_init(&var))
 		return (1);
-	if (!ft_gnl(3) || ft_get_graph(&var) || (i = init(&var)) == -1)
+	if (!ft_gnl(3) || ft_get_graph(&var) || init(&var) == -1)
 	{
 		ft_putendl("ERROR");
 		ft_gnl(0);
 		ft_del(&var);
 		return (1);
 	}
-	if ((var.paths = ft_dijkstra(&var, i)))
-		ft_travel(var.paths);
+	while ((path = ft_dijkstra(&var)))
+		ft_push_path(&var.paths, path);
+	ft_travel(var.paths);
 	ft_gnl(0);
 	ft_del(&var);
 	return (0);

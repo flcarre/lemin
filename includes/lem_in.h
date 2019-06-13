@@ -6,7 +6,7 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 16:25:50 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/06/12 23:18:06 by lutsiara         ###   ########.fr       */
+/*   Updated: 2019/06/13 08:11:21 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,7 @@ int					ft_make_links(t_var *var);
 int					ft_make_link(char *line, t_var *var);
 int					ft_checkup(t_var *var);
 
-t_ctn				*ft_dijkstra(t_var *var, int i);
+t_ctn				*ft_dijkstra(t_var *var);
 
 int					ft_reset(t_graph *start, unsigned char state);
 int					ft_set(t_graph *start, unsigned char state);

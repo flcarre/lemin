@@ -6,7 +6,7 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/08 00:31:30 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/06/12 03:41:56 by lutsiara         ###   ########.fr       */
+/*   Updated: 2019/06/13 08:27:58 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ int			ft_del_ctn(t_ctn **paths)
 	t_ctn			*elem;
 	t_ctn			*del;
 
+	if (!(*paths))
+		return (0);
 	elem = *paths;
 	while (elem)
 	{
@@ -42,6 +44,7 @@ int			ft_del_ctn(t_ctn **paths)
 		ft_del_path(&(del->path), 0);
 		ft_memdel((void **)&del);
 	}
+	*paths = (void *)0;
 	return (0);
 }
 

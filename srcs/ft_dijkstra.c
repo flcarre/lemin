@@ -6,7 +6,7 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 23:02:06 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/06/13 00:04:01 by lutsiara         ###   ########.fr       */
+/*   Updated: 2019/06/13 09:02:21 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,32 +58,26 @@ static int		ft_calc_dist(t_var *var, t_links *link)
 	return (0);
 }
 
-static int		ft_build_path(t_var *var, t_ctn **elem)
+static int		ft_build_path(t_var *var, t_ctn *elem)
 {
 	var->dij = ft_return_link(var, var->end);
-	(*elem)->len = var->dij->room->dist;
+	elem->len = var->dij->room->dist;
 	while (var->dij)
 	{
 		if (var->dij->room != var->start && var->dij->room != var->end)
 			var->dij->room->state |= 8;
 		if (!(var->ptr = ft_alloc_path_elem()))
-		{
-			ft_del_ctn(elem);
 			return (1);
-		}
 		var->ptr->room = var->dij->room;
-		ft_push_room(&(*elem)->path, var->ptr);
+		ft_push_room(&elem->path, var->ptr);
 		var->dij = var->dij->prev;
 	}
-	if ((*elem)->path->room != var->start)
-	{
-		ft_del_ctn(elem);
+	if (elem->path->room != var->start)
 		return (1);
-	}
 	return (0);
 }
 
-t_ctn			*ft_dijkstra(t_var *var, int i)
+t_ctn			*ft_dijkstra(t_var *var)
 {
 	t_ctn	*elem;
 	t_links	*tmp;
@@ -92,7 +86,9 @@ t_ctn			*ft_dijkstra(t_var *var, int i)
 		return ((void *)0);
 	var->room1 = var->start;
 	var->start->dist = 0;
-	while (i--)
+	var->start->state |= 16;
+	tmp = (void *)1;
+	while (tmp)
 	{
 		var->room1->state |= 1;
 		if (ft_calc_dist(var, var->room1->links))
@@ -103,7 +99,8 @@ t_ctn			*ft_dijkstra(t_var *var, int i)
 		tmp = ft_pop_hash(&var->hash);
 		var->room1 = (tmp) ? tmp->room : (void *)0;
 	}
-	ft_build_path(var, &elem);
+	if (ft_build_path(var, elem))
+		ft_del_ctn(&elem);
 	reset(var);
-	return (elem);
+	return ((elem) ? elem : (void *)0);
 }

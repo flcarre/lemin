@@ -6,13 +6,13 @@
 #    By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/11 17:54:03 by lutsiara          #+#    #+#              #
-#    Updated: 2019/06/12 23:32:35 by lutsiara         ###   ########.fr        #
+#    Updated: 2019/06/13 08:26:10 by lutsiara         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc
 
-FLAGS = -Wall -Werror -Wextra -g3 -fsanitize=address
+FLAGS = -Wall -Werror -Wextra
 
 SRCDIR = ./
 
