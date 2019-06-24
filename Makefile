@@ -6,7 +6,7 @@
 #    By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/11 17:54:03 by lutsiara          #+#    #+#              #
-#    Updated: 2019/05/06 14:50:23 by lutsiara         ###   ########.fr        #
+#    Updated: 2019/06/24 16:02:45 by lutsiara         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ EXEC = srcs/
 
 LIBFT = libft/libft.a
 
-export LIBFT NAME
+export LIBFT
 
 all:
 	@make -C $(LIB)

@@ -6,9 +6,11 @@
 #    By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/11 17:54:03 by lutsiara          #+#    #+#              #
-#    Updated: 2019/06/13 08:26:10 by lutsiara         ###   ########.fr        #
+#    Updated: 2019/06/24 18:39:25 by lutsiara         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+NAME = ../lem-in
 
 CC = gcc
 
@@ -39,17 +41,18 @@ SRCS = $(SRCDIR)main.c \
 	   $(SRCDIR)ft_hash.c \
 	   $(SRCDIR)ft_hash_utils.c \
 	   $(SRCDIR)ft_dijkstra.c \
+	   $(SRCDIR)ft_how_many.c \
 	   $(SRCDIR)ft_del.c
 
 OBJS = $(SRCS:.c=.o)
 
 $(NAME): $(OBJS) ../$(LIBFT)
-	@$(CC) -I $(INCDIR) $(FLAGS) -o ../$@ $(OBJS) $(LIB)libft.a
+	@$(CC) -I $(INCDIR) $(FLAGS) $(OBJS) -o $@ ../$(LIBFT)
 	@echo "make $(NAME)\033[0;32m ✓\033[0m"
 
-../$(LIBFT):
-
 all: $(NAME)
+
+../$(LIBFT):
 
 %.o: %.c $(INCDIR)/lem_in.h
 	@$(CC) -o $@ -c $< -I $(INCDIR) -I $(INCLIB) $(FLAGS)
@@ -58,7 +61,7 @@ clean:
 	@/bin/rm -rf $(OBJS)
 
 fclean: clean
-	@/bin/rm -rf ../$(NAME)
+	@/bin/rm -rf $(NAME)
 
 re: fclean all
 

@@ -6,7 +6,7 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 23:02:06 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/06/13 09:02:21 by lutsiara         ###   ########.fr       */
+/*   Updated: 2019/06/24 16:41:53 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,19 +60,26 @@ static int		ft_calc_dist(t_var *var, t_links *link)
 
 static int		ft_build_path(t_var *var, t_ctn *elem)
 {
+	t_graph	*last_room;
+
+	last_room = (void *)0;
 	var->dij = ft_return_link(var, var->end);
 	elem->len = var->dij->room->dist;
 	while (var->dij)
 	{
 		if (var->dij->room != var->start && var->dij->room != var->end)
 			var->dij->room->state |= 8;
-		if (!(var->ptr = ft_alloc_path_elem()))
-			return (1);
-		var->ptr->room = var->dij->room;
-		ft_push_room(&elem->path, var->ptr);
+		if (var->dij->room != var->start)
+		{
+			if (!(var->ptr = ft_alloc_path_elem()))
+				return (1);
+			var->ptr->room = var->dij->room;
+			ft_push_room(&elem->path, var->ptr);
+		}
+		last_room = var->dij->room;
 		var->dij = var->dij->prev;
 	}
-	if (elem->path->room != var->start)
+	if (last_room != var->start)
 		return (1);
 	return (0);
 }

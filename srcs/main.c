@@ -6,7 +6,7 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 11:17:54 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/06/13 09:02:01 by lutsiara         ###   ########.fr       */
+/*   Updated: 2019/06/24 18:39:12 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,10 @@ int			main(void)
 		ft_del(&var);
 		return (1);
 	}
-	while ((path = ft_dijkstra(&var)))
-		ft_push_path(&var.paths, path);
+	while ((path = ft_dijkstra(&var)) && ++var.nb_path)
+		ft_enqueue_path(&var.paths, path);
 	ft_travel(var.paths);
+	ft_printf("%{ORANGE}%u%{}\n", ft_how_many(&var));
 	ft_gnl(0);
 	ft_del(&var);
 	return (0);
