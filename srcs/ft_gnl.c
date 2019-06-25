@@ -6,7 +6,7 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/04 13:21:09 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/06/04 13:51:58 by lutsiara         ###   ########.fr       */
+/*   Updated: 2019/06/25 17:49:51 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void		ft_setzero(char *str)
 	}
 }
 
-static char		*ft_read(void)
+static char		*ft_read(unsigned long *len)
 {
 	char					buff[8192];
 	char					*buffer;
@@ -33,15 +33,17 @@ static char		*ft_read(void)
 	while ((ret = read(STDIN_FILENO, buff, 8191)) > 0)
 	{
 		buff[ret] = '\0';
+		*len += ret;
 		tmp = buffer;
 		buffer = ft_strjoin(buffer, buff);
 		ft_memdel((void **)&tmp);
-		if (!buffer)
+		if (!buffer && !(*len = 0))
 			return ((void *)0);
 	}
 	if (ret < 0)
 	{
 		ft_memdel((void **)&buffer);
+		*len = 0;
 		return ((void *)0);
 	}
 	return (buffer);
@@ -53,6 +55,8 @@ char			*ft_gnl(unsigned char mode)
 	static char				*line = (void *)0;
 	static unsigned long	len = 0;
 
+	if (mode == 4 && (line = buffer))
+		return (line);
 	if (mode == 2 && !line && (line = buffer))
 		return (line);
 	if (!mode)
@@ -62,9 +66,8 @@ char			*ft_gnl(unsigned char mode)
 	}
 	if (mode == 3)
 	{
-		if (!(buffer = ft_read()))
+		if (!(buffer = ft_read(&len)))
 			return ((void *)0);
-		len = ft_strlen(buffer);
 		ft_setzero(buffer);
 		return (buffer);
 	}

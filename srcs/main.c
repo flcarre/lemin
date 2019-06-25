@@ -6,7 +6,7 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 11:17:54 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/06/24 18:39:12 by lutsiara         ###   ########.fr       */
+/*   Updated: 2019/06/25 17:50:46 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ int			main(void)
 	while ((path = ft_dijkstra(&var)) && ++var.nb_path)
 		ft_enqueue_path(&var.paths, path);
 	ft_travel(var.paths);
+	ft_printf("%{GREEN}%u%{} %{YELLOW}%u%{}\n", var.nb_ants, var.nb_path);
 	ft_printf("%{ORANGE}%u%{}\n", ft_how_many(&var));
 	ft_gnl(0);
 	ft_del(&var);
