@@ -6,7 +6,7 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 16:49:00 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/06/08 00:47:56 by lutsiara         ###   ########.fr       */
+/*   Updated: 2019/06/24 16:34:39 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,4 +73,16 @@ int			ft_push_path(t_ctn **paths, t_ctn *elem)
 	elem->next = next;
 	*paths = elem;
 	return (0);
+}
+
+int			ft_enqueue_path(t_ctn **paths, t_ctn *elem)
+{
+	if (!elem)
+		return (1);
+	if (!(*paths))
+	{
+		*paths = elem;
+		return (0);
+	}
+	return (ft_enqueue_path(&((*paths)->next), elem));
 }

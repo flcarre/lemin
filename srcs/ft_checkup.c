@@ -6,7 +6,7 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/08 00:11:40 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/06/08 00:19:52 by lutsiara         ###   ########.fr       */
+/*   Updated: 2019/06/25 17:52:59 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,40 @@ static int	ft_is_there_path(t_graph *start, t_graph *end)
 	return (ret);
 }
 
+static void	ft_print_input(void)
+{
+	char		*line;
+	t_rank		t;
+
+	line = ft_gnl(4);
+	t = ft_rank_line(line);
+	while (t == COMMENT || t == COMMAND)
+	{
+		ft_printf("%s\n", line);
+		line = ft_gnl(1);
+		t = ft_rank_line(line);
+	}
+	ft_printf("%s\n", line);
+	while (*line)
+	{
+		line = ft_gnl(1);
+		t = ft_rank_line(line);
+		if (t == COMMAND || t == COMMENT || t == LINK)
+			ft_printf("%s\n", line);
+		else if (*line)
+			ft_printf("%s %s\n", line, ft_gnl(1));
+	}
+	ft_putendl("");
+}
+
 int			ft_checkup(t_var *var)
 {
 	if (!var->start || !var->end)
 		return (1);
 	if (!ft_is_there_path(var->start, var->end))
 		return (1);
+	ft_print_input();
 	ft_reset(var->start, 1);
+	ft_set(var->start, 4);
 	return (0);
 }

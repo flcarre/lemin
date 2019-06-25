@@ -6,7 +6,7 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 23:13:04 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/06/10 19:15:20 by lutsiara         ###   ########.fr       */
+/*   Updated: 2019/06/25 17:35:07 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ int			ft_make_link(char *line, t_var *var)
 	ret = ft_link_rooms(var);
 	var->room1 = (void *)0;
 	var->room2 = (void *)0;
-	ft_gnl(1);
 	return (ret);
 }
 

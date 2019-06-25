@@ -6,13 +6,13 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 15:53:35 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/06/07 20:45:03 by lutsiara         ###   ########.fr       */
+/*   Updated: 2019/06/13 00:46:55 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-t_graph			*ft_alloc_room(void)
+t_graph		*ft_alloc_room(void)
 {
 	t_graph		*elem;
 
@@ -21,24 +21,27 @@ t_graph			*ft_alloc_room(void)
 	elem->links = (void *)0;
 	elem->state = 0;
 	elem->nb_ants = 0;
+	elem->id_ants = 0;
+	elem->dist = -1;
 	elem->name = (void *)0;
 	elem->x = 0;
 	elem->y = 0;
 	return (elem);
 }
 
-t_links			*ft_alloc_link(void)
+t_links		*ft_alloc_link(void)
 {
 	t_links		*elem;
 
 	if (!(elem = (t_links *)ft_memalloc(sizeof(t_links))))
 		return ((void *)0);
 	elem->room = (void *)0;
+	elem->prev = (void *)0;
 	elem->next = (void *)0;
 	return (elem);
 }
 
-t_path			*ft_alloc_path_elem(void)
+t_path		*ft_alloc_path_elem(void)
 {
 	t_path		*elem;
 
