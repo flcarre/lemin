@@ -6,7 +6,7 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 23:02:06 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/06/24 16:41:53 by lutsiara         ###   ########.fr       */
+/*   Updated: 2019/06/27 17:43:13 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@ static void		reset(t_var *var)
 	t_links	*link;
 	int		i;
 
-	ft_reset(var->start, 1);
-	ft_reset(var->start, 16);
+	ft_reset(var, 16 + 1);
 	i = 0;
 	while (i < SIZE_HASH_TABLE)
 	{

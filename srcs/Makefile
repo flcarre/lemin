@@ -6,7 +6,7 @@
 #    By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/11 17:54:03 by lutsiara          #+#    #+#              #
-#    Updated: 2019/06/24 18:39:25 by lutsiara         ###   ########.fr        #
+#    Updated: 2019/06/27 00:34:01 by lutsiara         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,6 +42,8 @@ SRCS = $(SRCDIR)main.c \
 	   $(SRCDIR)ft_hash_utils.c \
 	   $(SRCDIR)ft_dijkstra.c \
 	   $(SRCDIR)ft_how_many.c \
+	   $(SRCDIR)ft_bfs.c \
+	   $(SRCDIR)ft_bfs_utils.c \
 	   $(SRCDIR)ft_del.c
 
 OBJS = $(SRCS:.c=.o)

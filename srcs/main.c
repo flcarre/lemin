@@ -6,7 +6,7 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 11:17:54 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/06/25 17:50:46 by lutsiara         ###   ########.fr       */
+/*   Updated: 2019/06/27 20:20:33 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,21 +41,6 @@ static int	var_init(t_var *var)
 	return (0);
 }
 
-static int		init(t_var *var)
-{
-	t_path	*i;
-
-	i = var->queue;
-	while (i)
-	{
-		if (i->room->state & 4)
-			if (ft_push_hash2(var, i->room))
-				return (-1);
-		i = i->next;
-	}
-	return (0);
-}
-
 int			main(void)
 {
 	t_var	var;
@@ -64,21 +49,27 @@ int			main(void)
 	ft_bzero((void *)&var, sizeof(t_var));
 	if (var_init(&var))
 		return (1);
-	if (!ft_gnl(3) || ft_get_graph(&var) || init(&var) == -1)
+	if (!ft_gnl(3) || ft_get_graph(&var))
 	{
 		ft_putendl("ERROR");
 		ft_gnl(0);
-		ft_del(&var);
-		return (1);
+		return (!ft_del(&var));
 	}
 	while ((path = ft_dijkstra(&var)) && ++var.nb_path)
 		ft_enqueue_path(&var.paths, path);
+	if (!var.paths || ft_bfs(&var, 8))
+		return (!ft_del(&var));
+
+	ft_printf("%{HGREEN}DIJKSTRA%{}:\n\n");
 	ft_travel(var.paths);
 	ft_printf("%{GREEN}%u%{} %{YELLOW}%u%{}\n", var.nb_ants, var.nb_path);
-	ft_printf("%{ORANGE}%u%{}\n", ft_how_many(&var));
+	ft_printf("%{ORANGE}%u%{}\n\n", ft_how_many(&var, 0));
+	ft_printf("%{HGREEN}BFS%{}:\n\n");
+	ft_travel(var.bfs);
+	ft_printf("%{GREEN}%u%{} %{YELLOW}%u%{}\n", var.nb_ants, var.nb_bfs);
+	ft_printf("%{ORANGE}%u%{}\n", ft_how_many(&var, 1));
 	ft_gnl(0);
-	ft_del(&var);
-	return (0);
+	return (ft_del(&var));
 }
 
 /*
