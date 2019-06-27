@@ -6,7 +6,7 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 11:17:54 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/06/27 22:30:45 by lutsiara         ###   ########.fr       */
+/*   Updated: 2019/06/27 22:35:47 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static int	ft_choose_paths(t_var *var)
 		ft_enqueue_path(&var->paths, path);
 	if (!var->paths)
 		return (1);
-	if (var->nb_path < var->max_nb_path && ft_bfs(&var, 8))
+	if (var->nb_path < var->max_nb_path && ft_bfs(var, 8))
 		return (1);
 	if (var->bfs)
 		h_bfs = ft_how_many(var, 1);
