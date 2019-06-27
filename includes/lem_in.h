@@ -6,7 +6,7 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 16:25:50 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/06/27 19:53:19 by lutsiara         ###   ########.fr       */
+/*   Updated: 2019/06/27 21:49:44 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ int					ft_push_link(t_links **links, t_links *elem);
 int					ft_enqueue_path(t_ctn **paths, t_ctn *elem);
 int					ft_push_path(t_ctn **paths, t_ctn *elem);
 t_graph				*ft_dequeue(t_links **list);
-int					ft_enqueue_link(t_links **list, t_graph *room, t_links *e);
+int					ft_enqueue_link(t_links **list, t_graph *room);
 int					ft_order_path(t_ctn **paths, t_ctn *elem);
 
 int					ft_push_hash(t_var *var, t_graph *room);

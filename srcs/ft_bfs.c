@@ -6,7 +6,7 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/26 16:17:05 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/06/27 21:43:41 by lutsiara         ###   ########.fr       */
+/*   Updated: 2019/06/27 22:02:06 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,11 @@ static int	ft_traceback(t_var *var)
 		{
 			while (ptr)
 			{
-				ft_printf("%{HYELLOW} %{}: %s\n", ptr->room->name);
 				if (ptr->room != var->start)
 					ptr->room->state |= 32;
 				var->room2 = ptr->room;
 				ptr = ptr->prev;
 			}
-			ft_printf("%{HRED} %{}\n");
 		}
 		if (var->room2 && var->room2 != var->start)
 			return (1);
@@ -89,43 +87,32 @@ static int	ft_mark_and_trace(t_var *var, unsigned char m)
 			|| ((var->dij->room->state & (m + 1)) \
 			&& !(i->room->state & (m + 1))))
 			{
-				ft_printf("%{HGREEN} %{}: %s\n", i->room->name);
 				if (i->room != var->end && !ft_endisnext(var, i))
 				{
-					if (ft_enqueue_link(&var->list, i->room, (void *)0))
+					if (ft_enqueue_link(&var->list, i->room))
 						return (1);
 					i->room->state |= 1;
 					(ft_return_link(var, i->room))->prev = \
 					ft_return_link(var, var->dij->room);
 				}
 				else if (i->room == var->end \
-				&& ft_enqueue_link(&var->list, i->room, (void *)0))
+				&& ft_enqueue_link(&var->list, i->room))
 					return (1);
 			}
 		i = i->next;
 	}
-	ft_putendl("");
 	return (0);
 }
 
 int			ft_bfs(t_var *var, unsigned char m)
 {
-	if (ft_enqueue_link(&var->list, var->start, (void *)0))
+	if (ft_enqueue_link(&var->list, var->start))
 		return (1);
 	var->dij = (void *)0;
 	var->start->state |= 1;
 	while (var->list)
 	{
-		t_links *i;
-		i=var->list;
-		while (i)
-		{ft_printf("%{HBLUE} %{}: %s\n", i->room->name);
-			i = i->next;
-		}
-		ft_putendl("");
 		var->dij = ft_return_link(var, ft_dequeue(&var->list));
-		ft_printf("\n%{HRED} %{}: %s\n\n", var->dij->room->name);
-
 		if (var->dij->room != var->end && ft_mark_and_trace(var, m))
 			return (!ft_del_links(&var->list));
 		else if (var->dij->room == var->end)
