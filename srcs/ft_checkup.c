@@ -6,7 +6,7 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/08 00:11:40 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/06/25 17:52:59 by lutsiara         ###   ########.fr       */
+/*   Updated: 2019/06/27 19:55:33 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,41 @@ static void	ft_print_input(void)
 	ft_putendl("");
 }
 
+static void	count_links(t_var *var)
+{
+	t_links		*li;
+
+	li = var->start->links;
+	while (li)
+	{
+		var->start->nb_links++;
+		li = li->next;
+	}
+	li = var->end->links;
+	while (li)
+	{
+		var->end->nb_links++;
+		li = li->next;
+	}
+	var->max_nb_path = (var->end->nb_links < var->start->nb_links) \
+	? var->end->nb_links : var->start->nb_links;
+}
+
+static int		init(t_var *var)
+{
+	t_path	*i;
+
+	i = var->queue;
+	while (i)
+	{
+		if (i->room->state & 4)
+			if (ft_push_hash2(var, i->room))
+				return (1);
+		i = i->next;
+	}
+	return (0);
+}
+
 int			ft_checkup(t_var *var)
 {
 	if (!var->start || !var->end)
@@ -65,7 +100,10 @@ int			ft_checkup(t_var *var)
 	if (!ft_is_there_path(var->start, var->end))
 		return (1);
 	ft_print_input();
-	ft_reset(var->start, 1);
+	count_links(var);
 	ft_set(var->start, 4);
+	if (init(var))
+		return (1);
+	ft_reset(var, 1);
 	return (0);
 }

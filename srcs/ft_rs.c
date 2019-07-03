@@ -1,38 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_reset.c                                         :+:      :+:    :+:   */
+/*   ft_rs.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/08 00:15:18 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/06/08 00:16:57 by lutsiara         ###   ########.fr       */
+/*   Updated: 2019/06/27 18:10:19 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-int		ft_reset(t_graph *start, unsigned char state)
+int		ft_reset(t_var *var, unsigned char state)
 {
-	t_links		*link;
+	unsigned int	i;
+	t_links			*link;
 
-	if (!start)
-		return (1);
-	link = start->links;
-	if ((start->state ^ state) & state)
-		return (0);
-	start->state ^= state;
-	while (link)
+	i = 0;
+	while (i < SIZE_HASH_TABLE)
 	{
-		ft_reset(link->room, state);
-		link = link->next;
+		link = var->hash_addr[i++];
+		while (link)
+		{
+			if (!((link->room->state ^ state) & state))
+				link->room->state ^= state;
+			link = link->next;
+		}
 	}
 	return (0);
 }
 
 int		ft_set(t_graph *start, unsigned char state)
 {
-	t_links		*link;
+	t_links			*link;
 
 	if (!start)
 		return (1);
