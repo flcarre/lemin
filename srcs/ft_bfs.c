@@ -6,7 +6,7 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/26 16:17:05 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/06/27 22:02:06 by lutsiara         ###   ########.fr       */
+/*   Updated: 2019/07/03 18:34:14 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ static int	ft_add(t_var *var, t_graph *room)
 		return (!ft_del_ctn(&var->elem));
 	var->ptr->room = room;
 	ft_push_room(&var->elem->path, var->ptr);
-	var->elem->len++;
+	if (room != var->start)
+		var->elem->len++;
 	return (0);
 }
 
@@ -56,14 +57,13 @@ static int	ft_build_paths(t_var *var)
 	{
 		var->elem = (void *)0;
 		var->list = ft_return_link(var, var->dij->room);
-		if (var->list->prev)
+		if (var->list->prev || var->list->room == var->start)
 		{
 			if (!(var->elem = ft_alloc_ctn_elem()) || ft_add(var, var->end))
 				return (1);
 			while (var->list)
 			{
-				if (var->list->room != var->start \
-				&& ft_add(var, var->list->room))
+				if (ft_add(var, var->list->room))
 					return (1);
 				var->list = var->list->prev;
 			}
@@ -119,7 +119,6 @@ int			ft_bfs(t_var *var, unsigned char m)
 		{
 			if (ft_traceback(var))
 				return (!ft_del_links(&var->list));
-			ft_reset(var, 8);
 		}
 	}
 	ft_reset(var, 8);

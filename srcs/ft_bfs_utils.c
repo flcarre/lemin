@@ -6,7 +6,7 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/26 16:25:10 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/06/27 21:49:19 by lutsiara         ###   ########.fr       */
+/*   Updated: 2019/07/03 18:54:36 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,31 @@
 
 int		ft_enqueue_link(t_links **list, t_graph *room)
 {
+	t_links			**prev;
 	t_links			*e;
 	t_links			**i;
 
 	if (!(e = ft_alloc_link()))
 		return (1);
-	e->room = room;
-	if (!(*list) && (*list = e))
-		return (0);
+	if (!(*list) && (e->room = room))
+		return (!(*list = e));
 	i = list;
-	while (*i)
+	prev = (void *)0;
+	while (*i && !((*i)->room->state & 8) && !((*i)->room->state & 32) \
+	&& (prev = i))
 		i = &(*i)->next;
-	*i = e;
-	return (0);
+	if (!(room->state & 8) && !(room->state & 32))
+	{
+		e->next = *i;
+		if (prev)
+			(*prev)->next = e;
+		else
+			*i = e;
+		return (!(e->room = room));
+	}
+	while ((e->room = room) && *i)
+		i = &(*i)->next;
+	return (!(*i = e));
 }
 
 t_graph	*ft_dequeue(t_links **list)

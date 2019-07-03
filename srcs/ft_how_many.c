@@ -6,7 +6,7 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/24 18:37:48 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/06/27 04:01:09 by lutsiara         ###   ########.fr       */
+/*   Updated: 2019/07/02 21:57:15 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static unsigned int	ft_sum(t_ctn *paths, unsigned int n, unsigned int i)
 	return (ret);
 }
 
-unsigned int		ft_how_many(t_var *var, unsigned char m)
+unsigned int		ft_how_many(t_var *var, unsigned int *x, unsigned char m)
 {
 	unsigned int	min;
 	unsigned int	sum;
@@ -50,6 +50,7 @@ unsigned int		ft_how_many(t_var *var, unsigned char m)
 		if (!min || (sum && min > sum))
 		{
 			min = sum;
+			*x = min;
 			ret = i;
 		}
 		i--;

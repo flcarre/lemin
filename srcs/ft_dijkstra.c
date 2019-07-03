@@ -6,7 +6,7 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 23:02:06 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/06/27 17:43:13 by lutsiara         ###   ########.fr       */
+/*   Updated: 2019/07/03 17:08:23 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ static void		reset(t_var *var)
 	t_links	*link;
 	int		i;
 
-	ft_reset(var, 16 + 1);
 	i = 0;
 	while (i < SIZE_HASH_TABLE)
 	{
@@ -26,6 +25,10 @@ static void		reset(t_var *var)
 		{
 			link->room->dist = -1;
 			link->prev = (void *)0;
+			if (!((link->room->state ^ 1) & 1))
+				link->room->state ^= 1;
+			if (!((link->room->state ^ 16) & 16))
+				link->room->state ^= 16;
 			link = link->next;
 		}
 	}
@@ -68,13 +71,10 @@ static int		ft_build_path(t_var *var, t_ctn *elem)
 	{
 		if (var->dij->room != var->start && var->dij->room != var->end)
 			var->dij->room->state |= 8;
-		if (var->dij->room != var->start)
-		{
-			if (!(var->ptr = ft_alloc_path_elem()))
-				return (1);
-			var->ptr->room = var->dij->room;
-			ft_push_room(&elem->path, var->ptr);
-		}
+		if (!(var->ptr = ft_alloc_path_elem()))
+			return (1);
+		var->ptr->room = var->dij->room;
+		ft_push_room(&elem->path, var->ptr);
 		last_room = var->dij->room;
 		var->dij = var->dij->prev;
 	}

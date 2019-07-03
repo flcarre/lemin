@@ -6,7 +6,7 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 20:59:29 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/06/08 00:48:42 by lutsiara         ###   ########.fr       */
+/*   Updated: 2019/07/02 22:03:18 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,7 @@ int		ft_get_ants(unsigned int *nb_ants)
 		return (1);
 	}
 	*nb_ants = ft_atoui((const char *)line);
+	if (*nb_ants == 0)
+		return (1);
 	return (0);
 }

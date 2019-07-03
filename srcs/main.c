@@ -6,14 +6,13 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 11:17:54 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/06/27 22:35:47 by lutsiara         ###   ########.fr       */
+/*   Updated: 2019/07/03 19:00:06 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-/*
-int		ft_travel(t_ctn *paths)
+int		ft_debug(t_ctn *paths)
 {
 	t_path	*i;
 
@@ -28,17 +27,9 @@ int		ft_travel(t_ctn *paths)
 		i = i->next;
 	}
 	ft_printf("\n");
-	return (ft_travel(paths->next));
+	return (ft_debug(paths->next));
 }
-
-ft_printf("%{HGREEN}DIJKSTRA%{}:\n\n");
-ft_travel(var.paths);
-ft_printf("%{GREEN}%u%{} %{YELLOW}%u%{}\n", var.nb_ants, var.nb_path);
-ft_printf("%{ORANGE}%u%{}\n\n", ft_how_many(&var, 0));
-ft_printf("%{HGREEN}BFS%{}:\n\n");
-ft_travel(var.bfs);
-ft_printf("%{GREEN}%u%{} %{YELLOW}%u%{}\n", var.nb_ants, var.nb_bfs);
-ft_printf("%{ORANGE}%u%{}\n", ft_how_many(&var, 1));
+/*
 */
 
 static int	var_init(t_var *var)
@@ -52,27 +43,32 @@ static int	var_init(t_var *var)
 	return (0);
 }
 
-static int	ft_choose_paths(t_var *var)
+static int	ft_choose_paths(t_var *var, int m)
 {
 	t_ctn			*path;
 	unsigned int	h_dij;
 	unsigned int	h_bfs;
+	unsigned int	nb_dij;
+	unsigned int	nb_bfs;
 
-	while ((path = ft_dijkstra(var)) && ++var->nb_path)
-		ft_enqueue_path(&var->paths, path);
-	if (!var->paths)
+	if (!(h_dij = 0) && m)
+		while ((path = ft_dijkstra(var)) && ++var->nb_path)
+			ft_enqueue_path(&var->paths, path);
+	if (!var->paths && !ft_endisnext(var, var->start->links))
 		return (1);
 	if (var->nb_path < var->max_nb_path && ft_bfs(var, 8))
 		return (1);
 	if (var->bfs)
-		h_bfs = ft_how_many(var, 1);
+		nb_bfs = ft_how_many(var, &h_bfs, 1);
 	else
 	{
-		var->elem = var->paths;
+		var->nb_travel = ft_how_many(var, &h_dij, 0);
+		var->travel = var->paths;
 		return (0);
 	}
-	h_dij = ft_how_many(var, 0);
-	var->elem = (h_dij < h_bfs) ? var->paths : var->bfs;
+	nb_dij = ft_how_many(var, &h_dij, 0);
+	var->travel = (h_dij == 0 || h_dij > h_bfs) ? var->bfs : var->paths;
+	var->nb_travel = (h_dij == 0 || h_dij > h_bfs) ? nb_bfs : nb_dij;
 	return (0);
 }
 
@@ -89,9 +85,16 @@ int			main(void)
 		ft_gnl(0);
 		return (!ft_del(&var));
 	}
-	if (ft_choose_paths(&var) && !ft_gnl(0))
+	if (ft_choose_paths(&var, !ft_endisnext(&var, var.start->links)) \
+	&& !ft_gnl(0))
 		return (!ft_del(&var));
-	//ft_travel(&var);
+	ft_travel(&var);
+	ft_printf("%{HGREEN}DIJKSTRA%{}:\n\n");
+	ft_debug(var.paths);
+	ft_printf("%{HGREEN}BFS%{}:\n\n");
+	ft_debug(var.bfs);
+	/*
+	*/
 	ft_gnl(0);
 	return (ft_del(&var));
 }

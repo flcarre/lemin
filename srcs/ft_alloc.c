@@ -6,7 +6,7 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 15:53:35 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/06/27 08:26:40 by lutsiara         ###   ########.fr       */
+/*   Updated: 2019/07/03 14:57:00 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ t_graph		*ft_alloc_room(void)
 	elem->state = 0;
 	elem->nb_ants = 0;
 	elem->nb_links = 0;
-	elem->id_ants = 0;
 	elem->dist = -1;
 	elem->name = (void *)0;
 	elem->x = 0;
