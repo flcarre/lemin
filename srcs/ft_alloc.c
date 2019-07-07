@@ -6,7 +6,7 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 15:53:35 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/07/03 14:57:00 by lutsiara         ###   ########.fr       */
+/*   Updated: 2019/07/07 18:31:05 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ t_ctn		*ft_alloc_ctn_elem(void)
 	if (!(elem = (t_ctn *)ft_memalloc(sizeof(t_ctn))))
 		return ((void *)0);
 	elem->path = (void *)0;
+	elem->id_ant = 0;
+	elem->ant = (void *)0;
 	elem->len = 0;
 	elem->next = (void *)0;
 	return (elem);

@@ -6,89 +6,91 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/02 20:36:20 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/07/03 17:30:06 by lutsiara         ###   ########.fr       */
+/*   Updated: 2019/07/07 22:19:23 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-static void	send(t_path **ants, t_var *var)
+static int	send(t_ctn *ants, t_var *var)
 {
-	t_ctn			*ptr;
-	t_path			*next;
-	unsigned int	i;
-	unsigned int	r;
+	unsigned int		i;
 
 	i = 0;
-	ptr = var->travel;
-	next = ptr->path->next;
-	r = 0;
-	while (i < var->nb_travel && i < var->start->nb_ants)
+	while (i < var->nb_ants)
 	{
-		while (var->cycle && r < var->nb_ants && !ants[r])
-			r++;
-		while (r < var->nb_ants && ants[r])
-			r++;
-		if (r < var->nb_ants && !(next->room->state & 2))
-			ants[r] = ptr->path;
-		while (next->room == var->end && ++r < var->start->nb_ants \
-		&& (i = var->start->nb_ants))
-			ants[r] = ptr->path;
-		ptr = ptr->next;
+		if (ants[i].path && ants[i].path->next \
+		&& !(ants[i].path->next->room->state & 2) \
+		&& !(ants[i].path->room->state & 2))
+		{
+			if (ants[i].path->room == var->start)
+			{
+				ants[i].id_ant = i + 1;
+				if (ants[i].path->next->room != var->end)
+					ants[i].path->next->room->state ^= 2;
+			}
+			if (ft_enqueue_ant(&var->ants, &ants[i]))
+				return (1);
+		}
+		else if (ants[i].path && ants[i].path->room == var->end)
+			if (ft_enqueue_ant(&var->ants, &ants[i]))
+				return (1);
 		i++;
 	}
+	return (0);
 }
 
-static void	moving(t_path **ants, t_var *var, unsigned int i, unsigned char m)
+static void	moving(t_ctn *ant, t_var *var, unsigned char m)
 {
-	ants[i]->room->nb_ants--;
-	if (ants[i]->room != var->start)
-		ants[i]->room->state ^= 2;
-	ants[i] = ants[i]->next;
-	if (ants[i] && ++ants[i]->room->nb_ants && ants[i]->room != var->end)
-		ants[i]->room->state ^= 2;
+	if (!ant->path)
+		return ;
+	if (ant->path->room != var->end)
+		ant->path->room->nb_ants--;
+	if (ant->path->room != var->start && ant->path->room != var->end)
+		ant->path->room->state ^= 2;
+	ant->path = ant->path->next;
+	if (ant->path && ++ant->path->room->nb_ants && ant->path->room != var->end)
+		ant->path->room->state ^= (((ant->path->room->state ^ 2) & 2)) ? 2 : 0;
 	if (m & 2)
 	{
-		ft_printf("L%u-%s", i + 1, ants[i]->room->name);
-		moving(ants, var, i, 0);
+		ft_printf("L%u-%s", ant->id_ant, ant->path->room->name);
+		moving(ant, var, 0);
 	}
 }
 
-static void	move(t_path **ants, t_var *var)
+static int	move(t_ctn *ants, t_var *var)
 {
-	unsigned int	i;
 	unsigned char	space;
+	t_ctn			*ant;
 
 	space = 0;
-	i = 0;
-	while (i < var->nb_ants)
+	while (var->ants)
 	{
-		while (i < var->nb_ants && !ants[i])
-			i++;
-		if (!ants[i])
-			break ;
-		if (space)
+		ant = ft_pop_ant(&var->ants);
+		if (space == 1)
 			ft_putchar(' ');
-		if (ants[i]->room != var->start)
-			ft_printf("L%u-%s", i + 1, ants[i]->room->name);
+		if (ant->path->room != var->start)
+			ft_printf("L%u-%s", ant->id_ant, ant->path->room->name);
 		else
 			space ^= 2;
-		moving(ants, var, i, space);
+		moving(ant, var, space);
 		space = 1;
-		i++;
 	}
+	if (ft_repush_ants(var, ants))
+		return (1);
 	ft_putchar('\n');
 	var->cycle++;
+	return (0);
 }
 
-static int	done(t_path **ants, t_var *var)
+static int	done(t_ctn *ants, t_var *var)
 {
 	unsigned int	i;
 
 	i = 0;
 	while (i < var->nb_ants)
 	{
-		if (ants[i])
+		if (ants[i].path)
 			return (0);
 		i++;
 	}
@@ -97,16 +99,17 @@ static int	done(t_path **ants, t_var *var)
 
 int			ft_travel(t_var *var)
 {
-	t_path			**ants;
+	t_ctn			*ants;
 
-	if (!(ants = (t_path **)ft_memalloc(sizeof(t_path *) * (var->nb_ants + 1))))
+	if (!(ants = (t_ctn *)ft_memalloc(sizeof(t_ctn) * var->nb_ants)))
 		return (1);
-	send(ants, var);
-	move(ants, var);
+	ft_moderate(var, ants);
+	if (send(ants, var) || move(ants, var))
+		return (1);
 	while (!done(ants, var))
 	{
-		send(ants, var);
-		move(ants, var);
+		if (send(ants, var) || move(ants, var))
+			return (1);
 	}
 	ft_memdel((void **)&ants);
 	return (0);

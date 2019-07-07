@@ -6,7 +6,7 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/08 00:31:30 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/06/27 02:28:05 by lutsiara         ###   ########.fr       */
+/*   Updated: 2019/07/05 23:24:36 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ int			ft_del_links(t_links **links)
 		elem = elem->next;
 		ft_memdel((void **)&del);
 	}
+	*links = (void *)0;
 	return (0);
 }
 
