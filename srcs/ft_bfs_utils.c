@@ -6,7 +6,7 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/26 16:25:10 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/07/03 18:54:36 by lutsiara         ###   ########.fr       */
+/*   Updated: 2019/07/06 01:13:07 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,5 +92,16 @@ int		ft_endisnext(t_var *var, t_links *links)
 			return (1);
 		links = links->next;
 	}
+	return (0);
+}
+
+int		ft_add(t_var *var, t_graph *room, t_ctn *elem)
+{
+	if (!(var->ptr = ft_alloc_path_elem()))
+		return (1);
+	var->ptr->room = room;
+	ft_push_room(&elem->path, var->ptr);
+	if (room != var->start)
+		elem->len++;
 	return (0);
 }

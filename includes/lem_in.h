@@ -6,7 +6,7 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 16:25:50 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/07/03 15:12:26 by lutsiara         ###   ########.fr       */
+/*   Updated: 2019/07/07 20:01:43 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,9 @@ typedef struct		s_ctn
 {
 	t_path			*path;
 	int				len;
+	unsigned int	id_ant;
+	struct s_ctn	*ant;
+	unsigned int	ants;
 	struct s_ctn	*next;
 }					t_ctn;
 
@@ -85,16 +88,27 @@ typedef struct		s_var
 	t_graph			*room2;
 	t_path			*queue;
 	t_path			*ptr;
+	t_ctn			*ants;
 	t_ctn			*paths;
 	t_ctn			*bfs;
 	t_ctn			*travel;
-	t_ctn			*elem;
 	t_links			*dij;
 	t_links			*list;
 	t_hash			*hash;
 	t_links			**hash_name;
 	t_links			**hash_addr;
 }					t_var;
+
+typedef struct		s_min
+{
+	unsigned int	min;
+	t_ctn			*travel;
+	unsigned int	min_cycle;
+	unsigned int	sum;
+	unsigned int	save;
+	unsigned int	ret;
+	unsigned int	i;
+}					t_min;
 
 char				*ft_gnl(unsigned char mode);
 
@@ -117,7 +131,11 @@ int					ft_push_path(t_ctn **paths, t_ctn *elem);
 t_graph				*ft_dequeue(t_links **list);
 int					ft_enqueue_link(t_links **list, t_graph *room);
 int					ft_order_path(t_ctn **paths, t_ctn *elem);
+int					ft_add(t_var *var, t_graph *room, t_ctn *elem);
 
+int					ft_enqueue_ant(t_ctn **stack, t_ctn *ant);
+int					ft_repush_ants(t_var *var, t_ctn *ants);
+t_ctn				*ft_pop_ant(t_ctn **stack);
 int					ft_push_hash(t_var *var, t_graph *room);
 int					ft_push_hash2(t_var *var, t_graph *room);
 t_graph				*ft_return_room(t_var *var, char *name);
@@ -139,8 +157,10 @@ int					ft_checkup(t_var *var);
 
 t_ctn				*ft_dijkstra(t_var *var);
 unsigned int		ft_how_many(t_var *var, unsigned int *x, unsigned char m);
-int					ft_bfs(t_var *var, unsigned char m);
+t_ctn				*ft_bfs(t_var *var, unsigned char m);
 int					ft_endisnext(t_var *var, t_links *links);
+int					ft_cyclecount(t_var *var, t_min *min);
+void				ft_moderate(t_var *var, t_ctn *ants);
 int					ft_travel(t_var *var);
 
 int					ft_reset(t_var *var, unsigned char state);

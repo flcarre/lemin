@@ -6,7 +6,7 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 11:17:54 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/07/03 19:00:06 by lutsiara         ###   ########.fr       */
+/*   Updated: 2019/07/07 20:28:39 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,20 +43,38 @@ static int	var_init(t_var *var)
 	return (0);
 }
 
-static int	ft_choose_paths(t_var *var, int m)
+static int	ft_find_paths(t_var *var, int m)
 {
 	t_ctn			*path;
+
+	if (m)
+		while ((path = ft_dijkstra(var)) && ++var->nb_path)
+			ft_enqueue_path(&var->paths, path);
+	if (!var->paths && m)
+		return (1);
+	if (var->nb_path < var->max_nb_path)
+	{
+		if ((path = ft_bfs(var, 8)) && ++var->nb_bfs)
+			ft_order_path(&var->bfs, path);
+		else if (!path)
+			return (1);
+		ft_reset(var, 8);
+		if (m)
+			while ((path = ft_bfs(var, 32)) && ++var->nb_bfs)
+				ft_order_path(&var->bfs, path);
+	}
+	return (0);
+}
+
+static int	ft_choose_paths(t_var *var, int m)
+{
 	unsigned int	h_dij;
 	unsigned int	h_bfs;
 	unsigned int	nb_dij;
 	unsigned int	nb_bfs;
 
-	if (!(h_dij = 0) && m)
-		while ((path = ft_dijkstra(var)) && ++var->nb_path)
-			ft_enqueue_path(&var->paths, path);
-	if (!var->paths && !ft_endisnext(var, var->start->links))
-		return (1);
-	if (var->nb_path < var->max_nb_path && ft_bfs(var, 8))
+	h_dij = 0;
+	if (ft_find_paths(var, m))
 		return (1);
 	if (var->bfs)
 		nb_bfs = ft_how_many(var, &h_bfs, 1);
@@ -89,11 +107,15 @@ int			main(void)
 	&& !ft_gnl(0))
 		return (!ft_del(&var));
 	ft_travel(&var);
+	ft_printf("\nAnts: %u\n", var.nb_ants);
+	ft_printf("Cycles: %u\n", var.cycle);
+	ft_printf("Algo: %{YELLOW}%s%{}\n", (var.travel == var.paths) ? "DIJKSTRA" : "BFS");
+	ft_printf("Nombres de paths: %u\n", var.nb_travel);
+	/*
 	ft_printf("%{HGREEN}DIJKSTRA%{}:\n\n");
 	ft_debug(var.paths);
 	ft_printf("%{HGREEN}BFS%{}:\n\n");
 	ft_debug(var.bfs);
-	/*
 	*/
 	ft_gnl(0);
 	return (ft_del(&var));

@@ -6,54 +6,33 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/24 18:37:48 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/07/02 21:57:15 by lutsiara         ###   ########.fr       */
+/*   Updated: 2019/07/07 20:02:53 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-static unsigned int	ft_sum(t_ctn *paths, unsigned int n, unsigned int i)
+unsigned int	ft_how_many(t_var *var, unsigned int *x, unsigned char m)
 {
-	unsigned int	ret;
-	t_ctn			*elem;
+	t_min			min;
 
-	if (!n)
-		return (0);
-	ret = 0;
-	elem = paths;
-	while (i--)
+	ft_bzero((void *)&min, sizeof(t_min));
+	min.save = var->cycle;
+	min.i = (!m) ? var->nb_path : var->nb_bfs;
+	min.travel = (!m) ? var->paths : var->bfs;
+	while (min.i)
 	{
-		ret += n + elem->len - 1;
-		elem = elem->next;
-	}
-	return (ret);
-}
-
-unsigned int		ft_how_many(t_var *var, unsigned int *x, unsigned char m)
-{
-	unsigned int	min;
-	unsigned int	sum;
-	unsigned int	ret;
-	unsigned int	i;
-
-	if (!var->start->nb_ants)
-		return (0);
-	min = 0;
-	ret = 0;
-	i = (!m) ? var->nb_path : var->nb_bfs;
-	while (i)
-	{
-		if (!m)
-			sum = ft_sum(var->paths, var->start->nb_ants / i, i) / i;
-		else
-			sum = ft_sum(var->bfs, var->start->nb_ants / i, i) / i;
-		if (!min || (sum && min > sum))
+		ft_cyclecount(var, &min);
+		if (!min.min_cycle || min.min_cycle > var->cycle)
 		{
-			min = sum;
-			*x = min;
-			ret = i;
+			min.min_cycle = var->cycle;
+			if (x)
+				*x = min.min_cycle;
+			min.ret = min.i;
 		}
-		i--;
+		var->cycle = 0;
+		min.i--;
 	}
-	return (ret);
+	var->cycle = min.save;
+	return (min.ret);
 }
