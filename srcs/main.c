@@ -6,31 +6,11 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 11:17:54 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/07/07 20:28:39 by lutsiara         ###   ########.fr       */
+/*   Updated: 2019/07/09 18:03:53 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
-
-int		ft_debug(t_ctn *paths)
-{
-	t_path	*i;
-
-	if (!paths)
-		return (0);
-	i = paths->path;
-	ft_printf("Path length: %{CYAN}%d%{}\n", paths->len);
-	while (i)
-	{
-		ft_printf("%s %{YELLOW}%ld %ld%{}\n", i->room->name, \
-		i->room->x, i->room->y);
-		i = i->next;
-	}
-	ft_printf("\n");
-	return (ft_debug(paths->next));
-}
-/*
-*/
 
 static int	var_init(t_var *var)
 {
@@ -90,7 +70,7 @@ static int	ft_choose_paths(t_var *var, int m)
 	return (0);
 }
 
-int			main(void)
+int			main(int ac, char **av)
 {
 	t_var			var;
 
@@ -107,16 +87,7 @@ int			main(void)
 	&& !ft_gnl(0))
 		return (!ft_del(&var));
 	ft_travel(&var);
-	ft_printf("\nAnts: %u\n", var.nb_ants);
-	ft_printf("Cycles: %u\n", var.cycle);
-	ft_printf("Algo: %{YELLOW}%s%{}\n", (var.travel == var.paths) ? "DIJKSTRA" : "BFS");
-	ft_printf("Nombres de paths: %u\n", var.nb_travel);
-	/*
-	ft_printf("%{HGREEN}DIJKSTRA%{}:\n\n");
-	ft_debug(var.paths);
-	ft_printf("%{HGREEN}BFS%{}:\n\n");
-	ft_debug(var.bfs);
-	*/
+	ft_debug(ac, av, &var);
 	ft_gnl(0);
 	return (ft_del(&var));
 }
