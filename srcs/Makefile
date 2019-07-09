@@ -6,7 +6,7 @@
 #    By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/11 17:54:03 by lutsiara          #+#    #+#              #
-#    Updated: 2019/07/07 16:25:04 by lutsiara         ###   ########.fr        #
+#    Updated: 2019/07/09 18:02:27 by lutsiara         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = ../lem-in
 
 CC = gcc
 
-FLAGS = -Wall -Werror -Wextra -ggdb -fsanitize=address -fno-omit-frame-pointer
+FLAGS = -Wall -Werror -Wextra
 
 SRCDIR = ./
 
@@ -48,6 +48,7 @@ SRCS = $(SRCDIR)main.c \
 	   $(SRCDIR)ft_moderate.c \
 	   $(SRCDIR)ft_travel.c \
 	   $(SRCDIR)ft_travel_utils.c \
+	   $(SRCDIR)ft_debug.c \
 	   $(SRCDIR)ft_del.c
 
 OBJS = $(SRCS:.c=.o)

@@ -6,7 +6,7 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 16:25:50 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/07/07 20:01:43 by lutsiara         ###   ########.fr       */
+/*   Updated: 2019/07/09 18:17:28 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,5 +165,6 @@ int					ft_travel(t_var *var);
 
 int					ft_reset(t_var *var, unsigned char state);
 int					ft_set(t_graph *start, unsigned char state);
+void				ft_debug(int ac, char **av, t_var *var);
 
 #endif
