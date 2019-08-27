@@ -6,7 +6,7 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 16:25:50 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/07/09 18:17:28 by lutsiara         ###   ########.fr       */
+/*   Updated: 2019/08/27 04:21:37 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,6 +160,7 @@ unsigned int		ft_how_many(t_var *var, unsigned int *x, unsigned char m);
 t_ctn				*ft_bfs(t_var *var, unsigned char m);
 int					ft_endisnext(t_var *var, t_links *links);
 int					ft_cyclecount(t_var *var, t_min *min);
+void				ft_moderate_simu(t_var *var, t_ctn *ants, t_min *min);
 void				ft_moderate(t_var *var, t_ctn *ants);
 int					ft_travel(t_var *var);
 
