@@ -6,7 +6,7 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 11:17:54 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/08/27 04:12:14 by lutsiara         ###   ########.fr       */
+/*   Updated: 2019/08/28 17:18:38 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ static int	ft_find_paths(t_var *var, int m)
 			ft_order_path(&var->bfs, path);
 		else if (!path)
 			return (1);
-		ft_reset(var, 8);
 		if (m)
 			while ((path = ft_bfs(var, 32)) && ++var->nb_bfs)
 				ft_order_path(&var->bfs, path);

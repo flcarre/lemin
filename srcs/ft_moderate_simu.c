@@ -6,7 +6,7 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/06 06:04:30 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/08/27 05:58:04 by lutsiara         ###   ########.fr       */
+/*   Updated: 2019/08/28 17:18:11 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,13 @@ static int			isequal(t_min *x, t_min *min, unsigned int *rates)
 
 	ptr = min->travel;
 	x->min = 0;
-	while (ptr && ptr->next && x->min < min->i)
+	while (ptr && x->min < min->i)
 	{
+		if (x->min != x->i && sum(ptr, ptr->ants) > rates[x->i])
+				return (0);
 		x->min++;
 		ptr = ptr->next;
 	}
-	if (x->min != x->i && sum(ptr, ptr->ants) > rates[x->i])
-			return (0);
 	return (1);
 }
 
@@ -41,16 +41,12 @@ static void			add(t_var *var, t_min *x, t_min *min, unsigned int *rates)
 
 	ptr = min->travel;
 	x->i = 0;
-	while (ptr && ptr->next && x->i < min->i && x->sum < var->nb_ants)
-	{
-		x->i++;
-		ptr = ptr->next;
-	}
-	if (x->sum < var->nb_ants)
+	while (ptr && x->i < min->i && x->sum < var->nb_ants)
 	{
 		ptr->ants += 1;
 		x->sum++;
-		rates[x->i] = sum(ptr, ptr->ants);
+		rates[x->i++] = sum(ptr, ptr->ants);
+		ptr = ptr->next;
 	}
 }
 

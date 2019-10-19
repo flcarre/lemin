@@ -6,7 +6,7 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/06 06:04:30 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/08/27 05:50:40 by lutsiara         ###   ########.fr       */
+/*   Updated: 2019/08/28 17:00:21 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,16 +41,12 @@ static void			add(t_var *var, t_min *x, unsigned int *rates)
 
 	ptr = var->travel;
 	x->i = 0;
-	while (ptr && ptr->next && x->i < var->nb_travel && x->sum < var->nb_ants)
-	{
-		x->i++;
-		ptr = ptr->next;
-	}
-	if (x->sum < var->nb_ants)
+	while (ptr && x->i < var->nb_travel && x->sum < var->nb_ants)
 	{
 		ptr->ants += 1;
 		x->sum++;
-		rates[x->i] = sum(ptr, ptr->ants);
+		rates[x->i++] = sum(ptr, ptr->ants);
+		ptr = ptr->next;
 	}
 }
 
