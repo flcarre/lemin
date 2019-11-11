@@ -6,7 +6,7 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 11:17:54 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/08/28 17:18:38 by lutsiara         ###   ########.fr       */
+/*   Updated: 2019/11/07 10:49:28 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,17 +30,21 @@ static int	ft_find_paths(t_var *var, int m)
 	if (m)
 		while ((path = ft_dijkstra(var)) && ++var->nb_path)
 			ft_enqueue_path(&var->paths, path);
+	else if ((path = ft_dijkstra(var)) && ++var->nb_path)
+		ft_enqueue_path(&var->paths, path);
 	if (!var->paths && m)
 		return (1);
-	if (var->nb_path < var->max_nb_path)
+	ft_reset(var, 8);
+	if (var->nb_path < var->max_nb_path && m)
 	{
+		if ((path = ft_dijkstra(var)))
+			ft_del_ctn(&path);
 		if ((path = ft_bfs(var, 8)) && ++var->nb_bfs)
 			ft_order_path(&var->bfs, path);
 		else if (!path)
 			return (1);
-		if (m)
-			while ((path = ft_bfs(var, 32)) && ++var->nb_bfs)
-				ft_order_path(&var->bfs, path);
+		while ((path = ft_bfs(var, 32)) && ++var->nb_bfs)
+			ft_order_path(&var->bfs, path);
 	}
 	return (0);
 }

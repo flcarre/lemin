@@ -6,7 +6,7 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/08 00:11:40 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/06/27 19:55:33 by lutsiara         ###   ########.fr       */
+/*   Updated: 2019/10/19 18:32:13 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,26 +58,6 @@ static void	ft_print_input(void)
 	ft_putendl("");
 }
 
-static void	count_links(t_var *var)
-{
-	t_links		*li;
-
-	li = var->start->links;
-	while (li)
-	{
-		var->start->nb_links++;
-		li = li->next;
-	}
-	li = var->end->links;
-	while (li)
-	{
-		var->end->nb_links++;
-		li = li->next;
-	}
-	var->max_nb_path = (var->end->nb_links < var->start->nb_links) \
-	? var->end->nb_links : var->start->nb_links;
-}
-
 static int		init(t_var *var)
 {
 	t_path	*i;
@@ -100,7 +80,8 @@ int			ft_checkup(t_var *var)
 	if (!ft_is_there_path(var->start, var->end))
 		return (1);
 	ft_print_input();
-	count_links(var);
+	var->max_nb_path = (var->end->nb_links < var->start->nb_links) \
+	? var->end->nb_links : var->start->nb_links;
 	ft_set(var->start, 4);
 	if (init(var))
 		return (1);

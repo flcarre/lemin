@@ -6,7 +6,7 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 23:13:04 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/06/25 17:35:07 by lutsiara         ###   ########.fr       */
+/*   Updated: 2019/10/19 18:31:45 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,12 @@ static int	ft_link_rooms(t_var *var)
 	if (!(link = ft_alloc_link()))
 		return (1);
 	link->room = var->room2;
+	var->room2->nb_links += 1;
 	ft_push_link(&var->room1->links, link);
 	if (!(link = ft_alloc_link()))
 		return (1);
 	link->room = var->room1;
+	var->room1->nb_links += 1;
 	ft_push_link(&var->room2->links, link);
 	return (0);
 }
