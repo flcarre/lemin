@@ -6,7 +6,7 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/06 06:04:30 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/08/28 17:18:11 by lutsiara         ###   ########.fr       */
+/*   Updated: 2020/03/04 11:32:54 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int			isequal(t_min *x, t_min *min, unsigned int *rates)
 	while (ptr && x->min < min->i)
 	{
 		if (x->min != x->i && sum(ptr, ptr->ants) > rates[x->i])
-				return (0);
+			return (0);
 		x->min++;
 		ptr = ptr->next;
 	}

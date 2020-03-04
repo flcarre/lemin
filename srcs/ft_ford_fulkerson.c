@@ -6,7 +6,7 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 14:34:46 by lutsiara          #+#    #+#             */
-/*   Updated: 2020/03/03 14:16:31 by lutsiara         ###   ########.fr       */
+/*   Updated: 2020/03/04 16:51:19 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,12 +75,12 @@ void			ft_fill_matrix(t_matrix **matrix, t_graph *parent, \
 		return ;
 	link = parent->links;
 	parent->state |= 1;
-	i_row_matrix = ft_return_matrix_index(matrix, parent->name, size);
+	i_row_matrix = ft_return_index(matrix[0] + 1, parent->name, size);
 	while (link)
 	{
-		i_column_marix = ft_return_matrix_index(matrix, link->room->name, size);
-		matrix[i_row_matrix][i_column_marix].value = 1;
-		ft_fill_matrix(matrix, link->room, size); 
+		i_column_marix = ft_return_index(matrix[0] + 1, link->room->name, size);
+		matrix[i_row_matrix + 1][i_column_marix + 1].value = 1;
+		ft_fill_matrix(matrix, link->room, size);
 		link = link->next;
 	}
 }
@@ -126,7 +126,7 @@ t_matrix		*ft_build_array(t_var *var, unsigned int size)
 	return (array);
 }
 
-void			*ft_alloc_some_var(t_var * var)
+void			*ft_alloc_some_var(t_var *var)
 {
 	if (!(var->residual_matrix = ft_build_matrix(var, var->nb_rooms)))
 		return ((void *)0);
@@ -153,27 +153,38 @@ void			ft_update_residual_matrix(t_var *var)
 	unsigned int	i_u;
 	t_graph			*v_room;
 	t_graph			*u_room;
+	t_matrix		*rewind;
 
 	v_room = var->end;
+	rewind = (void *)0;
 	while (v_room)
 	{
 		i_v = ft_return_index(var->parent, v_room->name, var->nb_rooms);
 		u_room = var->parent[i_v].link;
 		i_u = ft_return_index(var->parent, u_room->name, var->nb_rooms);
-		var->residual_matrix[i_u][i_v].value -= 1;
-		var->residual_matrix[i_v][i_u].value += 1;
+		var->residual_matrix[i_u + 1][i_v + 1].value -= 1;
+		var->residual_matrix[i_v + 1][i_u + 1].value += 1;
+		ft_push_address(rewind, &var->residual_matrix[i_u + 1][i_v + 1]);
+		if (var->start != v_room && var->end != v_room)
+			var->residual_matrix[i_u + 1][i_v + 1].follow = v_room;
+		if (var->end != v_room && var->start != v_room)
+			var->residual_matrix[i_u + 1][i_v + 1].link = u_room;
 		v_room = var->parent[i_v].link;
 	}
 }
 
 t_ctn			*ft_ford_fulkerson(t_var *var)
 {
-	t_ctn		*paths;
+	t_ctn			*paths;
+	unsigned int	t;
+	unsigned int	s;
 
 	paths = (void *)0;
 	if (!(ft_alloc_some_var(var)))
 		return ((void *)0);
-	while (ft_ff_bfs(var))
+	s = ft_return_index(var->visited, var->start->name, var->nb_rooms);
+	t = ft_return_index(var->visited, var->end->name, var->nb_rooms);
+	while (ft_ff_bfs(var, s, t))
 	{
 		ft_init_visited(var);
 		ft_update_residual_matrix(var);

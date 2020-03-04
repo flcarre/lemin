@@ -6,7 +6,7 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 16:25:50 by lutsiara          #+#    #+#             */
-/*   Updated: 2020/03/02 20:20:56 by lutsiara         ###   ########.fr       */
+/*   Updated: 2020/03/04 16:51:25 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,9 @@ typedef struct		s_matrix
 {
 	struct s_graph	*room;
 	struct s_graph	*link;
+	struct s_graph	*follow;
+	struct s_matrix	*rewind;
+	struct s_matrix	*address;
 	int				value;
 }					t_matrix;
 
@@ -183,7 +186,7 @@ int					ft_travel(t_var *var);
 int					ft_reset(t_var *var, unsigned char state);
 int					ft_set(t_graph *start, unsigned char state);
 void				ft_debug(int ac, char **av, t_var *var);
-unsigned int		ft_return_matrix_index(t_matrix **matrix, char *name, \
+unsigned int		ft_return_index(t_matrix *array, char *name, \
 					unsigned int size);
 void				ft_fill_matrix(t_matrix **matrix, t_graph *parent, \
 					unsigned int size);

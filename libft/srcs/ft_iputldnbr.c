@@ -6,7 +6,7 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 17:17:57 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/03/07 05:36:31 by lutsiara         ###   ########.fr       */
+/*   Updated: 2020/03/04 11:19:20 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,12 +118,12 @@ static void	ft_print(unsigned int *p[4], t_id *e, long *r, char *s)
 
 long		ft_iputldnbr(long double x, t_id *e)
 {
-	unsigned int	tx[SIZE_LD_TX];
+	unsigned int	tx[1835];
 	unsigned int	*p[4];
 	long			r[2];
 
 	ft_bzero((void *)r, 2 * sizeof(long));
-	ft_bzero((void *)tx, SIZE_LD_TX * sizeof(unsigned int));
+	ft_bzero((void *)tx, 1835 * sizeof(unsigned int));
 	(ft_isinf(x) && e->p[1] == 2) ? (r[0] = ft_iputstr("INF")) : 0;
 	(ft_isinf(x) && e->p[1] != 2) ? (r[0] = ft_iputstr("inf")) : 0;
 	(ft_isnan(x) && e->p[1] == 2) ? (r[0] = ft_iputstr("NAN")) : 0;

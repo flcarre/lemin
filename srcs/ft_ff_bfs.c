@@ -6,7 +6,7 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 16:51:05 by lutsiara          #+#    #+#             */
-/*   Updated: 2020/03/04 09:46:18 by lutsiara         ###   ########.fr       */
+/*   Updated: 2020/03/04 16:51:23 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,20 +53,60 @@ void	ft_init_visited(t_var *var)
 	}
 }
 
-int		ft_ff_bfs(t_var *var)
+void	ft_rewind_path(t_var *var, unsigned int i_u, unsigned int i_v)
 {
-	unsigned int	t;
-	unsigned int 	s;
+	t_graph		*u_room;
+	t_graph		*v_room;
+
+	u_room = var->residual_matrix[i_u + 1][i_v + 1].link;
+	v_room = 
+	ft_clear_path_forward(var, i_u, i_v);
+	i_u = ft_return_index
+}
+
+int		ft_link_while(t_var *var, t_graph *u_room, unsigned int i_u)
+{
 	unsigned int	i_v;
+	t_links			*iter;
+
+	iter = u_room->links;
+	while (iter)
+	{
+		i_v = ft_return_index(var->visited, iter->room->name, var->nb_rooms);
+		if (!var->visited[i_v].value && \
+			var->residual_matrix[i_u + 1][i_v + 1].value > 0)
+		{
+			if (ft_enqueue(&var->file, iter->room))
+				return (ft_del_links(&var->file) == 0);
+			var->parent[i_v].link = u_room;
+			var->visited[i_v].value = 1;
+		}
+		else if (!var->visited[i_v].value && \
+			var->residual_matrix[i_u + 1][i_v + 1].link && \
+			var->residual_matrix[i_u + 1][i_v + 1].follow)
+			ft_rewind_path(var, i_u, i_v);
+		iter = iter->next;
+	}
+	return (0);
+}
+
+int		ft_ff_bfs(t_var *var, unsigned int s, unsigned int t)
+{
 	unsigned int	i_u;
-	t_graph			*v_room;
 	t_graph			*u_room;
 
-	s = ft_return_index(var->visited, var->start->name, var->nb_rooms);
-	t = ft_return_index(var->visited, var->end->name, var->nb_rooms);
+	var->parent[s].value = -1;
+	var->visited[s].value = 1;
+	if (ft_enqueue(&var->file, var->parent[s].room))
+		return (0);
 	while (var->file)
 	{
-		u_room = ft_get_room(ft_dequeue(&var->file));
-		ft_link_while(var);
+		u_room = ft_dequeue(&var->file);
+		if (u_room == var->end)
+			continue ;
+		i_u = ft_return_index(var->parent, u_room->name, var->nb_rooms);
+		if (ft_link_while(var, u_room, i_u))
+			return (0);
 	}
+	return (var->visited[t].value == 1);
 }

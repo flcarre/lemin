@@ -6,7 +6,7 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/08 00:11:40 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/10/19 18:32:13 by lutsiara         ###   ########.fr       */
+/*   Updated: 2020/03/04 11:31:25 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static void	ft_print_input(void)
 	ft_putendl("");
 }
 
-static int		init(t_var *var)
+static int	init(t_var *var)
 {
 	t_path	*i;
 

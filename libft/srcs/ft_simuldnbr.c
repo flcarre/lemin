@@ -6,7 +6,7 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 17:17:57 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/03/07 07:31:09 by lutsiara         ###   ########.fr       */
+/*   Updated: 2020/03/04 11:19:32 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ static void	ft_simu(unsigned int *p[4], t_id *e, long *r, char *s)
 
 long		ft_simuldnbr(long double x, t_id *e)
 {
-	unsigned int	tx[SIZE_LD_TX];
+	unsigned int	tx[1835];
 	unsigned int	*p[4];
 	long			r[2];
 	t_id			et;
@@ -126,7 +126,7 @@ long		ft_simuldnbr(long double x, t_id *e)
 	et.p[0] = e->p[0];
 	et.fm = e->fm;
 	ft_bzero((void *)r, 2 * sizeof(long));
-	ft_bzero((void *)tx, SIZE_LD_TX * sizeof(unsigned int));
+	ft_bzero((void *)tx, 1835 * sizeof(unsigned int));
 	(ft_isinf(x) || ft_isnan(x)) ? (r[0] = 3) : 0;
 	if (ft_isnan(x) || ft_isinf(x))
 		return (r[0]);
