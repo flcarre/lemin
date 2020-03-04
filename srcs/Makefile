@@ -6,7 +6,7 @@
 #    By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/11 17:54:03 by lutsiara          #+#    #+#              #
-#    Updated: 2019/08/28 17:01:38 by lutsiara         ###   ########.fr        #
+#    Updated: 2020/03/02 16:48:31 by lutsiara         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,7 +50,10 @@ SRCS = $(SRCDIR)main.c \
 	   $(SRCDIR)ft_travel.c \
 	   $(SRCDIR)ft_travel_utils.c \
 	   $(SRCDIR)ft_debug.c \
-	   $(SRCDIR)ft_del.c
+	   $(SRCDIR)ft_del.c \
+	#    $(SRCDIR)ft_ford_filkerson.c \
+	#    $(SRCDIR)ft_ford_filkerson_utils.c \
+	#    $(SRCDIR)ft_recursive_bfs.c
 
 OBJS = $(SRCS:.c=.o)
 

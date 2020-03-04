@@ -6,7 +6,7 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/26 16:17:05 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/11/07 10:50:25 by lutsiara         ###   ########.fr       */
+/*   Updated: 2020/03/02 20:05:37 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static int	ft_mark_and_trace(t_var *var, unsigned char m)
 	i = var->dij->room->links;
 	while (i)
 	{
-		if (!(i->room->state & (32 + 1)))
+		if (!(i->room->state & 1) && !(i->room->state & 32))
 			if (var->dij->room == var->start || !(var->dij->room->state & m) \
 			|| ((var->dij->room->state & (m + 1)) \
 			&& !(i->room->state & (m + 1))))

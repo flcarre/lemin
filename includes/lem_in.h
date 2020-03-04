@@ -6,7 +6,7 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 16:25:50 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/08/27 04:21:37 by lutsiara         ###   ########.fr       */
+/*   Updated: 2020/03/02 20:20:56 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,13 @@ typedef struct		s_links
 	struct s_links	*next;
 }					t_links;
 
+typedef struct		s_matrix
+{
+	struct s_graph	*room;
+	struct s_graph	*link;
+	int				value;
+}					t_matrix;
+
 typedef struct		s_graph
 {
 	unsigned int	nb_ants;
@@ -75,6 +82,7 @@ typedef struct		s_ctn
 
 typedef struct		s_var
 {
+	unsigned int	nb_rooms;
 	unsigned int	nb_ants;
 	unsigned int	nb_path;
 	unsigned int	nb_bfs;
@@ -94,6 +102,10 @@ typedef struct		s_var
 	t_ctn			*travel;
 	t_links			*dij;
 	t_links			*list;
+	t_links			*file;
+	t_matrix		**residual_matrix;
+	t_matrix		*parent;
+	t_matrix		*visited;
 	t_hash			*hash;
 	t_links			**hash_name;
 	t_links			**hash_addr;
@@ -116,22 +128,25 @@ t_graph				*ft_alloc_room(void);
 t_links				*ft_alloc_link(void);
 t_path				*ft_alloc_path_elem(void);
 t_ctn				*ft_alloc_ctn_elem(void);
+t_matrix			**ft_alloc_matrix(unsigned int size);
 
 int					ft_del(t_var *var);
 int					ft_del_links(t_links **links);
 int					ft_del_room(t_graph **room);
 int					ft_del_ctn(t_ctn **paths);
 int					ft_del_path(t_path **path, unsigned int room);
+void				*ft_freematrix(t_matrix ***matrix, unsigned int limit);
 
 int					ft_enqueue_room(t_path **path, t_path *elem);
 int					ft_push_room(t_path **path, t_path *elem);
 int					ft_push_link(t_links **links, t_links *elem);
 int					ft_enqueue_path(t_ctn **paths, t_ctn *elem);
 int					ft_push_path(t_ctn **paths, t_ctn *elem);
-t_graph				*ft_dequeue(t_links **list);
 int					ft_enqueue_link(t_links **list, t_graph *room);
 int					ft_order_path(t_ctn **paths, t_ctn *elem);
 int					ft_add(t_var *var, t_graph *room, t_ctn *elem);
+int					ft_enqueue(t_links **list, t_graph *room);
+t_graph				*ft_dequeue(t_links **list);
 
 int					ft_enqueue_ant(t_ctn **stack, t_ctn *ant);
 int					ft_repush_ants(t_var *var, t_ctn *ants);
@@ -155,6 +170,7 @@ int					ft_make_links(t_var *var);
 int					ft_make_link(char *line, t_var *var);
 int					ft_checkup(t_var *var);
 
+t_ctn				*ft_ford_fulkerson(t_var *var);
 t_ctn				*ft_dijkstra(t_var *var);
 unsigned int		ft_how_many(t_var *var, unsigned int *x, unsigned char m);
 t_ctn				*ft_bfs(t_var *var, unsigned char m);
@@ -167,5 +183,9 @@ int					ft_travel(t_var *var);
 int					ft_reset(t_var *var, unsigned char state);
 int					ft_set(t_graph *start, unsigned char state);
 void				ft_debug(int ac, char **av, t_var *var);
+unsigned int		ft_return_matrix_index(t_matrix **matrix, char *name, \
+					unsigned int size);
+void				ft_fill_matrix(t_matrix **matrix, t_graph *parent, \
+					unsigned int size);
 
 #endif

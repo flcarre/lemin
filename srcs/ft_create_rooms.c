@@ -6,7 +6,7 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 21:33:57 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/06/11 16:11:41 by lutsiara         ###   ########.fr       */
+/*   Updated: 2020/03/02 16:58:47 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static int		ft_create_room(char *line, t_var *var)
 	var->state = 0;
 	if (ft_push_hash(var, room))
 		return (1);
-	return (0);
+	return ((++var->nb_rooms) && 0);
 }
 
 static int		ft_select_cmd(char *line, t_var *var)
