@@ -6,13 +6,13 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 16:51:05 by lutsiara          #+#    #+#             */
-/*   Updated: 2020/03/04 16:51:23 by lutsiara         ###   ########.fr       */
+/*   Updated: 2020/03/05 15:52:47 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-int		ft_enqueue(t_links **list, t_graph *room)
+int			ft_enqueue(t_links **list, t_graph *room)
 {
 	t_links			*elem;
 	t_links			**iterator;
@@ -27,7 +27,7 @@ int		ft_enqueue(t_links **list, t_graph *room)
 	return (!(*iterator = elem));
 }
 
-t_graph	*ft_dequeue(t_links **list)
+t_graph		*ft_dequeue(t_links **list)
 {
 	t_links			*head;
 	t_graph			*room;
@@ -41,7 +41,7 @@ t_graph	*ft_dequeue(t_links **list)
 	return (room);
 }
 
-void	ft_init_visited(t_var *var)
+void		ft_init_visited(t_var *var)
 {
 	unsigned int	iterator;
 
@@ -49,22 +49,59 @@ void	ft_init_visited(t_var *var)
 	while (iterator < var->nb_rooms)
 	{
 		var->visited[iterator].value = 0;
+		var->parent[iterator].link = (void *)0;
 		iterator++;
 	}
 }
 
-void	ft_rewind_path(t_var *var, unsigned int i_u, unsigned int i_v)
+void		ft_recursive_clear(t_matrix *cell)
 {
-	t_graph		*u_room;
-	t_graph		*v_room;
+	t_matrix	*go;
 
-	u_room = var->residual_matrix[i_u + 1][i_v + 1].link;
-	v_room = 
-	ft_clear_path_forward(var, i_u, i_v);
-	i_u = ft_return_index
+	if (!cell)
+		return ;
+	(*cell).link = (void *)0;
+	(*cell).follow = (void *)0;
+	(*cell).address = (void *)0;
+	go = (*cell).address_follow;
+	(*cell).address_follow = (void *)0;
+	ft_recursive_clear(go);
 }
 
-int		ft_link_while(t_var *var, t_graph *u_room, unsigned int i_u)
+t_matrix	*ft_clear_path_forward(t_var *var, \
+			unsigned int i_u, unsigned int i_v)
+{
+	t_matrix	*cell;
+
+	if (var->residual_matrix[i_u + 1][i_v + 1].address)
+		cell = var->residual_matrix[i_u + 1][i_v + 1].address;
+	else if (var->residual_matrix[i_v + 1][i_u + 1].address)
+		cell = var->residual_matrix[i_v + 1][i_u + 1].address;
+	else
+		cell = (void *)0;
+	if (cell)
+	{
+		ft_recursive_clear(cell);
+		(*cell).address = (void *)0;
+		(*cell).address_follow = (void *)0;
+		(*cell).follow = (void *)0;
+		return (cell);
+	}
+	return ((void *)0);
+}
+
+void		ft_rewind_path(t_var *var, unsigned int i_u, unsigned int i_v)
+{
+	t_matrix	*cell;
+
+	if (!(cell = ft_clear_path_forward(var, i_u, i_v)))
+		return ;
+	while (ft_dequeue(&var->file))
+		;
+	ft_rewind_to_start(var, cell);
+}
+
+int			ft_link_while(t_var *var, t_graph *u_room, unsigned int i_u)
 {
 	unsigned int	i_v;
 	t_links			*iter;
@@ -90,7 +127,7 @@ int		ft_link_while(t_var *var, t_graph *u_room, unsigned int i_u)
 	return (0);
 }
 
-int		ft_ff_bfs(t_var *var, unsigned int s, unsigned int t)
+int			ft_ff_bfs(t_var *var, unsigned int s, unsigned int t)
 {
 	unsigned int	i_u;
 	t_graph			*u_room;
@@ -102,8 +139,6 @@ int		ft_ff_bfs(t_var *var, unsigned int s, unsigned int t)
 	while (var->file)
 	{
 		u_room = ft_dequeue(&var->file);
-		if (u_room == var->end)
-			continue ;
 		i_u = ft_return_index(var->parent, u_room->name, var->nb_rooms);
 		if (ft_link_while(var, u_room, i_u))
 			return (0);

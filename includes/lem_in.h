@@ -6,7 +6,7 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 16:25:50 by lutsiara          #+#    #+#             */
-/*   Updated: 2020/03/04 16:51:25 by lutsiara         ###   ########.fr       */
+/*   Updated: 2020/03/05 14:38:06 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ typedef struct		s_matrix
 	struct s_graph	*room;
 	struct s_graph	*link;
 	struct s_graph	*follow;
-	struct s_matrix	*rewind;
 	struct s_matrix	*address;
+	struct s_matrix	*address_follow;
 	int				value;
 }					t_matrix;
 

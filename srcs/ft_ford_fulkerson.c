@@ -6,7 +6,7 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 14:34:46 by lutsiara          #+#    #+#             */
-/*   Updated: 2020/03/04 16:51:19 by lutsiara         ###   ########.fr       */
+/*   Updated: 2020/03/05 14:50:27 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,16 +147,23 @@ void			*ft_free_some_var(t_var *var)
 	return ((void *)0);
 }
 
-void			ft_update_residual_matrix(t_var *var)
+void			ft_save_address(t_matrix *address, \
+				t_graph *prev_room, t_graph *u_room)
+{
+	(*address).address = address;
+	(*address).follow = prev_room;
+	(*address).link = u_room;
+}
+
+void			ft_update_residual_matrix(t_var *var, t_graph *v_room)
 {
 	unsigned int	i_v;
 	unsigned int	i_u;
-	t_graph			*v_room;
+	t_graph			*prev_room;
 	t_graph			*u_room;
-	t_matrix		*rewind;
+	t_matrix		*address;
 
-	v_room = var->end;
-	rewind = (void *)0;
+	prev_room = var->end;
 	while (v_room)
 	{
 		i_v = ft_return_index(var->parent, v_room->name, var->nb_rooms);
@@ -164,11 +171,12 @@ void			ft_update_residual_matrix(t_var *var)
 		i_u = ft_return_index(var->parent, u_room->name, var->nb_rooms);
 		var->residual_matrix[i_u + 1][i_v + 1].value -= 1;
 		var->residual_matrix[i_v + 1][i_u + 1].value += 1;
-		ft_push_address(rewind, &var->residual_matrix[i_u + 1][i_v + 1]);
-		if (var->start != v_room && var->end != v_room)
-			var->residual_matrix[i_u + 1][i_v + 1].follow = v_room;
+		if (v_room != var->start && var->end != v_room)
+			var->residual_matrix[i_u + 1][i_v + 1].address_follow = address;
+		address = &var->residual_matrix[i_u + 1][i_v + 1];
 		if (var->end != v_room && var->start != v_room)
-			var->residual_matrix[i_u + 1][i_v + 1].link = u_room;
+			ft_save_address(address, prev_room, u_room);
+		prev_room = v_room;
 		v_room = var->parent[i_v].link;
 	}
 }
@@ -187,7 +195,7 @@ t_ctn			*ft_ford_fulkerson(t_var *var)
 	while (ft_ff_bfs(var, s, t))
 	{
 		ft_init_visited(var);
-		ft_update_residual_matrix(var);
+		ft_update_residual_matrix(var, var->end);
 		ft_build_path(&paths, var);
 	}
 	ft_free_some_var(var);
