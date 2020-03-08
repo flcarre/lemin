@@ -1,35 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juazouz <juazouz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/17 14:41:57 by juazouz           #+#    #+#             */
-/*   Updated: 2019/03/19 12:59:28 by juazouz          ###   ########.fr       */
+/*   Created: 2019/02/01 16:41:07 by agoulas           #+#    #+#             */
+/*   Updated: 2019/03/15 13:16:02 by juazouz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-int			main(int ac, char **av)
-{
-	t_lem_in	lem_in;
-	t_solution	solution;
+/*
+**	Main parsing function.
+*/
 
-	lem_in_init(&lem_in);
-	parse_opt(&lem_in, ac, av);
-	if (lem_in.opt.print_help == true)
-	{
-		printf_help();
-		return (0);
-	}
-	parse(&lem_in);
-	solution_init(&solution);
-	solve(&lem_in, &solution);
-	print_output(&lem_in);
-	solution_print(lem_in, &solution);
-	solution_free(&solution);
-	lem_in_free(&lem_in);
-	return (0);
+void	parse(t_lem_in *lem_in)
+{
+	char *line;
+
+	line = NULL;
+	parse_ants_count(lem_in, &line);
+	parse_rooms(lem_in, &line);
+	lem_in->array_room = (t_room**)glist_to_array(lem_in->rooms);
+	array_sort((void **)lem_in->array_room, lem_in->room_count, room_cmp);
+	parse_links(lem_in, &line);
+	lem_in->start->ants = lem_in->total_ants;
+	parse_optimizer(lem_in);
+	ft_strdel(&line);
 }

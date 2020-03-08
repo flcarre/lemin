@@ -1,35 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_glstrev.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juazouz <juazouz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/17 14:41:57 by juazouz           #+#    #+#             */
-/*   Updated: 2019/03/19 12:59:28 by juazouz          ###   ########.fr       */
+/*   Created: 2018/08/16 14:47:28 by juazouz           #+#    #+#             */
+/*   Updated: 2019/02/19 15:49:08 by juazouz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-int			main(int ac, char **av)
-{
-	t_lem_in	lem_in;
-	t_solution	solution;
+/*
+**	Reverses the specified list.
+*/
 
-	lem_in_init(&lem_in);
-	parse_opt(&lem_in, ac, av);
-	if (lem_in.opt.print_help == true)
+void	ft_glstrev(t_glist **list)
+{
+	t_glist	*curr;
+	t_glist	*prev;
+	t_glist	*next;
+
+	curr = *list;
+	prev = 0;
+	while (curr)
 	{
-		printf_help();
-		return (0);
+		next = curr->next;
+		curr->next = prev;
+		prev = curr;
+		curr = next;
 	}
-	parse(&lem_in);
-	solution_init(&solution);
-	solve(&lem_in, &solution);
-	print_output(&lem_in);
-	solution_print(lem_in, &solution);
-	solution_free(&solution);
-	lem_in_free(&lem_in);
-	return (0);
+	*list = prev;
 }

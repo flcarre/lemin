@@ -6,17 +6,14 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/07 12:44:47 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/06/13 00:48:06 by lutsiara         ###   ########.fr       */
+/*   Updated: 2020/03/04 11:19:51 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
-# define LIBFT_H
+#define LIBFT_H
 
-# define ABS(x) (((x) < 0) ? -(x) : (x))
-# define PARTA LDBL_MANT_DIG + 28) / 29
-# define PARTB (LDBL_MAX_EXP + LDBL_MANT_DIG + 28 + 8
-# define SIZE_LD_TX (PARTA + 1 + PARTB) / 9
+#define SIZE_LD_TX 1835
 
 typedef struct		s_list
 {
@@ -28,7 +25,7 @@ typedef struct		s_list
 void				*ft_memset(void *b, int c, unsigned long len);
 void				ft_bzero(void *s, unsigned long n);
 void				*ft_memcpy(void *dst, const void *src, unsigned long n);
-void				*ft_memccpy(void *dst, const void *src, int c, \
+void				*ft_memccpy(void *dst, const void *src, int c,
 					unsigned long n);
 void				*ft_memmove(void *dst, const void *src, unsigned long len);
 void				*ft_memchr(const void *s, int c, unsigned long n);
@@ -48,11 +45,11 @@ unsigned long		ft_strlcat(char *dst, const char *src, unsigned long size);
 char				*ft_strchr(const char *s, int c);
 char				*ft_strrchr(const char *s, int c);
 char				*ft_strstr(const char *haystack, const char *needle);
-char				*ft_strnstr(const char *haystack, const char *needle, \
+char				*ft_strnstr(const char *haystack, const char *needle,
 					unsigned long len);
 int					ft_strcmp(const char *s1, const char *s2);
 int					ft_strncmp(const char *s1, const char *s2, unsigned long n);
-int					ft_strrevncmp(const char *s1, const char *s2, \
+int					ft_strrevncmp(const char *s1, const char *s2,
 					unsigned long n);
 int					ft_atoi(const char *str);
 long				ft_atol(const char *str);
@@ -73,7 +70,7 @@ char				*ft_strmap(char const *s, char (*f)(char));
 char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 int					ft_strequ(char const *s1, char const *s2);
 int					ft_strnequ(char const *s1, char const *s2, unsigned long n);
-char				*ft_strsub(char const *s, unsigned int start, \
+char				*ft_strsub(char const *s, unsigned int start,
 					unsigned long len);
 char				*ft_strjoin(char const *s1, char const *s2);
 int					ft_iswhitespace(int c);
@@ -94,9 +91,9 @@ void				ft_putnbr(int n);
 void				ft_putunbr(unsigned long long n);
 void				ft_putnbr_fd(int n, int fd);
 t_list				*ft_lstnew(void const *content, unsigned long content_size);
-void				ft_lstdelone(t_list **alst, \
+void				ft_lstdelone(t_list **alst,
 					void (*del)(void *, unsigned long));
-void				ft_lstdel(t_list **alst, \
+void				ft_lstdel(t_list **alst,
 					void (*del)(void *, unsigned long));
 void				ft_lstadd(t_list **alst, t_list *new);
 void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
@@ -106,7 +103,7 @@ void				ft_lstenqueue(t_list **list, t_list *elem);
 t_list				*ft_lstdupone(t_list *elem);
 t_list				*ft_lstdup(t_list *list);
 int					ft_inttabmax(int ***tab, unsigned int x, unsigned int y);
-int					ft_lstdequeue_del(t_list **alst, \
+int					ft_lstdequeue_del(t_list **alst,
 					void (*del)(void *, unsigned long));
 char				*ft_ull(unsigned long long x, char *s);
 int					ft_signbit(double *x, long double *lx);
@@ -136,9 +133,16 @@ int					ft_isspace(int c);
 double				ft_dabs(double x);
 long double			ft_ldabs(long double x);
 unsigned long		ft_wstrlen(const int *ws);
-char				*ft_chunkcmp(const char *cmp, const char *need, \
+char				*ft_chunkcmp(const char *cmp, const char *need,
 					const char sep);
 unsigned long		ft_djb2a(char *str);
 unsigned long		ft_hash(unsigned long addr);
+unsigned long		ft_strchrindex(const char *str, char c);
+int					ft_charinset(char c, const char *charset);
+unsigned long		ft_strcspn(const char *s, const char *charset);
+unsigned long		ft_strspn(const char *s, const char *charset);
+long				ft_power(int nb, int power);
+int					ft_strisnum(const char *s);
+long				ft_sqrt(long nb);
 
 #endif

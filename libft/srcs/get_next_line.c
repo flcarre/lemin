@@ -6,7 +6,7 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/16 13:24:09 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/05/21 18:43:07 by lutsiara         ###   ########.fr       */
+/*   Updated: 2020/03/04 11:22:28 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ int				get_next_line(const int fd, char **line)
 	static t_list	*fd_buff = (void *)0;
 	t_list			*p;
 	char			*s;
-	char			b[ABS(BUFF_SIZE) + 1];
+	char			b[BUFF_SIZE + 1];
 	long			r;
 
 	if (fd < 0 || !line || !(p = ft_select(fd, fd_buff)))

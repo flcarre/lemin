@@ -1,35 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_glstcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juazouz <juazouz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/17 14:41:57 by juazouz           #+#    #+#             */
-/*   Updated: 2019/03/19 12:59:28 by juazouz          ###   ########.fr       */
+/*   Created: 2019/02/01 19:55:39 by juazouz           #+#    #+#             */
+/*   Updated: 2019/03/06 19:37:24 by juazouz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-int			main(int ac, char **av)
-{
-	t_lem_in	lem_in;
-	t_solution	solution;
+/*
+**	Returns a copy of all list elements.
+**	Copies the content pointers.
+**	Output is in reverse order (as required by route_creator).
+*/
 
-	lem_in_init(&lem_in);
-	parse_opt(&lem_in, ac, av);
-	if (lem_in.opt.print_help == true)
+t_glist		*ft_glstcpy(t_glist *src)
+{
+	t_glist	*res;
+	t_glist	*curr;
+	t_glist	*new;
+
+	res = NULL;
+	curr = src;
+	while (curr != NULL)
 	{
-		printf_help();
-		return (0);
+		new = ft_glstnew(curr->gen.content, curr->content_size);
+		ft_glstadd(&res, new);
+		curr = curr->next;
 	}
-	parse(&lem_in);
-	solution_init(&solution);
-	solve(&lem_in, &solution);
-	print_output(&lem_in);
-	solution_print(lem_in, &solution);
-	solution_free(&solution);
-	lem_in_free(&lem_in);
-	return (0);
+	return (res);
 }

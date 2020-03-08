@@ -1,35 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_glstadd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juazouz <juazouz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/17 14:41:57 by juazouz           #+#    #+#             */
-/*   Updated: 2019/03/19 12:59:28 by juazouz          ###   ########.fr       */
+/*   Created: 2018/11/12 19:53:12 by juazouz           #+#    #+#             */
+/*   Updated: 2019/02/01 16:48:02 by agoulas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-int			main(int ac, char **av)
+void	ft_glstadd(t_glist **alst, t_glist *new)
 {
-	t_lem_in	lem_in;
-	t_solution	solution;
-
-	lem_in_init(&lem_in);
-	parse_opt(&lem_in, ac, av);
-	if (lem_in.opt.print_help == true)
-	{
-		printf_help();
-		return (0);
-	}
-	parse(&lem_in);
-	solution_init(&solution);
-	solve(&lem_in, &solution);
-	print_output(&lem_in);
-	solution_print(lem_in, &solution);
-	solution_free(&solution);
-	lem_in_free(&lem_in);
-	return (0);
+	new->next = *alst;
+	*alst = new;
 }

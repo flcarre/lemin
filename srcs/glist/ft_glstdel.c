@@ -1,35 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_glstdel.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juazouz <juazouz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/17 14:41:57 by juazouz           #+#    #+#             */
-/*   Updated: 2019/03/19 12:59:28 by juazouz          ###   ########.fr       */
+/*   Created: 2018/11/12 19:47:48 by juazouz           #+#    #+#             */
+/*   Updated: 2019/02/05 13:53:16 by juazouz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-int			main(int ac, char **av)
+void			ft_glstdel(t_glist **alst, void (*del)(void *, size_t))
 {
-	t_lem_in	lem_in;
-	t_solution	solution;
+	t_glist	*curr;
+	t_glist	*next;
 
-	lem_in_init(&lem_in);
-	parse_opt(&lem_in, ac, av);
-	if (lem_in.opt.print_help == true)
+	curr = *alst;
+	while ((curr) != NULL)
 	{
-		printf_help();
-		return (0);
+		next = (curr)->next;
+		ft_glstdelone(&curr, del);
 	}
-	parse(&lem_in);
-	solution_init(&solution);
-	solve(&lem_in, &solution);
-	print_output(&lem_in);
-	solution_print(lem_in, &solution);
-	solution_free(&solution);
-	lem_in_free(&lem_in);
-	return (0);
+	*alst = NULL;
 }

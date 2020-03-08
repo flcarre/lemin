@@ -6,7 +6,7 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/17 20:17:34 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/01/22 23:14:51 by lutsiara         ###   ########.fr       */
+/*   Updated: 2020/03/04 11:17:08 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@
 # define D_EXPB 11
 # define D_FHB 20
 # define D_FLB 32
-# define D_FB (D_FHB + D_FLB)
+# define D_FB 52
 
 # define LD_EXPB 15
 # define LD_FHB 32
 # define LD_FLB 32
 # define LD_PLB 32
 # define LD_PHB 16
-# define LD_FB (LD_FHB + LD_FLB + LD_PLB + LD_PHB)
+# define LD_FB 112
 
 typedef struct		s_ieee_d
 {
@@ -58,8 +58,8 @@ typedef union		u_ieee_ld
 # define D_EXP_INFNAN 2047
 # define LD_EXP_INFNAN 32767
 
-# define D_QUIETNAN (1 << 19)
-# define LD_QUIETNAN (1 << 15)
+# define D_QUIETNAN 524288
+# define LD_QUIETNAN 32768
 
 # define D_EXP_BIAS 1023
 # define LD_EXP_BIAS 16383

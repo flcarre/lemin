@@ -1,35 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   route_print.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juazouz <juazouz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/17 14:41:57 by juazouz           #+#    #+#             */
-/*   Updated: 2019/03/19 12:59:28 by juazouz          ###   ########.fr       */
+/*   Created: 2019/02/15 16:51:20 by agoulas           #+#    #+#             */
+/*   Updated: 2019/03/06 19:39:36 by juazouz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-int			main(int ac, char **av)
-{
-	t_lem_in	lem_in;
-	t_solution	solution;
+/*
+**	Prints the specified route.
+**	Debug purposes.
+*/
 
-	lem_in_init(&lem_in);
-	parse_opt(&lem_in, ac, av);
-	if (lem_in.opt.print_help == true)
-	{
-		printf_help();
-		return (0);
-	}
-	parse(&lem_in);
-	solution_init(&solution);
-	solve(&lem_in, &solution);
-	print_output(&lem_in);
-	solution_print(lem_in, &solution);
-	solution_free(&solution);
-	lem_in_free(&lem_in);
-	return (0);
+void		route_print(t_route *route)
+{
+	t_bool	rev;
+
+	rev = route->rooms->gen.room->type == end;
+	ft_fprintf(2, "Route #%d (len=%d)\t", route->id_route, route->len);
+	if (rev)
+		ft_glstrev(&route->rooms);
+	print_nodes(route->rooms);
+	if (rev)
+		ft_glstrev(&route->rooms);
 }
