@@ -6,7 +6,7 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 16:51:05 by lutsiara          #+#    #+#             */
-/*   Updated: 2020/03/08 18:30:16 by lutsiara         ###   ########.fr       */
+/*   Updated: 2020/03/08 19:52:27 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,9 @@ static int		ft_link_while(t_var *var, t_graph *u_room, unsigned int i_u)
 			var->parent[i_v].link = u_room;
 			var->visited[i_v].value = 1;
 		}
-		else if (!var->visited[i_v].value && ft_is_none_else(var, u_room, i_v))
+		else if (!var->visited[i_v].value && \
+			ft_is_none_else(var, u_room, i_v) && \
+			var->residual_matrix[i_v + 1][i_u + 1].value == 1)
 		{
 			ft_rewind_path(var, i_u, i_v, u_room);
 			 if (ft_push(&var->file, iter->room))
@@ -97,6 +99,11 @@ int				ft_ff_bfs(t_var *var, unsigned int s, unsigned int t)
 	while (var->file)
 	{
 		u_room = ft_dequeue(&var->file);
+		if (u_room == var->end)
+		{
+			ft_del_links(&var->file);
+			break ;
+		}
 		i_u = ft_return_index(var->parent, u_room->name, var->nb_rooms);
 		if (ft_link_while(var, u_room, i_u))
 			return (0);
