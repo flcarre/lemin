@@ -6,7 +6,7 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 16:50:05 by lutsiara          #+#    #+#             */
-/*   Updated: 2020/03/09 13:55:24 by lutsiara         ###   ########.fr       */
+/*   Updated: 2020/03/09 17:19:28 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,9 +101,9 @@ int				ft_build_ek_paths(t_ctn **paths, t_var *var)
 	while (i_link)
 	{
 		i_to = ft_return_index(var->parent, i_link->room->name, var->nb_rooms);
-		cell_to = &var->residual_matrix[i_to + 1][i_from + 1];
+		cell_to = &var->residual_matrix[i_from + 1][i_to + 1];
 		if ((*cell_to).follow == var->end)
-			if (ft_build_ff_path(var, paths, cell_to))
+			if (ft_build_ek_path(var, paths, cell_to))
 				return (1);
 		i_link = i_link->next;
 	}

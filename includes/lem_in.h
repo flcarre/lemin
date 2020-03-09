@@ -6,7 +6,7 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 16:25:50 by lutsiara          #+#    #+#             */
-/*   Updated: 2020/03/09 13:55:43 by lutsiara         ###   ########.fr       */
+/*   Updated: 2020/03/09 17:09:24 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include "ft_printf.h"
 
 # define SIZE_HASH_TABLE 500000
+# define INF 2147483647
 
 typedef enum		e_rank
 {
@@ -63,6 +64,7 @@ typedef struct		s_graph
 	t_links			*links;
 	unsigned char	state;
 	char			*name;
+	int				flow;
 	long			x;
 	long			y;
 }					t_graph;
@@ -188,7 +190,10 @@ int					ft_reset(t_var *var, unsigned char state);
 int					ft_set(t_graph *start, unsigned char state);
 void				ft_debug(int ac, char **av, t_var *var);
 
+void				ft_fill_parent(t_var *var, int with);
 unsigned int		ft_return_index(t_matrix *array, char *name, \
+					unsigned int size);
+unsigned int		ft_return_index_matrix(t_matrix *array, char *name, \
 					unsigned int size);
 void				ft_fill_matrix(t_matrix **matrix, t_graph *parent, \
 					unsigned int size);

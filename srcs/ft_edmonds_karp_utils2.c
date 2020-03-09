@@ -6,7 +6,7 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/07 16:44:01 by lutsiara          #+#    #+#             */
-/*   Updated: 2020/03/09 11:13:13 by lutsiara         ###   ########.fr       */
+/*   Updated: 2020/03/09 17:12:09 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,13 @@ void			ft_fill_matrix(t_matrix **matrix, t_graph *parent, \
 		return ;
 	link = parent->links;
 	parent->state |= 1;
-	i_row_matrix = ft_return_index(matrix[0] + 1, parent->name, size);
+	i_row_matrix = ft_return_index_matrix(matrix[0], parent->name, size);
 	while (link)
 	{
-		i_column_marix = ft_return_index(matrix[0] + 1, link->room->name, size);
-		matrix[i_row_matrix + 1][i_column_marix + 1].value = 1;
+		i_column_marix = \
+		ft_return_index_matrix(matrix[0], link->room->name, size);
+		matrix[i_row_matrix][i_column_marix].value = 1;
+		matrix[i_row_matrix][i_column_marix].room = link->room;
 		ft_fill_matrix(matrix, link->room, size);
 		link = link->next;
 	}
@@ -79,7 +81,7 @@ t_matrix		*ft_build_array(t_var *var, unsigned int size)
 	if (!(array = (t_matrix *)ft_memalloc(sizeof(t_matrix) * size)))
 		return ((void *)0);
 	i_queue = var->queue;
-	iterator_size = 1;
+	iterator_size = 0;
 	while (i_queue && iterator_size < size)
 	{
 		array[iterator_size].room = i_queue->room;

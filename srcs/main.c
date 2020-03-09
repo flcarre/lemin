@@ -6,7 +6,7 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 11:17:54 by lutsiara          #+#    #+#             */
-/*   Updated: 2020/03/09 11:04:05 by lutsiara         ###   ########.fr       */
+/*   Updated: 2020/03/09 16:56:47 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,13 @@ static int	ft_find_paths(t_var *var, int m)
 		// if ((path = ft_dijkstra(var)))
 		// 	ft_del_ctn(&path);
 		if (m)
-			var->bfs = ft_ford_fulkerson(var);
+			var->bfs = ft_edmonds_karp(var);
 		else if ((path = ft_bfs(var, 8)) && ++var->nb_bfs)
 			ft_order_path(&var->bfs, path);
 		else if (!path)
 			return (1);
+		if (!var->bfs)
+			return (ft_printf("no finded with bfs\n"));
 		// while ((path = ft_bfs(var, 32)) && ++var->nb_bfs)
 		// 	ft_order_path(&var->bfs, path);
 	// }
