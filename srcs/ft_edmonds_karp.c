@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ford_fulkerson.c                                :+:      :+:    :+:   */
+/*   ft_edmonds_karp.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 14:34:46 by lutsiara          #+#    #+#             */
-/*   Updated: 2020/03/07 16:53:38 by lutsiara         ###   ########.fr       */
+/*   Updated: 2020/03/09 13:55:28 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static void		ft_update_residual_matrix(t_var *var, t_graph *v_room)
 	}
 }
 
-t_ctn			*ft_ford_fulkerson(t_var *var)
+t_ctn			*ft_edmonds_karp(t_var *var)
 {
 	t_ctn			*paths;
 	unsigned int	t;
@@ -86,7 +86,7 @@ t_ctn			*ft_ford_fulkerson(t_var *var)
 		ft_del_links(&var->file);
 		ft_update_residual_matrix(var, var->end);
 	}
-	if (ft_build_ff_paths(&paths, var) && ft_del_ctn(&paths))
+	if (ft_build_ek_paths(&paths, var) && ft_del_ctn(&paths))
 		;
 	ft_free_some_var(var);
 	return (paths);

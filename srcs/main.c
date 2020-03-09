@@ -6,7 +6,7 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 11:17:54 by lutsiara          #+#    #+#             */
-/*   Updated: 2020/03/02 20:06:08 by lutsiara         ###   ########.fr       */
+/*   Updated: 2020/03/09 11:04:05 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int	ft_find_paths(t_var *var, int m)
 		ft_enqueue_path(&var->paths, path);
 	if (!var->paths && m)
 		return (1);
-	// ft_reset(var, 8);
+	ft_reset(var, 8);
 	// if (var->nb_path < var->max_nb_path && m)
 	// {
 		// if ((path = ft_dijkstra(var)))

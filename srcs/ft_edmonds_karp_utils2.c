@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ford_fulkerson_utils2.c                         :+:      :+:    :+:   */
+/*   ft_edmonds_karp_utils2.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/07 16:44:01 by lutsiara          #+#    #+#             */
-/*   Updated: 2020/03/07 17:20:51 by lutsiara         ###   ########.fr       */
+/*   Updated: 2020/03/09 11:13:13 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-void		ft_init_visited(t_var *var)
+void			ft_init_visited(t_var *var)
 {
 	unsigned int	iterator;
 

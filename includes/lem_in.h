@@ -6,7 +6,7 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 16:25:50 by lutsiara          #+#    #+#             */
-/*   Updated: 2020/03/08 19:50:11 by lutsiara         ###   ########.fr       */
+/*   Updated: 2020/03/09 13:55:43 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,6 @@ int					ft_enqueue_link(t_links **list, t_graph *room);
 int					ft_order_path(t_ctn **paths, t_ctn *elem);
 int					ft_add(t_var *var, t_graph *room, t_ctn *elem);
 int					ft_enqueue(t_links **list, t_graph *room);
-int					ft_push(t_links **list, t_graph *room);
 t_graph				*ft_dequeue(t_links **list);
 
 int					ft_enqueue_ant(t_ctn **stack, t_ctn *ant);
@@ -174,8 +173,8 @@ int					ft_make_links(t_var *var);
 int					ft_make_link(char *line, t_var *var);
 int					ft_checkup(t_var *var);
 
-int					ft_ff_bfs(t_var *var, unsigned int s, unsigned int t);
-t_ctn				*ft_ford_fulkerson(t_var *var);
+int					ft_ek_bfs(t_var *var, unsigned int s, unsigned int t);
+t_ctn				*ft_edmonds_karp(t_var *var);
 t_ctn				*ft_dijkstra(t_var *var);
 unsigned int		ft_how_many(t_var *var, unsigned int *x, unsigned char m);
 t_ctn				*ft_bfs(t_var *var, unsigned char m);
@@ -194,18 +193,10 @@ unsigned int		ft_return_index(t_matrix *array, char *name, \
 void				ft_fill_matrix(t_matrix **matrix, t_graph *parent, \
 					unsigned int size);
 t_matrix			*ft_return_next_room(t_var *var, t_matrix *cell);
-void				ft_rewind_to_start(t_var *var, t_matrix *cell);
-void				ft_rewind_path(t_var *var, unsigned int i_u, \
-					unsigned int i_v, t_graph *u_room);
-int					ft_is_none_else(t_var *var, \
-					t_graph *current_room, unsigned int indice_next_room);
-t_matrix			*ft_clear_path_forward(t_var *var, \
-					unsigned int i_u, unsigned int i_v);
 void				ft_init_visited(t_var *var);
-void				ft_recursive_clear(t_var *var, t_matrix *cell);
-int					ft_build_ff_path(t_var *var, t_ctn **paths, \
+int					ft_build_ek_path(t_var *var, t_ctn **paths, \
 					t_matrix *cell_to);
-int					ft_build_ff_paths(t_ctn **paths, t_var *var);
+int					ft_build_ek_paths(t_ctn **paths, t_var *var);
 void				*ft_freematrix(t_matrix ***matrix, unsigned int limit);
 t_matrix			**ft_alloc_matrix(unsigned int size);
 void				ft_fill_matrix(t_matrix **matrix, t_graph *parent, \

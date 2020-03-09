@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ford_fulkerson_utils.c                          :+:      :+:    :+:   */
+/*   ft_edmonds_karp_utils.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 16:50:05 by lutsiara          #+#    #+#             */
-/*   Updated: 2020/03/07 17:05:12 by lutsiara         ###   ########.fr       */
+/*   Updated: 2020/03/09 13:55:24 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ unsigned int	ft_return_index(t_matrix *array, char *name, \
 	return (0);
 }
 
-int				ft_build_ff_path(t_var *var, t_ctn **paths, t_matrix *cell_to)
+int				ft_build_ek_path(t_var *var, t_ctn **paths, t_matrix *cell_to)
 {
 	t_ctn			*path;
 	unsigned char	end;
@@ -89,7 +89,7 @@ int				ft_build_ff_path(t_var *var, t_ctn **paths, t_matrix *cell_to)
 	return (0);
 }
 
-int				ft_build_ff_paths(t_ctn **paths, t_var *var)
+int				ft_build_ek_paths(t_ctn **paths, t_var *var)
 {
 	unsigned int	i_to;
 	unsigned int	i_from;
