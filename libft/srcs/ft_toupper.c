@@ -5,16 +5,18 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/09 16:02:50 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/03/13 16:21:49 by lutsiara         ###   ########.fr       */
+/*   Created: 2018/10/17 00:10:31 by lutsiara          #+#    #+#             */
+/*   Updated: 2020/03/10 13:13:17 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_toupper(int c)
+int	ft_toupper(int c)
 {
-	if (ft_isalpha(c) && ft_islower(c))
-		return (c - 32);
+	if (ft_islower(c))
+	{
+		return ((char)c + 'A' - 'a');
+	}
 	return (c);
 }

@@ -5,19 +5,22 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/07 12:52:23 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/03/13 16:24:29 by lutsiara         ###   ########.fr       */
+/*   Created: 2018/11/05 15:38:59 by lutsiara          #+#    #+#             */
+/*   Updated: 2020/03/10 13:27:06 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	*ft_memset(void *b, int c, unsigned long len)
-{
-	unsigned char	*p;
-	unsigned char	*s;
+#include "libft.h"
 
-	p = (unsigned char *)b;
-	s = (unsigned char *)b;
-	while ((unsigned long)(p - s) < len)
-		*(p++) = (unsigned char)c;
-	return (b);
+void	*ft_memset(void *ptr, int value, unsigned long num)
+{
+	unsigned long	i;
+
+	i = 0;
+	while (i < num)
+	{
+		((unsigned char*)ptr)[i] = (unsigned char)value;
+		i++;
+	}
+	return (ptr);
 }

@@ -5,16 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/07 13:57:32 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/03/13 16:26:22 by lutsiara         ###   ########.fr       */
+/*   Created: 2018/10/16 18:47:41 by lutsiara          #+#    #+#             */
+/*   Updated: 2020/03/10 13:13:17 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_bzero(void *s, unsigned long n)
+void	ft_bzero(void *s, int n)
 {
-	if (!n)
-		return ;
 	ft_memset(s, 0, n);
 }

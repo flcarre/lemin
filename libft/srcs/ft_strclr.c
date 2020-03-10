@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/08 11:26:21 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/03/13 16:23:56 by lutsiara         ###   ########.fr       */
+/*   Created: 2018/10/17 00:27:07 by lutsiara          #+#    #+#             */
+/*   Updated: 2020/03/10 13:13:17 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,14 @@
 
 void	ft_strclr(char *s)
 {
-	if (!s)
+	int	i;
+
+	if (s == NULL)
 		return ;
-	ft_bzero((void *)s, ft_strlen((const char *)s));
+	i = 0;
+	while (s[i] != '\0')
+	{
+		s[i] = '\0';
+		i++;
+	}
 }

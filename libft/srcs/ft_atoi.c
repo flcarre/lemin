@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/09 14:45:47 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/03/13 16:26:25 by lutsiara         ###   ########.fr       */
+/*   Created: 2018/08/08 14:20:31 by lutsiara          #+#    #+#             */
+/*   Updated: 2020/03/10 14:04:38 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,14 @@ int		ft_atoi(const char *str)
 	if (*str == '-' || *str == '+')
 		str++;
 	while (ft_isdigit((int)(*str)))
+	{
 		r = r * 10 + *(str++) - '0';
+		if (r > 2147483647)
+		{
+			if (n == 1)
+				return (-1);
+			return (0);
+		}
+	}
 	return ((int)(r * n));
 }

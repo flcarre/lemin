@@ -5,23 +5,24 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/07 14:25:10 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/03/13 16:24:38 by lutsiara         ###   ########.fr       */
+/*   Created: 2018/11/05 16:03:51 by lutsiara          #+#    #+#             */
+/*   Updated: 2020/03/10 14:06:19 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	*ft_memcpy(void *dst, const void *src, unsigned long n)
-{
-	unsigned char	*d;
-	unsigned char	*s;
-	unsigned char	*start;
+#include "libft.h"
 
-	if (!n)
+void	*ft_memcpy(void *dst, const void *src, unsigned long num)
+{
+	unsigned long	i;
+
+	if (dst == src)
 		return (dst);
-	d = (unsigned char *)dst;
-	s = (unsigned char *)src;
-	start = (unsigned char *)src;
-	while ((unsigned long)(s - start) < n)
-		*(d++) = *(s++);
+	i = 0;
+	while (i < num)
+	{
+		((unsigned char*)dst)[i] = ((unsigned char*)src)[i];
+		i++;
+	}
 	return (dst);
 }

@@ -3,18 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parse_core.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juazouz <juazouz@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/28 14:41:27 by agoulas           #+#    #+#             */
-/*   Updated: 2019/03/19 12:50:12 by juazouz          ###   ########.fr       */
+/*   Created: 2019/01/28 14:41:27 by lutsiara          #+#    #+#             */
+/*   Updated: 2020/03/10 17:35:48 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
-
-/*
-**	Reads the expected number records the ants count.
-*/
 
 void	parse_ants_count(t_lem_in *lem_in, char **line)
 {
@@ -37,10 +33,6 @@ void	parse_ants_count(t_lem_in *lem_in, char **line)
 		lem_in_die();
 }
 
-/*
-**	Reads and records a room.
-*/
-
 int		read_room_line(t_lem_in *lem_in, char **line, t_roomtype type)
 {
 	if (gnl_no_comm(lem_in, 0, line) == -1)
@@ -48,10 +40,6 @@ int		read_room_line(t_lem_in *lem_in, char **line, t_roomtype type)
 	parse_room(lem_in, *line, type);
 	return (1);
 }
-
-/*
-**	Parses the rooms list. Stops on the first link line.
-*/
 
 void	parse_rooms(t_lem_in *lem_in, char **line)
 {
@@ -66,22 +54,18 @@ void	parse_rooms(t_lem_in *lem_in, char **line)
 		if (ft_strnequ("##", *line, 2))
 		{
 			if (ft_strequ("##start", *line))
-				read_room_line(lem_in, line, start);
+				read_room_line(lem_in, line, START);
 			else if (ft_strequ("##end", *line))
-				read_room_line(lem_in, line, end);
+				read_room_line(lem_in, line, END);
 		}
 		else
 		{
-			parse_room(lem_in, *line, standard);
+			parse_room(lem_in, *line, STANDARD);
 		}
 	}
 	if (state == -1 || lem_in->start == NULL || lem_in->end == NULL)
 		lem_in_die();
 }
-
-/*
-**	Parses the list of links.
-*/
 
 void	parse_links(t_lem_in *lem_in, char **line)
 {

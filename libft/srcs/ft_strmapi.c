@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/11 14:03:28 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/03/13 16:23:22 by lutsiara         ###   ########.fr       */
+/*   Created: 2018/10/17 00:38:47 by lutsiara          #+#    #+#             */
+/*   Updated: 2020/03/10 13:13:17 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,22 @@
 
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	char			*tmp;
-	unsigned int	i;
+	int		i;
+	char	*result;
+	int		len;
 
-	if (!s || !f)
-		return ((void *)0);
-	if (!(tmp = ft_strnew(ft_strlen(s))))
-		return ((void *)0);
+	if (s == NULL)
+		return (NULL);
+	len = ft_strlen((char*)s);
+	result = ft_memalloc(len + 1);
+	if (result == NULL)
+		return (NULL);
 	i = 0;
-	while (*s)
+	while (i < len)
 	{
-		*(tmp + i) = f(i, *(s++));
+		result[i] = f(i, s[i]);
 		i++;
 	}
-	return (tmp);
+	result[i] = '\0';
+	return (result);
 }

@@ -3,18 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juazouz <juazouz@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/21 14:10:58 by juazouz           #+#    #+#             */
-/*   Updated: 2019/03/19 13:00:11 by juazouz          ###   ########.fr       */
+/*   Created: 2019/02/21 14:10:58 by lutsiara          #+#    #+#             */
+/*   Updated: 2020/03/10 19:26:37 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
-
-/*
-**	Parses the specified string to a number. Exit on error.
-*/
 
 int		parse_number_safe(char *s)
 {
@@ -44,9 +40,6 @@ int		parse_number_safe(char *s)
 	return (res * mul);
 }
 
-/*
-**	Returns true if the specified string contains room connection information.
-*/
 
 t_bool	parse_is_link(char *line)
 {
@@ -56,15 +49,9 @@ t_bool	parse_is_link(char *line)
 	len = ft_strlen(line);
 	pos = ft_strindex(line, '-');
 	if (pos == -1 || pos < 1 || pos >= len - 1)
-		return (false);
-	return (true);
+		return (FALSE);
+	return (TRUE);
 }
-
-/*
-**	Parses and cut the line in 3 part: the name, the coordinate x and y.
-**	after that, he create a room for the list of room
-**	Returns true if the specified string contains room information.
-*/
 
 void	parse_room(t_lem_in *lem_in, char *line, t_roomtype type)
 {
@@ -73,11 +60,10 @@ void	parse_room(t_lem_in *lem_in, char *line, t_roomtype type)
 	char	**tab;
 	t_room	*new;
 
-	if (((tab = ft_strsplit(line, ' ')) == NULL)
-		|| tab[0] == NULL || (ft_strnequ(tab[0], "L", 1) == true)
-		|| tab[1] == NULL
-		|| tab[2] == NULL || tab[3] != NULL
-		|| (ft_strlen(tab[1]) > MAX_NB_SIZE)
+	if (((tab = ft_strsplit(line, ' ')) == NULL) \
+		|| tab[0] == NULL || (ft_strnequ(tab[0], "L", 1) == TRUE) \
+		|| tab[1] == NULL || tab[2] == NULL || tab[3] != NULL \
+		|| (ft_strlen(tab[1]) > MAX_NB_SIZE) \
 		|| (ft_strlen(tab[2]) > MAX_NB_SIZE))
 	{
 		ft_free_tab(&tab);
@@ -89,10 +75,6 @@ void	parse_room(t_lem_in *lem_in, char *line, t_roomtype type)
 	lem_in_add_room(lem_in, new);
 	ft_free_tab(&tab);
 }
-
-/*
-**	Create links between rooms.
-*/
 
 void	parse_link(t_lem_in *lem_in, char **line)
 {

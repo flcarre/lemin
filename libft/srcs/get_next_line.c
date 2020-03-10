@@ -5,133 +5,80 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/16 13:24:09 by lutsiara          #+#    #+#             */
-/*   Updated: 2020/03/04 11:22:28 by lutsiara         ###   ########.fr       */
+/*   Created: 2018/11/15 13:47:56 by lutsiara          #+#    #+#             */
+/*   Updated: 2020/03/10 13:48:32 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
+#include <unistd.h>
+#include <limits.h>
 #include "libft.h"
-#include "get_next_line.h"
 
-static t_list	*ft_select(int fd, t_list *fd_buff)
+static unsigned int	linelen(char *str)
 {
-	t_list			*p;
-	int				*f;
-
-	if (!fd_buff)
-		return ((void *)0);
-	while (fd_buff)
-	{
-		p = (t_list *)fd_buff->content;
-		f = (int *)(p->content);
-		if (fd == *f)
-			return (p);
-		fd_buff = fd_buff->next;
-	}
-	return ((void *)0);
-}
-
-static t_list	*ft_add(int fd, t_list **fd_buff)
-{
-	t_list			*tmp;
-	t_list			*f;
-
-	tmp = (void *)0;
-	if (!(tmp = ft_lstnew((void const *)&fd, sizeof(int))))
-		return ((void *)0);
-	ft_lstenqueue(&tmp, ft_lstnew((void const *)"\0", 1));
-	if (!(tmp->next))
-	{
-		ft_lstdel(&tmp, &ft_delcontent);
-		return ((void *)0);
-	}
-	if (!(f = ft_lstnew((void const *)(void *)0, 0)))
-	{
-		ft_lstdel(&tmp, &ft_delcontent);
-		return ((void *)0);
-	}
-	f->content = (void *)tmp;
-	f->content_size = sizeof(t_list) * 2 + sizeof(int) + 1;
-	ft_lstenqueue(fd_buff, f);
-	f = *fd_buff;
-	while (f->next)
-		f = f->next;
-	return ((t_list *)f->content);
-}
-
-static int		ft_cpy_n_cut(char **line, t_list **buff)
-{
-	char			*s;
-	unsigned long	i;
+	unsigned int	i;
 
 	i = 0;
-	s = (char *)(*buff)->content;
-	while (*(s + i) && *(s + i) != '\n')
+	while (str[i] != '\n' && str[i] != '\0')
 		i++;
-	if (!(*line = ft_strsub((char const *)s, 0, i)))
+	return (i);
+}
+
+static char			*append(char *s1, char *s2)
+{
+	char		*str;
+
+	str = ft_strjoin(s1, s2);
+	free(s1);
+	if (str == NULL)
+		return (NULL);
+	return (str);
+}
+
+static int			shift_to_end(char *str)
+{
+	char	*lineend;
+
+	lineend = ft_strchr(str, '\n');
+	if (lineend)
+	{
+		ft_strcpy(str, lineend + 1);
+		return (1);
+	}
+	if (linelen(str) > 0)
+	{
+		*str = '\0';
+		return (1);
+	}
+	return (0);
+}
+
+int					get_next_line(int const fd, char **line)
+{
+	static char	*save[OPEN_MAX];
+	char		buff[BUFF_SIZE + 1];
+	long		res;
+
+	if (fd < 0 || BUFF_SIZE < 1 || !line || read(fd, buff, 0) < 0)
 		return (-1);
-	i += (*(s + i) == '\n') ? 1 : 0;
-	(*buff)->content = (void *)ft_strdup(s + i);
-	ft_memdel((void **)&s);
-	s = (char *)(*buff)->content;
-	if (!s)
+	if (*line != NULL)
+		ft_strdel(line);
+	if (!(save[fd]) && (save[fd] = ft_strnew(0)) == NULL)
 		return (-1);
-	(*buff)->content_size = ft_strlen((const char *)s) + 1;
+	while (!(ft_strchr(save[fd], '\n')) &&
+			(res = read(fd, buff, BUFF_SIZE)) > 0)
+	{
+		buff[res] = '\0';
+		save[fd] = append(save[fd], buff);
+		if (save[fd] == NULL)
+			return (-1);
+	}
+	*line = ft_strsub(save[fd], 0, linelen(save[fd]));
+	if (!shift_to_end(save[fd]))
+	{
+		free(save[fd]);
+		return (0);
+	}
 	return (1);
-}
-
-static int		ft_fddel(int ret, t_list **fd_buff, t_list **p)
-{
-	t_list		*f;
-	t_list		*i;
-
-	f = (*fd_buff);
-	while (f->content != (void *)(*p))
-	{
-		i = f;
-		f = f->next;
-	}
-	if (f == (*fd_buff))
-	{
-		i = f->next;
-		ft_lstdel(p, &ft_delcontent);
-		(*fd_buff)->content_size = 0;
-		ft_memdel((void **)&(*fd_buff));
-		*fd_buff = i;
-		return ((ret < 0) ? -1 : 0);
-	}
-	ft_lstdel(p, &ft_delcontent);
-	f->content_size = 0;
-	i->next = f->next;
-	ft_memdel((void **)&f);
-	return ((ret < 0) ? -1 : 0);
-}
-
-int				get_next_line(const int fd, char **line)
-{
-	static t_list	*fd_buff = (void *)0;
-	t_list			*p;
-	char			*s;
-	char			b[BUFF_SIZE + 1];
-	long			r;
-
-	if (fd < 0 || !line || !(p = ft_select(fd, fd_buff)))
-		if (fd < 0 || !line || !(p = ft_add(fd, &fd_buff)))
-			return (-1);
-	while ((r = read(fd, b, BUFF_SIZE)) > 0)
-	{
-		b[r] = '\0';
-		s = (char *)(p->next->content);
-		p->next->content = (void *)ft_strjoin((char const *)s, (char const *)b);
-		ft_memdel((void **)&s);
-		p->next->content_size = 0;
-		if (!(p->next->content))
-			return (-1);
-		p->next->content_size = ft_strlen((const char *)p->next->content) + 1;
-		if (ft_strchr((const char *)p->next->content, (int)'\n'))
-			return (ft_cpy_n_cut(line, &(p->next)));
-	}
-	if (r >= 0 && ft_strlen((const char *)p->next->content))
-		return (ft_cpy_n_cut(line, &(p->next)));
-	return (ft_fddel(r, &fd_buff, &p));
 }

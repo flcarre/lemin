@@ -3,27 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   lem_in.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juazouz <juazouz@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/28 16:39:09 by juazouz           #+#    #+#             */
-/*   Updated: 2019/03/19 12:59:50 by juazouz          ###   ########.fr       */
+/*   Created: 2019/01/28 16:39:09 by lutsiara          #+#    #+#             */
+/*   Updated: 2020/03/10 17:35:43 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-/*
-**	Initializes lem_in.
-*/
-
 void	lem_in_init(t_lem_in *lem_in)
 {
 	ft_bzero(lem_in, sizeof(t_lem_in));
 }
-
-/*
-**	Records a new room.
-*/
 
 void	lem_in_add_room(t_lem_in *lem_in, t_room *room)
 {
@@ -32,13 +24,13 @@ void	lem_in_add_room(t_lem_in *lem_in, t_room *room)
 	new = ft_glstnew(room, sizeof(t_room));
 	ft_glstadd(&lem_in->rooms, new);
 	lem_in->room_count++;
-	if (room->type == start)
+	if (room->type == START)
 	{
 		if (lem_in->start != NULL)
 			lem_in_die();
 		lem_in->start = room;
 	}
-	else if (room->type == end)
+	else if (room->type == END)
 	{
 		if (lem_in->end != NULL)
 			lem_in_die();
@@ -46,20 +38,12 @@ void	lem_in_add_room(t_lem_in *lem_in, t_room *room)
 	}
 }
 
-/*
-**	Free lem_in's elements.
-*/
-
 void	lem_in_free(t_lem_in *lem_in)
 {
 	ft_glstdel(&lem_in->rooms, room_free);
 	free(lem_in->array_room);
 	free_saved_output(lem_in);
 }
-
-/*
-**	Remove a room from lem_in.
-*/
 
 void	lem_in_remove_room(t_lem_in *lem_in, t_room *room)
 {
@@ -77,10 +61,6 @@ void	lem_in_remove_room(t_lem_in *lem_in, t_room *room)
 		curr = &(*curr)->next;
 	}
 }
-
-/*
-**	Prints an error and terminates the program.
-*/
 
 void	lem_in_die(void)
 {

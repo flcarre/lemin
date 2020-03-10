@@ -3,18 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juazouz <juazouz@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/01 16:41:07 by agoulas           #+#    #+#             */
-/*   Updated: 2019/03/15 13:16:02 by juazouz          ###   ########.fr       */
+/*   Created: 2019/02/01 16:41:07 by lutsiara          #+#    #+#             */
+/*   Updated: 2020/03/10 19:27:48 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
-
-/*
-**	Main parsing function.
-*/
 
 void	parse(t_lem_in *lem_in)
 {

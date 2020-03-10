@@ -5,33 +5,58 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/11 15:23:54 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/03/13 16:22:26 by lutsiara         ###   ########.fr       */
+/*   Created: 2018/10/17 01:10:14 by lutsiara          #+#    #+#             */
+/*   Updated: 2020/03/10 13:13:17 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strtrim(char const *s)
+static int	isblank(int c)
 {
-	unsigned long	len;
-	unsigned long	i;
-	char			*tmp;
+	return (c == '\n' || c == ' ' || c == '\t');
+}
 
-	if (!s)
-		return (ft_strnew(0));
-	len = ft_strlen(s);
-	while (len && ft_iswhitespace((int)(*(s + len - 1))))
-		len--;
-	while (len && ft_iswhitespace((int)(*s)))
+static int	start_pos(char const *s)
+{
+	int		n;
+
+	n = 0;
+	while (isblank(s[n]))
+		n++;
+	return (n);
+}
+
+static int	end_pos(char const *s, int len)
+{
+	int		i;
+
+	i = len - 1;
+	while (i >= 0 && isblank(s[i]))
 	{
-		s++;
-		len--;
+		i--;
 	}
-	if (!(tmp = ft_strnew(len)))
-		return ((void *)0);
-	i = 0;
-	while (len--)
-		*(tmp + (i++)) = *(s++);
-	return (tmp);
+	return (i);
+}
+
+char		*ft_strtrim(char const *s)
+{
+	int		start;
+	int		end;
+	int		len;
+	char	*result;
+
+	if (s == NULL)
+		return (NULL);
+	start = start_pos(s);
+	end = end_pos(s, ft_strlen((char*)s));
+	len = end - start + 1;
+	if (0 >= len)
+		len = 0;
+	result = ft_memalloc(len + 1);
+	if (result == NULL)
+		return (NULL);
+	ft_strncpy(result, (char*)(s + start), len);
+	result[len] = '\0';
+	return (result);
 }

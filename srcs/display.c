@@ -3,18 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   display.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juazouz <juazouz@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/07 15:04:36 by juazouz           #+#    #+#             */
-/*   Updated: 2019/03/19 12:59:50 by juazouz          ###   ########.fr       */
+/*   Created: 2019/03/07 15:04:36 by lutsiara          #+#    #+#             */
+/*   Updated: 2020/03/10 19:47:04 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
-
-/*
-**	Saves the specified non comment line for display.
-*/
 
 void	save_output(t_lem_in *lem_in, char *line)
 {
@@ -28,10 +24,6 @@ void	save_output(t_lem_in *lem_in, char *line)
 	}
 }
 
-/*
-**	Prints line of the list form the end to the start.
-*/
-
 void	print_output_line(t_list *display)
 {
 	while (display && display->content != NULL)
@@ -41,20 +33,12 @@ void	print_output_line(t_list *display)
 	}
 }
 
-/*
-**	Print the lines of display.
-*/
-
 void	print_output(t_lem_in *lem_in)
 {
 	ft_lstrev(&lem_in->display);
 	print_output_line(lem_in->display);
 	ft_printf("\n");
 }
-
-/*
-**	Free saved lines.
-*/
 
 void	free_saved_output(t_lem_in *lem_in)
 {

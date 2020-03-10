@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_opt.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agoulas <agoulas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/15 16:51:20 by agoulas           #+#    #+#             */
-/*   Updated: 2019/03/15 18:20:29 by agoulas          ###   ########.fr       */
+/*   Created: 2019/02/15 16:51:20 by lutsiara          #+#    #+#             */
+/*   Updated: 2020/03/10 19:28:06 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 void	init_opt(t_lem_in *lem_in)
 {
-	lem_in->opt.debug = false;
-	lem_in->opt.print_room = false;
-	lem_in->opt.print_groups = false;
-	lem_in->opt.print_nblines = false;
-	lem_in->opt.print_help = false;
+	lem_in->opt.debug = FALSE;
+	lem_in->opt.print_room = FALSE;
+	lem_in->opt.print_groups = FALSE;
+	lem_in->opt.print_nblines = FALSE;
+	lem_in->opt.print_help = FALSE;
 }
 
 void	parse_arg_sym(t_lem_in *lem_in, char *s)
@@ -29,26 +29,22 @@ void	parse_arg_sym(t_lem_in *lem_in, char *s)
 	while (s[i])
 	{
 		if (s[i] == 'd')
-			lem_in->opt.debug = true;
+			lem_in->opt.debug = TRUE;
 		else if (s[i] == 'h')
-			lem_in->opt.print_help = true;
+			lem_in->opt.print_help = TRUE;
 		else if (s[i] == 'r')
-			lem_in->opt.print_room = true;
+			lem_in->opt.print_room = TRUE;
 		else if (s[i] == 'g')
-			lem_in->opt.print_groups = true;
+			lem_in->opt.print_groups = TRUE;
 		else if (s[i] == 'R')
-			lem_in->opt.print_route = true;
+			lem_in->opt.print_route = TRUE;
 		else if (s[i] == 'n')
-			lem_in->opt.print_nblines = true;
+			lem_in->opt.print_nblines = TRUE;
 		else
 			print_unknow(s);
 		i++;
 	}
 }
-
-/*
-**	Parses a single argument.
-*/
 
 void	parse_arg(char *s, t_lem_in *lem_in)
 {
@@ -57,25 +53,21 @@ void	parse_arg(char *s, t_lem_in *lem_in)
 	else
 	{
 		if (ft_strequ("--debug", s))
-			lem_in->opt.debug = true;
+			lem_in->opt.debug = TRUE;
 		else if (ft_strequ("--help", s))
-			lem_in->opt.print_help = true;
+			lem_in->opt.print_help = TRUE;
 		else if (ft_strequ("--rooms", s))
-			lem_in->opt.print_room = true;
+			lem_in->opt.print_room = TRUE;
 		else if (ft_strequ("--groups", s))
-			lem_in->opt.print_groups = true;
+			lem_in->opt.print_groups = TRUE;
 		else if (ft_strequ("--route", s))
-			lem_in->opt.print_route = true;
+			lem_in->opt.print_route = TRUE;
 		else if (ft_strequ("--nblines", s))
-			lem_in->opt.print_nblines = true;
+			lem_in->opt.print_nblines = TRUE;
 		else
 			parse_arg_sym(lem_in, s);
 	}
 }
-
-/*
-**	Parses the command line options.
-*/
 
 void	parse_opt(t_lem_in *lem_in, int ac, char **av)
 {

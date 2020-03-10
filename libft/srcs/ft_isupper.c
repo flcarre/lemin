@@ -5,12 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/09 16:10:25 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/03/13 16:25:38 by lutsiara         ###   ########.fr       */
+/*   Created: 2018/10/16 23:51:23 by lutsiara          #+#    #+#             */
+/*   Updated: 2020/03/10 13:13:17 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_isupper(int c)
+#include "libft.h"
+
+int	ft_isupper(int c)
 {
-	return (c >= 0101 && c <= 0132);
+	return (c >= 'A' && c <= 'Z');
 }

@@ -6,7 +6,7 @@
 #    By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/06 17:06:41 by lutsiara          #+#    #+#              #
-#    Updated: 2020/02/28 00:34:43 by lutsiara         ###   ########.fr        #
+#    Updated: 2020/03/10 15:20:16 by lutsiara         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,19 +23,23 @@ SRC_SUFFIX = .c
 H_SUFFIX = .h
 
 H_FILENAME = libft \
-			 get_next_line \
-			 ft_ieee \
-			 ft_glo_print \
+			 ft_printf_types \
 			 ft_printf
 
-C_FILENAME = ft_atoi \
-			 ft_atoui \
-			 ft_atol \
+C_FILENAME = ft_abs \
+			 ft_all \
+			 ft_any \
+			 ft_atoi \
 			 ft_bzero \
-			 ft_djb2a \
-			 ft_countword \
-			 ft_delcontent \
-			 ft_digitlen \
+			 ft_dlstadd \
+			 ft_dlstdel \
+			 ft_dlstdelone \
+			 ft_dlstfirst \
+			 ft_dlstiter \
+			 ft_dlstmap \
+			 ft_dlstnew \
+			 ft_foreach \
+			 ft_fprintf \
 			 ft_isalnum \
 			 ft_isalpha \
 			 ft_isascii \
@@ -44,18 +48,19 @@ C_FILENAME = ft_atoi \
 			 ft_isprint \
 			 ft_isspace \
 			 ft_isupper \
-			 ft_iswhitespace \
 			 ft_itoa \
+			 ft_lst_del \
+			 ft_lst_del_one \
 			 ft_lstadd \
+			 ft_lstadd_last \
 			 ft_lstdel \
 			 ft_lstdelone \
-			 ft_lstdup \
-			 ft_lstdupone \
-			 ft_lstenqueue \
-			 ft_lstdequeue_del \
 			 ft_lstiter \
 			 ft_lstmap \
 			 ft_lstnew \
+			 ft_lstnewchar \
+			 ft_lstrev \
+			 ft_max \
 			 ft_memalloc \
 			 ft_memccpy \
 			 ft_memchr \
@@ -64,15 +69,20 @@ C_FILENAME = ft_atoi \
 			 ft_memdel \
 			 ft_memmove \
 			 ft_memset \
+			 ft_min \
+			 ft_powf \
 			 ft_putchar \
 			 ft_putchar_fd \
 			 ft_putendl \
 			 ft_putendl_fd \
 			 ft_putnbr \
-			 ft_putunbr \
+			 ft_putnbr_base \
 			 ft_putnbr_fd \
+			 ft_putnstr \
 			 ft_putstr \
 			 ft_putstr_fd \
+			 ft_realloc \
+			 ft_safe_malloc \
 			 ft_strcat \
 			 ft_strchr \
 			 ft_strclr \
@@ -90,7 +100,6 @@ C_FILENAME = ft_atoi \
 			 ft_strmapi \
 			 ft_strncat \
 			 ft_strncmp \
-			 ft_strrevncmp \
 			 ft_strncpy \
 			 ft_strnequ \
 			 ft_strnew \
@@ -98,77 +107,37 @@ C_FILENAME = ft_atoi \
 			 ft_strrchr \
 			 ft_strsplit \
 			 ft_strstr \
-			 ft_chunkcmp \
 			 ft_strsub \
-			 ft_strtabdel \
-			 ft_strtabnew \
 			 ft_strtrim \
 			 ft_tolower \
 			 ft_toupper \
-			 ft_inttabmax \
-			 gnl \
 			 get_next_line \
-			 ft_iputchar \
-			 ft_iputxchar \
-			 ft_iputnbr_base \
-			 ft_iputunbr_base \
-			 ft_iputstr \
-			 ft_iputnstr \
-			 ft_dmod \
-			 ft_ldmod \
-			 ft_dabs \
-			 ft_ldabs \
-			 ft_ldfrexp \
-			 ft_dfrexp \
-			 ft_ldexp \
-			 ft_dexp \
-			 ft_isnan \
-			 ft_isinf \
-			 ft_isdigit \
-			 ft_isspace \
-			 ft_dclassify \
-			 ft_signbit \
-			 ft_iputwchar \
-			 ft_iputwstr \
-			 ft_iputnwstr \
-			 ft_atoui \
-			 ft_wstrlen \
-			 ft_wcharlen \
-			 ft_ld_ldiglen \
-			 ft_ull \
-			 ft_udigitlen \
-			 ft_printf \
-			 ft_parse \
-			 ft_converter \
-			 ft_dorounding \
-			 ft_idisnull \
-			 ft_isid \
-			 ft_isfm \
-			 ft_iputldnbr \
-			 ft_simuldnbr \
-			 ft_pprocess0 \
-			 ft_pprocess1 \
-			 ft_pprocess2 \
-			 ft_pprocess3 \
-			 ft_pprocess4 \
-			 ft_print0 \
-			 ft_print1 \
-			 ft_print2 \
-			 ft_print3 \
-			 ft_printcolor \
-			 ft_wcalc \
-			 ft_wprocess0 \
-			 ft_wprocess1 \
-			 ft_wprocess2 \
-			 ft_wprocess3 \
-			 ft_wprocess4 \
-			 ft_strchrindex \
-			 ft_charinset \
-			 ft_strcspn \
-			 ft_strspn \
-			 ft_power \
-			 ft_strisnum \
-			 ft_sqrt
+			 out_fill \
+			 out_init \
+			 out_putchar \
+			 out_putchar_len \
+			 parse_flags \
+			 parse_length \
+			 parse_number \
+			 parse_precision \
+			 parse_specifier \
+			 parse_width \
+			 print_argument \
+			 print_char \
+			 print_float \
+			 print_hex \
+			 print_hexup \
+			 print_int \
+			 print_number_generic \
+			 print_octal \
+			 print_padding \
+			 print_percent \
+			 print_prepound_notnull \
+			 print_ptr \
+			 print_str \
+			 print_uint \
+			 read_argument \
+			 value_is_zero
 
 INC_FILES = $(addsuffix $(H_SUFFIX),$(H_FILENAME))
 SRC_FILES = $(addsuffix $(SRC_SUFFIX),$(C_FILENAME))

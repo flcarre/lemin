@@ -5,18 +5,27 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/09 14:21:08 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/03/13 16:23:53 by lutsiara         ###   ########.fr       */
+/*   Created: 2018/08/08 15:42:33 by lutsiara          #+#    #+#             */
+/*   Updated: 2020/03/10 13:13:17 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-int		ft_strcmp(const char *s1, const char *s2)
+int	ft_strcmp(char *s1, char *s2)
 {
-	unsigned long	len;
+	unsigned int	i;
+	unsigned int	c1;
+	unsigned int	c2;
 
-	len = (ft_strlen(s1) <= ft_strlen(s2)) ? ft_strlen(s1) : ft_strlen(s2);
-	len += 1;
-	return (ft_memcmp((const void *)s1, (const void *)s2, len));
+	i = 0;
+	while (s1[i] || s2[i])
+	{
+		c1 = (unsigned char)s1[i];
+		c2 = (unsigned char)s2[i];
+		if (c1 != c2)
+		{
+			return (c1 - c2);
+		}
+		i++;
+	}
+	return (0);
 }

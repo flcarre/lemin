@@ -5,15 +5,23 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/11 13:39:25 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/03/13 16:23:40 by lutsiara         ###   ########.fr       */
+/*   Created: 2018/10/17 00:32:20 by lutsiara          #+#    #+#             */
+/*   Updated: 2020/03/10 13:13:17 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
+
 void	ft_striter(char *s, void (*f)(char *))
 {
-	if (!s || !f)
+	int i;
+
+	if (s == NULL || f == NULL)
 		return ;
-	while (*s)
-		f(s++);
+	i = 0;
+	while (s[i] != '\0')
+	{
+		f((char*)(s + i));
+		i++;
+	}
 }

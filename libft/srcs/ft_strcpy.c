@@ -5,15 +5,21 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/08 12:32:07 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/03/13 16:23:50 by lutsiara         ###   ########.fr       */
+/*   Created: 2018/08/08 14:27:07 by lutsiara          #+#    #+#             */
+/*   Updated: 2020/03/10 13:13:17 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-char	*ft_strcpy(char *dst, const char *src)
+char	*ft_strcpy(char *dest, char const *src)
 {
-	ft_memcpy((void *)dst, (const void *)src, ft_strlen(src) + 1);
-	return (dst);
+	int i;
+
+	i = 0;
+	while (src[i])
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	dest[i] = '\0';
+	return (dest);
 }

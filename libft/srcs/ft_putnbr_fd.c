@@ -5,25 +5,29 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/13 12:31:26 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/03/13 16:24:11 by lutsiara         ###   ########.fr       */
+/*   Created: 2018/10/17 17:44:58 by lutsiara          #+#    #+#             */
+/*   Updated: 2020/03/10 13:13:17 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putnbr_fd(int n, int fd)
+void	ft_putnbr_fd(int nb, int fd)
 {
-	unsigned int	x;
+	unsigned int	tmp;
 
-	x = (n < 0) ? n * -1 : n;
-	if (n < 0)
-		ft_putchar_fd('-', fd);
-	if (x >= 10)
+	if (nb < 0)
 	{
-		ft_putnbr_fd(x / 10, fd);
-		ft_putnbr_fd(x % 10, fd);
+		tmp = (unsigned int)-nb;
+		ft_putchar_fd('-', fd);
 	}
 	else
-		ft_putchar_fd('0' + x, fd);
+	{
+		tmp = (unsigned int)nb;
+	}
+	if (tmp >= 10)
+	{
+		ft_putnbr_fd((int)(tmp / 10), fd);
+	}
+	ft_putchar_fd(tmp % 10 + '0', fd);
 }
