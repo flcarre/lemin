@@ -6,178 +6,176 @@
 #    By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/06 17:06:41 by lutsiara          #+#    #+#              #
-#    Updated: 2019/06/10 18:58:00 by lutsiara         ###   ########.fr        #
+#    Updated: 2020/03/10 15:20:16 by lutsiara         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
 
-CC = gcc
-
 FLAGS = -Wall -Werror -Wextra
+CC = gcc $(FLAGS)
+SRC_PATH = srcs/
+OBJ_PATH = srcs/
+INC_PATH = includes/
+INC = -I
+INCLUDES = $(INC_PATH)
+SRC_SUFFIX = .c
+H_SUFFIX = .h
 
-SRCDIR = ./srcs/
+H_FILENAME = libft \
+			 ft_printf_types \
+			 ft_printf
 
-INCDIR = ./includes/
+C_FILENAME = ft_abs \
+			 ft_all \
+			 ft_any \
+			 ft_atoi \
+			 ft_bzero \
+			 ft_dlstadd \
+			 ft_dlstdel \
+			 ft_dlstdelone \
+			 ft_dlstfirst \
+			 ft_dlstiter \
+			 ft_dlstmap \
+			 ft_dlstnew \
+			 ft_foreach \
+			 ft_fprintf \
+			 ft_isalnum \
+			 ft_isalpha \
+			 ft_isascii \
+			 ft_isdigit \
+			 ft_islower \
+			 ft_isprint \
+			 ft_isspace \
+			 ft_isupper \
+			 ft_itoa \
+			 ft_lst_del \
+			 ft_lst_del_one \
+			 ft_lstadd \
+			 ft_lstadd_last \
+			 ft_lstdel \
+			 ft_lstdelone \
+			 ft_lstiter \
+			 ft_lstmap \
+			 ft_lstnew \
+			 ft_lstnewchar \
+			 ft_lstrev \
+			 ft_max \
+			 ft_memalloc \
+			 ft_memccpy \
+			 ft_memchr \
+			 ft_memcmp \
+			 ft_memcpy \
+			 ft_memdel \
+			 ft_memmove \
+			 ft_memset \
+			 ft_min \
+			 ft_powf \
+			 ft_putchar \
+			 ft_putchar_fd \
+			 ft_putendl \
+			 ft_putendl_fd \
+			 ft_putnbr \
+			 ft_putnbr_base \
+			 ft_putnbr_fd \
+			 ft_putnstr \
+			 ft_putstr \
+			 ft_putstr_fd \
+			 ft_realloc \
+			 ft_safe_malloc \
+			 ft_strcat \
+			 ft_strchr \
+			 ft_strclr \
+			 ft_strcmp \
+			 ft_strcpy \
+			 ft_strdel \
+			 ft_strdup \
+			 ft_strequ \
+			 ft_striter \
+			 ft_striteri \
+			 ft_strjoin \
+			 ft_strlcat \
+			 ft_strlen \
+			 ft_strmap \
+			 ft_strmapi \
+			 ft_strncat \
+			 ft_strncmp \
+			 ft_strncpy \
+			 ft_strnequ \
+			 ft_strnew \
+			 ft_strnstr \
+			 ft_strrchr \
+			 ft_strsplit \
+			 ft_strstr \
+			 ft_strsub \
+			 ft_strtrim \
+			 ft_tolower \
+			 ft_toupper \
+			 get_next_line \
+			 out_fill \
+			 out_init \
+			 out_putchar \
+			 out_putchar_len \
+			 parse_flags \
+			 parse_length \
+			 parse_number \
+			 parse_precision \
+			 parse_specifier \
+			 parse_width \
+			 print_argument \
+			 print_char \
+			 print_float \
+			 print_hex \
+			 print_hexup \
+			 print_int \
+			 print_number_generic \
+			 print_octal \
+			 print_padding \
+			 print_percent \
+			 print_prepound_notnull \
+			 print_ptr \
+			 print_str \
+			 print_uint \
+			 read_argument \
+			 value_is_zero
 
-INCFILES = $(INCDIR)libft.h \
-		   $(INCDIR)get_next_line.h \
-		   $(INCDIR)ft_ieee.h \
-		   $(INCDIR)ft_glo_print.h \
-		   $(INCDIR)ft_printf.h
+INC_FILES = $(addsuffix $(H_SUFFIX),$(H_FILENAME))
+SRC_FILES = $(addsuffix $(SRC_SUFFIX),$(C_FILENAME))
+OBJ_FILES = $(SRC_FILES:.c=.o)
+SRC = $(addprefix $(SRC_PATH),$(SRC_FILES))
+OBJ = $(addprefix $(OBJ_PATH),$(OBJ_FILES))
+HEADER = $(addprefix $(INC), $(INCLUDES))
+H_FILES = $(addprefix $(INC_PATH), $(INC_FILES))
 
-SRCS = $(SRCDIR)ft_atoi.c \
-	   $(SRCDIR)ft_atoui.c \
-	   $(SRCDIR)ft_atol.c \
-	   $(SRCDIR)ft_bzero.c \
-	   $(SRCDIR)ft_djb2a.c \
-	   $(SRCDIR)ft_countword.c \
-	   $(SRCDIR)ft_delcontent.c \
-	   $(SRCDIR)ft_digitlen.c \
-	   $(SRCDIR)ft_isalnum.c \
-	   $(SRCDIR)ft_isalpha.c \
-	   $(SRCDIR)ft_isascii.c \
-	   $(SRCDIR)ft_isdigit.c \
-	   $(SRCDIR)ft_islower.c \
-	   $(SRCDIR)ft_isprint.c \
-	   $(SRCDIR)ft_isspace.c \
-	   $(SRCDIR)ft_isupper.c \
-	   $(SRCDIR)ft_iswhitespace.c \
-	   $(SRCDIR)ft_itoa.c \
-	   $(SRCDIR)ft_lstadd.c \
-	   $(SRCDIR)ft_lstdel.c \
-	   $(SRCDIR)ft_lstdelone.c \
-	   $(SRCDIR)ft_lstdup.c \
-	   $(SRCDIR)ft_lstdupone.c \
-	   $(SRCDIR)ft_lstenqueue.c \
-	   $(SRCDIR)ft_lstdequeue_del.c \
-	   $(SRCDIR)ft_lstiter.c \
-	   $(SRCDIR)ft_lstmap.c \
-	   $(SRCDIR)ft_lstnew.c \
-	   $(SRCDIR)ft_memalloc.c \
-	   $(SRCDIR)ft_memccpy.c \
-	   $(SRCDIR)ft_memchr.c \
-	   $(SRCDIR)ft_memcmp.c \
-	   $(SRCDIR)ft_memcpy.c \
-	   $(SRCDIR)ft_memdel.c \
-	   $(SRCDIR)ft_memmove.c \
-	   $(SRCDIR)ft_memset.c \
-	   $(SRCDIR)ft_putchar.c \
-	   $(SRCDIR)ft_putchar_fd.c \
-	   $(SRCDIR)ft_putendl.c \
-	   $(SRCDIR)ft_putendl_fd.c \
-	   $(SRCDIR)ft_putnbr.c \
-	   $(SRCDIR)ft_putunbr.c \
-	   $(SRCDIR)ft_putnbr_fd.c \
-	   $(SRCDIR)ft_putstr.c \
-	   $(SRCDIR)ft_putstr_fd.c \
-	   $(SRCDIR)ft_strcat.c \
-	   $(SRCDIR)ft_strchr.c \
-	   $(SRCDIR)ft_strclr.c \
-	   $(SRCDIR)ft_strcmp.c \
-	   $(SRCDIR)ft_strcpy.c \
-	   $(SRCDIR)ft_strdel.c \
-	   $(SRCDIR)ft_strdup.c \
-	   $(SRCDIR)ft_strequ.c \
-	   $(SRCDIR)ft_striter.c \
-	   $(SRCDIR)ft_striteri.c \
-	   $(SRCDIR)ft_strjoin.c \
-	   $(SRCDIR)ft_strlcat.c \
-	   $(SRCDIR)ft_strlen.c \
-	   $(SRCDIR)ft_strmap.c \
-	   $(SRCDIR)ft_strmapi.c \
-	   $(SRCDIR)ft_strncat.c \
-	   $(SRCDIR)ft_strncmp.c \
-	   $(SRCDIR)ft_strrevncmp.c \
-	   $(SRCDIR)ft_strncpy.c \
-	   $(SRCDIR)ft_strnequ.c \
-	   $(SRCDIR)ft_strnew.c \
-	   $(SRCDIR)ft_strnstr.c \
-	   $(SRCDIR)ft_strrchr.c \
-	   $(SRCDIR)ft_strsplit.c \
-	   $(SRCDIR)ft_strstr.c \
-	   $(SRCDIR)ft_chunkcmp.c \
-	   $(SRCDIR)ft_strsub.c \
-	   $(SRCDIR)ft_strtabdel.c \
-	   $(SRCDIR)ft_strtabnew.c \
-	   $(SRCDIR)ft_strtrim.c \
-	   $(SRCDIR)ft_tolower.c \
-	   $(SRCDIR)ft_toupper.c \
-	   $(SRCDIR)ft_inttabmax.c \
-	   $(SRCDIR)gnl.c \
-	   $(SRCDIR)get_next_line.c \
-	   $(SRCDIR)ft_iputchar.c \
-	   $(SRCDIR)ft_iputxchar.c \
-	   $(SRCDIR)ft_iputnbr_base.c \
-	   $(SRCDIR)ft_iputunbr_base.c \
-	   $(SRCDIR)ft_iputstr.c \
-	   $(SRCDIR)ft_iputnstr.c \
-	   $(SRCDIR)ft_dmod.c \
-	   $(SRCDIR)ft_ldmod.c \
-	   $(SRCDIR)ft_dabs.c \
-	   $(SRCDIR)ft_ldabs.c \
-	   $(SRCDIR)ft_ldfrexp.c \
-	   $(SRCDIR)ft_dfrexp.c \
-	   $(SRCDIR)ft_ldexp.c \
-	   $(SRCDIR)ft_dexp.c \
-	   $(SRCDIR)ft_isnan.c \
-	   $(SRCDIR)ft_isinf.c \
-	   $(SRCDIR)ft_isdigit.c \
-	   $(SRCDIR)ft_isspace.c \
-	   $(SRCDIR)ft_dclassify.c \
-	   $(SRCDIR)ft_signbit.c \
-	   $(SRCDIR)ft_iputwchar.c \
-	   $(SRCDIR)ft_iputwstr.c \
-	   $(SRCDIR)ft_iputnwstr.c \
-	   $(SRCDIR)ft_atoui.c \
-	   $(SRCDIR)ft_wstrlen.c \
-	   $(SRCDIR)ft_wcharlen.c \
-	   $(SRCDIR)ft_ld_ldiglen.c \
-	   $(SRCDIR)ft_ull.c \
-	   $(SRCDIR)ft_udigitlen.c \
-	   $(SRCDIR)ft_printf.c \
-	   $(SRCDIR)ft_parse.c \
-	   $(SRCDIR)ft_converter.c \
-	   $(SRCDIR)ft_dorounding.c \
-	   $(SRCDIR)ft_idisnull.c \
-	   $(SRCDIR)ft_isid.c \
-	   $(SRCDIR)ft_isfm.c \
-	   $(SRCDIR)ft_iputldnbr.c \
-	   $(SRCDIR)ft_simuldnbr.c \
-	   $(SRCDIR)ft_pprocess0.c \
-	   $(SRCDIR)ft_pprocess1.c \
-	   $(SRCDIR)ft_pprocess2.c \
-	   $(SRCDIR)ft_pprocess3.c \
-	   $(SRCDIR)ft_pprocess4.c \
-	   $(SRCDIR)ft_print0.c \
-	   $(SRCDIR)ft_print1.c \
-	   $(SRCDIR)ft_print2.c \
-	   $(SRCDIR)ft_print3.c \
-	   $(SRCDIR)ft_printcolor.c \
-	   $(SRCDIR)ft_wcalc.c \
-	   $(SRCDIR)ft_wprocess0.c \
-	   $(SRCDIR)ft_wprocess1.c \
-	   $(SRCDIR)ft_wprocess2.c \
-	   $(SRCDIR)ft_wprocess3.c \
-	   $(SRCDIR)ft_wprocess4.c
+BLUE = "\\033[36m"
+RED = "\\033[31m"
+WHITE = "\\033[0m"
+GREEN = "\\033[32m"
 
-OBJS = $(SRCS:.c=.o)
+EOLCLR = "\\033[0K"
+CHECK = "\\xE2\\x9C\\x94"
+OK = "$(CHECK)$(WHITE)"
 
-$(NAME): $(OBJS)
-	@ar rc $(NAME) $(OBJS)
+$(NAME): $(OBJ) $(H_FILES) $(SRC)
+	@ar rc $(NAME) $(OBJ)
 	@ranlib $(NAME)
-	@echo "make $(NAME)\033[0;32m ✓\033[0m"
+	@printf "\r$(EOLCLR)$(NAME): $(GREEN)$(OK)\n"
 
 all: $(NAME)
 
-%.o: %.c $(INCFILES)
-	@$(CC) -o $@ -c $< -I $(INCDIR) $(FLAGS)
+$(OBJ_PATH)%.o: $(SRC_PATH)%.c
+	@printf "\r$(EOLCLR)$(NAME): $< $(BLUE)$(OK)"
+	@$(CC) -o $@ -c $< $(HEADER) $(FLAGS)
 
 clean:
-	@/bin/rm -rf $(OBJS)
+	@printf "$(NAME): rm *.o"
+	@/bin/rm -rf $(OBJ)
+	@printf " $(RED)$(OK)\n"
 
 fclean: clean
-	@/bin/rm -rf $(NAME)
+	@printf "$(NAME): rm $(NAME)"
+	@/bin/rm -f $(NAME)
+	@printf " $(RED)$(OK)\n"
 
 re: fclean all
 

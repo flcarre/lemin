@@ -5,35 +5,31 @@
 #                                                     +:+ +:+         +:+      #
 #    By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2019/03/11 17:54:03 by lutsiara          #+#    #+#              #
-#    Updated: 2019/06/24 16:02:45 by lutsiara         ###   ########.fr        #
+#    Created: 2020/02/18 22:47:08 by lutsiara          #+#    #+#              #
+#    Updated: 2020/03/08 20:34:26 by lutsiara         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = lem-in
-
 LIB = libft/
-
-EXEC = srcs/
+LEMIN = srcs/
 
 LIBFT = libft/libft.a
+INC_LIB_PATH = libft/includes/
 
 export LIBFT
+export INC_LIB_PATH
 
 all:
 	@make -C $(LIB)
-	@make -C $(EXEC)
+	@make -C $(LEMIN)
 
 clean:
 	@make -C $(LIB) clean
-	@make -C $(EXEC) clean
-	@echo "rm *.o\033[0;32m ✓\033[0m"
+	@make -C $(LEMIN) clean
 
-fclean: clean
+fclean:
 	@make -C $(LIB) fclean
-	@make -C $(EXEC) fclean
-	@echo "rm $(LIBFT)\033[0;32m ✓\033[0m"
-	@echo "rm $(NAME)\033[0;32m ✓\033[0m"
+	@make -C $(LEMIN) fclean
 
 re: fclean all
 

@@ -5,71 +5,103 @@
 #                                                     +:+ +:+         +:+      #
 #    By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2019/03/11 17:54:03 by lutsiara          #+#    #+#              #
-#    Updated: 2019/08/28 17:01:38 by lutsiara         ###   ########.fr        #
+#    Created: 2020/02/18 16:35:34 by lutsiara          #+#    #+#              #
+#    Updated: 2020/04/09 17:04:30 by lutsiara         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = ../lem-in
 
-CC = gcc
+FLAGS = -Wall -Werror -Wextra
+CC = gcc $(FLAGS)
+SRC_PATH = ./
+OBJ_PATH = ./
+INC_PATH = ../includes/
+INC = -I
+INCLUDES = $(INC_PATH) ../$(INC_LIB_PATH)
+LIB = ../$(LIBFT)
+SRC_SUFFIX = .c
+H_SUFFIX = .h
 
-FLAGS = -Wall -Werror -Wextra -ggdb -fsanitize=address -fno-omit-frame-pointer
+H_FILENAME = lem_in
 
-SRCDIR = ./
+C_FILENAME = main \
+			 display \
+			 lem_in \
+			 bfs/run_bfs \
+			 bfs/run_bfs_core \
+			 bfs/run_bfs_utils \
+			 bfs/inter \
+			 bfs/inter_utils \
+			 glist_utils/ft_glstadd \
+			 glist_utils/ft_glstcpy \
+			 glist_utils/ft_glstdel \
+			 glist_utils/ft_glstdelone \
+			 glist_utils/ft_glsthascontent \
+			 glist_utils/ft_glstlen \
+			 glist_utils/ft_glstnew \
+			 glist_utils/ft_glstrev \
+			 glist_utils/ft_glstsort \
+			 group_utils/ants_distribution \
+			 group_utils/group \
+			 group_utils/group_build \
+			 parser/parse \
+			 parser/parse_core \
+			 parser/parse_opt_print \
+			 parser/parse_opt_print_help \
+			 parser/parse_optimizer \
+			 parser/parse_utils \
+			 parser/parser_opt \
+			 room_utils/room \
+			 room_utils/room_create_links \
+			 route_utils/route \
+			 route_utils/route_print \
+			 solution_utils/build_solution \
+			 solution_utils/solution \
+			 solution_utils/solution_print \
+			 solution_utils/solution_round \
+			 solver_ek/rebuild_routes \
+			 solver_ek/solve \
+			 solver_ek/solve_utils \
+			 array_utils \
+			 utils
 
-INCDIR = ../includes/
+INC_FILES = $(addsuffix $(H_SUFFIX),$(H_FILENAME))
+SRC_FILES = $(addsuffix $(SRC_SUFFIX),$(C_FILENAME))
+OBJ_FILES = $(SRC_FILES:.c=.o)
+SRC = $(addprefix $(SRC_PATH),$(SRC_FILES))
+OBJ = $(addprefix $(OBJ_PATH),$(OBJ_FILES))
+HEADER = $(addprefix $(INC), $(INCLUDES))
+H_FILES = $(addprefix $(INC_PATH), $(INC_FILES))
 
-LIB = ../libft/
+BLUE = "\\033[36m"
+RED = "\\033[31m"
+WHITE = "\\033[0m"
+GREEN = "\\033[32m"
 
-INCLIB = ../libft/includes/
+EOLCLR = "\\033[0K"
+CHECK = "\\xE2\\x9C\\x94"
+OK = "$(CHECK)$(WHITE)"
 
-SRCS = $(SRCDIR)main.c \
-	   $(SRCDIR)ft_gnl.c \
-	   $(SRCDIR)ft_alloc.c \
-	   $(SRCDIR)ft_enqueue.c \
-	   $(SRCDIR)ft_rank_line.c \
-	   $(SRCDIR)ft_isvalidcmd.c \
-	   $(SRCDIR)ft_get_ants.c \
-	   $(SRCDIR)ft_get_graph.c \
-	   $(SRCDIR)ft_set_room.c \
-	   $(SRCDIR)ft_create_rooms.c \
-	   $(SRCDIR)ft_control_names.c \
-	   $(SRCDIR)ft_make_links.c \
-	   $(SRCDIR)ft_checkup.c \
-	   $(SRCDIR)ft_rs.c \
-	   $(SRCDIR)ft_hash.c \
-	   $(SRCDIR)ft_hash_utils.c \
-	   $(SRCDIR)ft_dijkstra.c \
-	   $(SRCDIR)ft_how_many.c \
-	   $(SRCDIR)ft_bfs.c \
-	   $(SRCDIR)ft_bfs_utils.c \
-	   $(SRCDIR)ft_cyclecount.c \
-	   $(SRCDIR)ft_moderate.c \
-	   $(SRCDIR)ft_moderate_simu.c \
-	   $(SRCDIR)ft_travel.c \
-	   $(SRCDIR)ft_travel_utils.c \
-	   $(SRCDIR)ft_debug.c \
-	   $(SRCDIR)ft_del.c
-
-OBJS = $(SRCS:.c=.o)
-
-$(NAME): $(OBJS) ../$(LIBFT)
-	@$(CC) -I $(INCDIR) $(FLAGS) $(OBJS) -o $@ ../$(LIBFT)
-	@echo "make $(NAME)\033[0;32m ✓\033[0m"
+$(NAME): $(OBJ) $(H_FILES) $(SRC) $(LIB)
+	@$(CC) $(HEADER) $(OBJ) $(LIB) -o $@
+	@printf "\r$(EOLCLR)$(NAME): $(GREEN)$(OK)\n"
 
 all: $(NAME)
 
-../$(LIBFT):
-
-%.o: %.c $(INCDIR)/lem_in.h
-	@$(CC) -o $@ -c $< -I $(INCDIR) -I $(INCLIB) $(FLAGS)
+$(OBJ_PATH)%.o: $(SRC_PATH)%.c
+	@printf "\r$(EOLCLR)$(NAME): $< $(BLUE)$(OK)"
+	@$(CC) $(HEADER) -o $@ -c $<
 
 clean:
-	@/bin/rm -rf $(OBJS)
+	@printf "$(NAME): rm *.o"
+	@/bin/rm -rf $(OBJ)
+	@printf " $(RED)$(OK)\n"
 
 fclean: clean
-	@/bin/rm -rf $(NAME)
+	@printf "$(NAME): rm $(NAME)"
+	@/bin/rm -f $(NAME)
+	@printf " $(RED)$(OK)\n"
 
 re: fclean all
 

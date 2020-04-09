@@ -5,14 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/13 12:10:48 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/03/13 16:24:27 by lutsiara         ###   ########.fr       */
+/*   Created: 2018/10/17 17:40:39 by lutsiara          #+#    #+#             */
+/*   Updated: 2020/03/10 13:13:17 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include "libft.h"
 
 void	ft_putchar_fd(char c, int fd)
 {
-	write(fd, (const void *)&c, 1);
+	write(fd, &c, 1);
 }

@@ -5,31 +5,26 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/13 15:29:35 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/03/13 16:25:11 by lutsiara         ###   ########.fr       */
+/*   Created: 2018/11/12 19:56:45 by lutsiara          #+#    #+#             */
+/*   Updated: 2020/03/10 13:13:17 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list		*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem))
+t_list	*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem))
 {
-	t_list		*ltmp;
-	t_list		*nelem;
+	t_list	*begin;
+	t_list	*curr_in;
+	t_list	**curr_out;
 
-	if (!lst || !f)
-		return ((void *)0);
-	ltmp = (void *)0;
-	while (lst)
+	curr_out = &begin;
+	curr_in = lst;
+	while (curr_in != NULL)
 	{
-		if (!(nelem = f(lst)))
-		{
-			ft_lstdel(&ltmp, &ft_delcontent);
-			return ((void *)0);
-		}
-		ft_lstenqueue(&ltmp, nelem);
-		lst = lst->next;
-		nelem = (void *)0;
+		*curr_out = f(curr_in);
+		curr_out = &(*curr_out)->next;
+		curr_in = curr_in->next;
 	}
-	return (ltmp);
+	return (begin);
 }

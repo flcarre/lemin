@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/11 14:31:06 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/03/13 16:22:57 by lutsiara         ###   ########.fr       */
+/*   Created: 2018/10/17 00:46:28 by lutsiara          #+#    #+#             */
+/*   Updated: 2020/03/10 13:27:06 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,14 @@
 
 char	*ft_strsub(char const *s, unsigned int start, unsigned long len)
 {
-	char			*tmp;
-	unsigned long	i;
+	char	*result;
 
-	if (!(tmp = ft_strnew(len)))
-		return ((void *)0);
-	if (!s)
-		return (tmp);
-	i = 0;
-	while (len--)
-		*(tmp + (i++)) = *((s++) + start);
-	return (tmp);
+	if (s == NULL)
+		return (NULL);
+	result = ft_memalloc(len + 1);
+	if (result == NULL)
+		return (NULL);
+	ft_strncpy(result, (char*)(s + start), len);
+	result[len] = '\0';
+	return (result);
 }

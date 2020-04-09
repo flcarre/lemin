@@ -5,12 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/09 15:44:41 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/03/13 16:26:06 by lutsiara         ###   ########.fr       */
+/*   Created: 2018/10/16 23:45:20 by lutsiara          #+#    #+#             */
+/*   Updated: 2020/03/10 13:13:17 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_isalpha(int c)
+#include "libft.h"
+
+int	ft_isalpha(int c)
 {
-	return ((c >= 0101 && c <= 0132) || (c >= 0141 && c <= 0172));
+	return (ft_isupper(c) || ft_islower(c));
 }

@@ -5,17 +5,15 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/13 14:38:32 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/03/13 16:25:30 by lutsiara         ###   ########.fr       */
+/*   Created: 2018/11/12 19:53:12 by lutsiara          #+#    #+#             */
+/*   Updated: 2020/03/10 13:13:17 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstadd(t_list **alst, t_list *new)
+void	ft_lstadd(t_list **alst, t_list *_new)
 {
-	if (!new)
-		return ;
-	new->next = (*alst);
-	(*alst) = new;
+	_new->next = *alst;
+	*alst = _new;
 }

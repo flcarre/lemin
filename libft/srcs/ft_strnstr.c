@@ -5,30 +5,33 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/09 14:08:38 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/04/04 18:40:07 by lutsiara         ###   ########.fr       */
+/*   Created: 2018/10/16 23:30:23 by lutsiara          #+#    #+#             */
+/*   Updated: 2020/03/10 13:27:06 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-char	*ft_strnstr(const char *haystack, const char *needle, unsigned long len)
-{
-	unsigned long	i;
-	unsigned long	j;
+#include "libft.h"
 
-	if (!haystack || !len)
-		return ((void *)0);
-	if (!(*needle))
-		return ((char *)haystack);
-	j = 0;
-	while (*haystack && j < len)
+char	*ft_strnstr(const char *big, const char *little, unsigned long len)
+{
+	unsigned long	big_len;
+	unsigned long	little_len;
+	unsigned long	i;
+
+	big_len = ft_strlen((char*)big);
+	little_len = ft_strlen((char*)little);
+	if (little_len == 0)
 	{
-		i = 0;
-		while (*(needle + i) && *(haystack + i) == *(needle + i) && i + j < len)
-			i++;
-		if (!(*(needle + i)))
-			return ((char *)haystack);
-		haystack++;
-		j++;
+		return ((char*)big);
 	}
-	return ((void *)0);
+	i = 0;
+	while (big[i] && i + little_len <= len)
+	{
+		if (!ft_strncmp((char*)big + i, (char*)little, little_len))
+		{
+			return ((char*)big + i);
+		}
+		i++;
+	}
+	return (NULL);
 }

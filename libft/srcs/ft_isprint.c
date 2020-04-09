@@ -5,12 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/09 15:58:57 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/03/13 16:25:55 by lutsiara         ###   ########.fr       */
+/*   Created: 2018/10/17 00:01:53 by lutsiara          #+#    #+#             */
+/*   Updated: 2020/03/10 13:13:17 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_isprint(int c)
+#include "libft.h"
+
+int	ft_isprint(int c)
 {
-	return (c >= 040 && c <= 0176);
+	return (c >= 0x20 && c <= 0x7E);
 }

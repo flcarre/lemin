@@ -5,26 +5,24 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/08 15:19:57 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/03/13 16:23:30 by lutsiara         ###   ########.fr       */
+/*   Created: 2018/08/08 20:37:52 by lutsiara          #+#    #+#             */
+/*   Updated: 2020/03/10 13:27:06 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-unsigned long	ft_strlcat(char *dst, const char *src, unsigned long size)
+unsigned long		ft_strlcat(char *dest, char const *src, unsigned int size)
 {
-	unsigned long	i;
-	unsigned long	d;
-	unsigned long	s;
+	unsigned long	dest_len;
+	unsigned long	src_len;
 
-	d = ft_strlen((const char *)dst);
-	s = ft_strlen(src);
-	if (!dst || !src || !size)
-		return ((size >= d) ? d + s : s + size);
-	i = 0;
-	while (*src && i < ((size <= d) ? 0 : size - d - 1))
-		*(dst + d + (i++)) = *(src++);
-	*(dst + d + i) = '\0';
-	return ((size >= d) ? d + s : s + size);
+	dest_len = ft_strlen(dest);
+	src_len = ft_strlen(src);
+	if (size + src_len <= dest_len + src_len)
+	{
+		return (ft_strlen(src) + size);
+	}
+	ft_strncat(dest, src, size - dest_len - 1);
+	return (dest_len + src_len);
 }

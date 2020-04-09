@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/13 12:23:29 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/03/13 16:24:17 by lutsiara         ###   ########.fr       */
+/*   Created: 2018/10/17 17:43:12 by lutsiara          #+#    #+#             */
+/*   Updated: 2020/03/10 13:13:17 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 void	ft_putendl_fd(char const *s, int fd)
 {
-	if (!s)
-		return ;
-	ft_putstr_fd(s, fd);
+	ft_putstr_fd((char*)s, fd);
 	ft_putchar_fd('\n', fd);
 }

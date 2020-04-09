@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/13 11:09:13 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/05/24 18:13:11 by lutsiara         ###   ########.fr       */
+/*   Created: 2018/10/17 17:15:06 by lutsiara          #+#    #+#             */
+/*   Updated: 2020/03/10 14:57:28 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ char	*ft_itoa(int n)
 	unsigned int	i;
 	int				x;
 	char			*tmp;
+	unsigned int	abs;
 
 	i = ft_digitlen(n, 10);
 	i += (n < 0) ? 1 : 0;
@@ -24,9 +25,11 @@ char	*ft_itoa(int n)
 		return ((void *)0);
 	*tmp = (n < 0) ? '-' : '\0';
 	x = n;
+	abs = 0;
 	while ((n < 0) ? (--i) : (i--))
 	{
-		*(tmp + i) = '0' + ABS(x % 10);
+		abs = (x % 10 < 0) ? -(x % 10) : x % 10;
+		*(tmp + i) = '0' + abs;
 		x /= 10;
 	}
 	return (tmp);

@@ -5,12 +5,15 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/09 15:09:12 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/03/13 16:25:41 by lutsiara         ###   ########.fr       */
+/*   Created: 2018/10/26 19:25:24 by lutsiara          #+#    #+#             */
+/*   Updated: 2020/03/10 13:48:54 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_isspace(int c)
+#include "libft.h"
+
+int	ft_isspace(int c)
 {
-	return ((c >= 9 && c <= 13) || c == 32);
+	return (c == ' ' || c == '\t' || c == '\r' || \
+			c == '\v' || c == '\f' || c == '\n');
 }

@@ -5,17 +5,18 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/08 11:13:04 by lutsiara          #+#    #+#             */
-/*   Updated: 2019/04/12 16:16:51 by lutsiara         ###   ########.fr       */
+/*   Created: 2018/11/05 16:13:09 by lutsiara          #+#    #+#             */
+/*   Updated: 2020/03/10 13:13:17 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "libft.h"
 
 void	ft_memdel(void **ap)
 {
-	if (!ap || !(*ap))
-		return ;
-	free(*ap);
-	*ap = (void *)0;
+	if (*ap != NULL)
+	{
+		free(*ap);
+		*ap = NULL;
+	}
 }
