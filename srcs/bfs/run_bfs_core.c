@@ -6,15 +6,15 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/06 18:56:50 by lutsiara          #+#    #+#             */
-/*   Updated: 2020/03/10 17:27:48 by lutsiara         ###   ########.fr       */
+/*   Updated: 2020/04/09 17:04:30 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-t_tree	*traverse(t_lem_in *lem_in, t_tree *node, t_room *dst)
+t_inter	*traverse(t_lem_in *lem_in, t_inter *node, t_room *dst)
 {
-	t_tree			*res;
+	t_inter			*res;
 	int				augmentation;
 	t_room			*intersection;
 
@@ -32,15 +32,15 @@ t_tree	*traverse(t_lem_in *lem_in, t_tree *node, t_room *dst)
 		intersection = NULL;
 	else
 		intersection = node->intersection;
-	res = tree_create_child(lem_in, node, dst);
+	res = inter_create_child(lem_in, node, dst);
 	res->augmentation = augmentation;
 	res->intersection = intersection;
 	return (res);
 }
 
-t_tree	*traverse_end(t_lem_in *lem_in, t_tree *node)
+t_inter	*traverse_end(t_lem_in *lem_in, t_inter *node)
 {
-	t_tree	*res;
+	t_inter	*res;
 
 	if (node->parent->room->next != NULL)
 	{
@@ -50,20 +50,20 @@ t_tree	*traverse_end(t_lem_in *lem_in, t_tree *node)
 	return (NULL);
 }
 
-t_route	*try_finalize_traverse(t_tree *node)
+t_route	*try_finalize_traverse(t_inter *node)
 {
 	if (node->augmentation > 0)
 	{
-		return (tree_to_route(node));
+		return (inter_to_route(node));
 	}
 	return (NULL);
 }
 
-t_route	*extend_node(t_lem_in *lem_in, t_tree *node,
+t_route	*extend_node(t_lem_in *lem_in, t_inter *node,
 	t_glist **next_nodes)
 {
 	t_glist			*curr;
-	t_tree			*new_node;
+	t_inter			*new_node;
 	t_route			*res;
 
 	new_node = NULL;
@@ -74,7 +74,7 @@ t_route	*extend_node(t_lem_in *lem_in, t_tree *node,
 			return (res);
 		new_node = traverse_end(lem_in, node);
 		if (new_node != NULL)
-			ft_glstadd(next_nodes, ft_glstnew(new_node, sizeof(t_tree)));
+			ft_glstadd(next_nodes, ft_glstnew(new_node, sizeof(t_inter)));
 		return (NULL);
 	}
 	curr = node->room->links;
@@ -82,7 +82,7 @@ t_route	*extend_node(t_lem_in *lem_in, t_tree *node,
 	{
 		new_node = traverse(lem_in, node, curr->gen.room);
 		if (new_node != NULL)
-			ft_glstadd(next_nodes, ft_glstnew(new_node, sizeof(t_tree)));
+			ft_glstadd(next_nodes, ft_glstnew(new_node, sizeof(t_inter)));
 		curr = curr->next;
 	}
 	return (NULL);
@@ -97,7 +97,7 @@ t_route	*extend_nodes_list(t_lem_in *lem_in, t_glist *nodes,
 	curr = nodes;
 	while (curr != NULL)
 	{
-		if ((res = extend_node(lem_in, curr->gen.tree, next_nodes)))
+		if ((res = extend_node(lem_in, curr->gen.inter, next_nodes)))
 			return (res);
 		curr = curr->next;
 	}

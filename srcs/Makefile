@@ -6,7 +6,7 @@
 #    By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/18 16:35:34 by lutsiara          #+#    #+#              #
-#    Updated: 2020/03/10 22:22:58 by lutsiara         ###   ########.fr        #
+#    Updated: 2020/04/09 17:04:30 by lutsiara         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,8 +31,8 @@ C_FILENAME = main \
 			 bfs/run_bfs \
 			 bfs/run_bfs_core \
 			 bfs/run_bfs_utils \
-			 bfs/tree \
-			 bfs/tree_utils \
+			 bfs/inter \
+			 bfs/inter_utils \
 			 glist_utils/ft_glstadd \
 			 glist_utils/ft_glstcpy \
 			 glist_utils/ft_glstdel \

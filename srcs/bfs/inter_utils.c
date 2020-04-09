@@ -1,32 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tree_utils.c                                       :+:      :+:    :+:   */
+/*   inter_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/06 17:30:59 by lutsiara          #+#    #+#             */
-/*   Updated: 2020/03/10 18:13:11 by lutsiara         ###   ########.fr       */
+/*   Updated: 2020/04/09 17:05:48 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-void			tree_del_list(t_lem_in *lem_in, t_glist **trees)
+void			inter_del_list(t_lem_in *lem_in, t_glist **inters)
 {
-	while ((*trees) != NULL)
+	while ((*inters) != NULL)
 	{
-		tree_del(lem_in, (*trees)->gen.tree);
-		ft_glstdelone(trees, NULL);
+		inter_del(lem_in, (*inters)->gen.inter);
+		ft_glstdelone(inters, NULL);
 	}
 }
 
-void			tree_print(t_tree *tree)
+void			inter_print(t_inter *inter)
 {
-	if (tree->parent != NULL)
-		tree_print(tree->parent);
-	ft_fprintf(2, "BFS node [%-6s]\t(augmentation=%d, intersection=%s)\n",
-		tree->room->name,
-		tree->augmentation,
-		tree->intersection != NULL ? tree->intersection->name : NULL);
+	if (inter->parent != NULL)
+		inter_print(inter->parent);
+	ft_fprintf(2, "BFS node [%-6s]\t(augmentation=%d, intersection=%s)\n", \
+		inter->room->name, \
+		inter->augmentation, \
+		inter->intersection != NULL ? inter->intersection->name : NULL);
 }

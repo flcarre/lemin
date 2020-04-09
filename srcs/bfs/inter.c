@@ -1,35 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tree.c                                             :+:      :+:    :+:   */
+/*   inter.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/28 15:57:17 by lutsiara          #+#    #+#             */
-/*   Updated: 2020/03/10 18:14:40 by lutsiara         ###   ########.fr       */
+/*   Updated: 2020/04/09 17:04:30 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-t_tree	*tree_new(t_lem_in *lem_in)
+t_inter	*inter_new(t_lem_in *lem_in)
 {
-	t_tree			*res;
+	t_inter			*res;
 	static int		id;
 
 	(void)lem_in;
-	res = ft_memalloc(sizeof(t_tree));
+	res = ft_memalloc(sizeof(t_inter));
 	id++;
 	return (res);
 }
 
-void	tree_del(t_lem_in *lem_in, t_tree *tree)
+void	inter_del(t_lem_in *lem_in, t_inter *inter)
 {
-	t_tree	*del;
-	t_tree	*curr;
+	t_inter	*del;
+	t_inter	*curr;
 
 	(void)lem_in;
-	curr = tree;
+	curr = inter;
 	while (curr != NULL && curr->child_count == 0)
 	{
 		del = curr;
@@ -40,12 +40,12 @@ void	tree_del(t_lem_in *lem_in, t_tree *tree)
 	}
 }
 
-t_tree	*tree_create_child(t_lem_in *lem_in, t_tree *parent, t_room *room)
+t_inter	*inter_create_child(t_lem_in *lem_in, t_inter *parent, t_room *room)
 {
-	t_tree	*res;
+	t_inter	*res;
 
 	(void)lem_in;
-	res = tree_new(lem_in);
+	res = inter_new(lem_in);
 	res->parent = parent;
 	res->intersection = parent->intersection;
 	res->augmentation = parent->augmentation;
@@ -55,13 +55,13 @@ t_tree	*tree_create_child(t_lem_in *lem_in, t_tree *parent, t_room *room)
 	return (res);
 }
 
-t_route	*tree_to_route(t_tree *tree)
+t_route	*inter_to_route(t_inter *inter)
 {
-	t_tree	*curr;
+	t_inter	*curr;
 	t_route	*res;
 
 	res = route_new();
-	curr = tree;
+	curr = inter;
 	while (curr != NULL)
 	{
 		route_add_node(res, curr->room);

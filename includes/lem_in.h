@@ -6,7 +6,7 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/17 13:32:25 by lutsiara          #+#    #+#             */
-/*   Updated: 2020/03/10 19:39:15 by lutsiara         ###   ########.fr       */
+/*   Updated: 2020/04/09 17:11:09 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ typedef struct s_solution	t_solution;
 typedef struct s_route		t_route;
 typedef struct s_group		t_group;
 typedef struct s_opt		t_opt;
-typedef struct s_tree		t_tree;
+typedef struct s_inter		t_inter;
 
 union		u_generic
 {
@@ -39,7 +39,7 @@ union		u_generic
 	t_round	*round;
 	t_move	*move;
 	t_glist	*glist;
-	t_tree	*tree;
+	t_inter	*inter;
 };
 
 struct		s_glist
@@ -113,10 +113,10 @@ struct		s_round
 	t_dlist	*moves;
 };
 
-struct		s_tree
+struct		s_inter
 {
 	t_room	*room;
-	t_tree	*parent;
+	t_inter	*parent;
 	int		child_count;
 	int		augmentation;
 	t_room	*intersection;
@@ -186,23 +186,24 @@ t_route		*run_bfs(t_lem_in *lem_in);
 t_route		*extend_nodes_list(t_lem_in *lem_in, t_glist *nodes,
 	t_glist **next_nodes);
 t_route		*extend_node(t_lem_in *lem_in,
-	t_tree *node, t_glist **next_nodes);
-t_route		*try_finalize_traverse(t_tree *node);
-t_tree		*traverse_end(t_lem_in *lem_in, t_tree *node);
-t_tree		*traverse(t_lem_in *lem_in, t_tree *node, t_room *dst);
+	t_inter *node, t_glist **next_nodes);
+t_route		*try_finalize_traverse(t_inter *node);
+t_inter		*traverse_end(t_lem_in *lem_in, t_inter *node);
+t_inter		*traverse(t_lem_in *lem_in, t_inter *node, t_room *dst);
 
-t_bool		can_traverse(t_tree *tree, t_room *dst);
+t_bool		can_traverse(t_inter *inter, t_room *dst);
 t_bool		in_intersection(t_room *src, t_room *dst);
 t_bool		out_intersection(t_room *src, t_room *dst);
-t_tree		*go_to_start(t_lem_in *lem_in, t_tree *tree);
-void		mark_as_visited(t_tree *tree);
+t_inter		*go_to_start(t_lem_in *lem_in, t_inter *inter);
+void		mark_as_visited(t_inter *inter);
 
-t_tree		*tree_new(t_lem_in *lem_in);
-void		tree_del(t_lem_in *lem_in, t_tree *tree);
-void		tree_del_list(t_lem_in *lem_in, t_glist **trees);
-t_tree		*tree_create_child(t_lem_in *lem_in, t_tree *parent, t_room *room);
-void		tree_print(t_tree *tree);
-t_route		*tree_to_route(t_tree *tree);
+t_inter		*inter_new(t_lem_in *lem_in);
+void		inter_del(t_lem_in *lem_in, t_inter *inter);
+void		inter_del_list(t_lem_in *lem_in, t_glist **inters);
+t_inter		*inter_create_child(t_lem_in *lem_in, \
+			t_inter *parent, t_room *room);
+void		inter_print(t_inter *inter);
+t_route		*inter_to_route(t_inter *inter);
 
 t_route		*route_new();
 t_route		*route_build(t_room *start, t_room *second);
@@ -239,7 +240,7 @@ void		round_free(void *content, unsigned long size);
 
 void		ft_free_tab(char ***tab);
 int			ft_strindex(const char *str, char c);
-int			gnl_no_comm(t_lem_in *lem_in, const int fd, char **line);
+int			gnl(t_lem_in *lem_in, const int fd, char **line);
 void		print_nodes(t_glist *nodes);
 t_bool		is_number(char *s);
 

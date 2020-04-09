@@ -6,7 +6,7 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/07 09:59:35 by lutsiara          #+#    #+#             */
-/*   Updated: 2020/03/10 17:29:30 by lutsiara         ###   ########.fr       */
+/*   Updated: 2020/04/09 17:11:09 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int		ft_strindex(const char *str, char c)
 	return (-1);
 }
 
-int		gnl_no_comm(t_lem_in *lem_in, const int fd, char **line)
+int		gnl(t_lem_in *lem_in, const int fd, char **line)
 {
 	int	res;
 
