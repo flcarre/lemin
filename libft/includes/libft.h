@@ -6,7 +6,7 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/16 23:18:06 by lutsiara          #+#    #+#             */
-/*   Updated: 2020/03/10 15:22:26 by lutsiara         ###   ########.fr       */
+/*   Updated: 2020/04/10 00:26:19 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ char			**ft_strsplit(char const *str, char c);
 t_list			*ft_lstnew(void const *content, unsigned long content_size);
 void			ft_lstdelone(t_list **alst, void (*del)(void*, unsigned long));
 void			ft_lstdel(t_list **alst, void (*del)(void*, unsigned long));
-void			ft_lstadd(t_list **alst, t_list *_new);
+void			ft_lstadd(t_list **alst, t_list *new);
 void			ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 t_list			*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 void			ft_lst_del(t_list **lst);
@@ -132,7 +132,7 @@ t_dlist			*ft_dlstnew(void const *content, unsigned long content_size);
 void			ft_dlstdelone(t_dlist **alst, \
 				void (*del)(void*, unsigned long));
 void			ft_dlstdel(t_dlist **alst, void (*del)(void*, unsigned long));
-void			ft_dlstadd(t_dlist **alst, t_dlist *_new);
+void			ft_dlstadd(t_dlist **alst, t_dlist *new);
 void			ft_dlstiter(t_dlist *lst, void (*f)(t_dlist *elem));
 t_dlist			*ft_dlstmap(t_dlist *lst, t_dlist *(*f)(t_dlist *elem));
 t_dlist			*ft_dlstfirst(t_dlist *lst);

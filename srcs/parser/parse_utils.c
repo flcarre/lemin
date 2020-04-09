@@ -6,7 +6,7 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/21 14:10:58 by lutsiara          #+#    #+#             */
-/*   Updated: 2020/03/10 19:26:37 by lutsiara         ###   ########.fr       */
+/*   Updated: 2020/04/10 00:27:50 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ int		parse_number_safe(char *s)
 	}
 	return (res * mul);
 }
-
 
 t_bool	parse_is_link(char *line)
 {

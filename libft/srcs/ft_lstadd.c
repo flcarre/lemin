@@ -6,14 +6,14 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/12 19:53:12 by lutsiara          #+#    #+#             */
-/*   Updated: 2020/03/10 13:13:17 by lutsiara         ###   ########.fr       */
+/*   Updated: 2020/04/10 00:26:19 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstadd(t_list **alst, t_list *_new)
+void	ft_lstadd(t_list **alst, t_list *new)
 {
-	_new->next = *alst;
-	*alst = _new;
+	new->next = *alst;
+	*alst = new;
 }
