@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lem_in.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
+/*   By: flcarre <flcarre@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/17 13:32:25 by lutsiara          #+#    #+#             */
-/*   Updated: 2020/04/09 17:11:09 by lutsiara         ###   ########.fr       */
+/*   Created: 2019/12/17 13:32:25 by lutsiara          #+#    #+#             */
+/*   Updated: 2020/04/10 21:11:32 by flcarre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,10 +183,10 @@ void		room_remove_link(t_room *room, t_room *link);
 
 t_route		*run_bfs(t_lem_in *lem_in);
 
-t_route		*extend_nodes_list(t_lem_in *lem_in, t_glist *nodes,
-	t_glist **next_nodes);
-t_route		*extend_node(t_lem_in *lem_in,
-	t_inter *node, t_glist **next_nodes);
+t_route		*extend_nodes_list(t_lem_in *lem_in, t_glist *nodes, \
+			t_glist **next_nodes);
+t_route		*extend_node(t_lem_in *lem_in, \
+			t_inter *node, t_glist **next_nodes);
 t_route		*try_finalize_traverse(t_inter *node);
 t_inter		*traverse_end(t_lem_in *lem_in, t_inter *node);
 t_inter		*traverse(t_lem_in *lem_in, t_inter *node, t_room *dst);
@@ -222,13 +222,13 @@ void		distribute_ants(t_group *group, int total_ants);
 void		solve(t_lem_in *lem_in, t_solution *solution);
 void		rebuild_routes(t_lem_in *lem_in, t_route *route);
 void		build_solution(t_lem_in *lem_in, t_group *group,
-	t_solution *solution);
+			t_solution *solution);
 
 int			max_routes(t_lem_in *lem_in);
 
 void		print_solution(t_group *group, t_lem_in *lem_in);
-t_bool		ant_try_move(t_room *src, t_room *dest,
-	t_solution *solution, int *ants_routes);
+t_bool		ant_try_move(t_room *src, t_room *dest, \
+			t_solution *solution, int *ants_routes);
 t_bool		ant_can_move(t_room *room);
 
 void		solution_init(t_solution *solution);
