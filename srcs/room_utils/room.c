@@ -6,7 +6,7 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 15:16:36 by lutsiara          #+#    #+#             */
-/*   Updated: 2020/03/10 19:30:06 by lutsiara         ###   ########.fr       */
+/*   Updated: 2020/04/15 22:17:26 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ t_room	*room_find_by_name(t_lem_in *lem_in, char *name)
 				pos = (pos + 1);
 		}
 	}
-	lem_in_die();
+	lem_in_error();
 	return (NULL);
 }
 
@@ -76,6 +76,6 @@ int		room_cmp(void *a, void *b)
 	room_a = (t_room*)a;
 	room_b = (t_room*)b;
 	if ((cmp = ft_strcmp(room_a->name, room_b->name)) == 0)
-		lem_in_die();
+		lem_in_error();
 	return (cmp);
 }

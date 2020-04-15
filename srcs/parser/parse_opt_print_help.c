@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_opt_print_help.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flcarre <flcarre@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/15 16:51:20 by lutsiara          #+#    #+#             */
-/*   Updated: 2020/04/10 21:09:25 by flcarre          ###   ########.fr       */
+/*   Updated: 2020/04/15 22:17:26 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	print_unknow(char *s)
 	ft_fprintf(2, "Error arg : '%s' is not a valid option.\n\n", s);
 	printf_help();
 	ft_fprintf(2, "\n");
-	lem_in_die();
+	lem_in_error();
 }
 
 void	printf_help(void)

@@ -6,7 +6,7 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/06 17:37:23 by lutsiara          #+#    #+#             */
-/*   Updated: 2020/03/10 19:31:37 by lutsiara         ###   ########.fr       */
+/*   Updated: 2020/04/15 22:17:26 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void		solution_discard_round(t_solution *solution)
 
 	curr = solution->rounds;
 	if (curr == NULL)
-		lem_in_die();
+		lem_in_error();
 	round = (t_round*)curr->content;
 	ft_dlstdel(&round->moves, NULL);
 	ft_dlstdelone(&solution->rounds, NULL);

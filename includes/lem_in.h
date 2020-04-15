@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lem_in.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flcarre <flcarre@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/17 13:32:25 by lutsiara          #+#    #+#             */
-/*   Updated: 2020/04/10 21:11:32 by flcarre          ###   ########.fr       */
+/*   Updated: 2020/04/15 22:17:26 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,7 +147,7 @@ struct		s_group
 void		lem_in_init(t_lem_in *lem_in);
 void		lem_in_add_room(t_lem_in *lem_in, t_room *room);
 void		lem_in_free(t_lem_in *lem_in);
-void		lem_in_die();
+void		lem_in_error();
 void		lem_in_remove_room(t_lem_in *lem_in, t_room *room);
 
 t_glist		*ft_glstnew(void const *content, unsigned long content_size);

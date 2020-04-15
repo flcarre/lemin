@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flcarre <flcarre@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/21 14:10:58 by lutsiara          #+#    #+#             */
-/*   Updated: 2020/04/10 21:09:25 by flcarre          ###   ########.fr       */
+/*   Updated: 2020/04/15 22:17:26 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,11 @@ int		parse_number_safe(char *s)
 	while (s[i])
 	{
 		if (!ft_isdigit(s[i]))
-			lem_in_die();
+			lem_in_error();
 		res *= 10;
 		res += s[i] - '0';
 		if (res < 0)
-			lem_in_die();
+			lem_in_error();
 		i++;
 	}
 	return (res * mul);
@@ -66,7 +66,7 @@ void	parse_room(t_lem_in *lem_in, char *line, t_roomtype type)
 		|| (ft_strlen(tab[2]) > MAX_NB_SIZE))
 	{
 		ft_free_tab(&tab);
-		lem_in_die();
+		lem_in_error();
 	}
 	x = parse_number_safe(tab[1]);
 	y = parse_number_safe(tab[2]);

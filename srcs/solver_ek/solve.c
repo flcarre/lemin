@@ -6,7 +6,7 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 18:33:02 by lutsiara          #+#    #+#             */
-/*   Updated: 2020/03/10 19:35:17 by lutsiara         ###   ########.fr       */
+/*   Updated: 2020/04/15 22:17:26 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void			solve(t_lem_in *lem_in, t_solution *solution)
 	debug_print_max_groups(lem_in);
 	best_group = create_best_group(lem_in);
 	if (best_group == NULL || best_group->routes == NULL)
-		lem_in_die();
+		lem_in_error();
 	build_solution(lem_in, best_group, solution);
 	group_free(best_group, sizeof(t_group));
 }

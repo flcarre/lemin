@@ -6,7 +6,7 @@
 /*   By: lutsiara <lutsiara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 14:41:27 by lutsiara          #+#    #+#             */
-/*   Updated: 2020/04/09 17:11:09 by lutsiara         ###   ########.fr       */
+/*   Updated: 2020/04/15 22:17:26 by lutsiara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,18 +25,18 @@ void	parse_ants_count(t_lem_in *lem_in, char **line)
 		else
 		{
 			ft_strdel(line);
-			lem_in_die();
+			lem_in_error();
 		}
 		ft_strdel(line);
 	}
 	else
-		lem_in_die();
+		lem_in_error();
 }
 
 int		read_room_line(t_lem_in *lem_in, char **line, t_roomtype type)
 {
 	if (gnl(lem_in, 0, line) == -1)
-		lem_in_die();
+		lem_in_error();
 	parse_room(lem_in, *line, type);
 	return (1);
 }
@@ -64,7 +64,7 @@ void	parse_rooms(t_lem_in *lem_in, char **line)
 		}
 	}
 	if (state == -1 || lem_in->start == NULL || lem_in->end == NULL)
-		lem_in_die();
+		lem_in_error();
 }
 
 void	parse_links(t_lem_in *lem_in, char **line)
@@ -79,10 +79,10 @@ void	parse_links(t_lem_in *lem_in, char **line)
 		parse_link(lem_in, line);
 		if (gnl(lem_in, 0, line) == -1)
 		{
-			lem_in_die();
+			lem_in_error();
 		}
 	}
 	ft_strdel(line);
 	if (lem_in->start->links == 0 || lem_in->end->links_count == 0)
-		lem_in_die();
+		lem_in_error();
 }
